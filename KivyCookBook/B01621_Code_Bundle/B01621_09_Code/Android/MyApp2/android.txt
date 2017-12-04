@@ -1,0 +1,3 @@
+title=e2
+author=manca
+orientation=portrait

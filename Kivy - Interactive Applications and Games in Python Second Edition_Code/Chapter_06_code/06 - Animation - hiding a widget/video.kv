@@ -1,0 +1,23 @@
+# File name: video.kv
+#:kivy 1.9.0
+#:set _default_video "http://video.ted.com/talk/stream/2004/None/DanGilbert_2004-180k.mp4"
+#:set _default_image "http://images.ted.com/images/ted/016a827cc0757092a0439ab2a63feca8655b6c29_1600x1200.jpg"
+#:set _default_surl "http://www.ted.com/talks/subtitles/id/97/lang/en"
+
+<Video>:
+    surl: _default_surl 
+    slabel: _slabel
+    cover: _cover
+    image: _default_image
+    allow_stretch: True
+    color: 0,0,0,0
+    source: _default_video
+	
+    AsyncImage:
+        id: _cover
+        source: root.image
+        size: root.width,root.height
+
+    Subtitle:
+        id: _slabel
+        x: (root.width - self.width)/2

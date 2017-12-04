@@ -1,0 +1,65 @@
+#:kivy 1.9.0
+#:import sm1 kivy.uix.screenmanager
+
+
+<MyW>:
+    orientation: 'vertical'
+
+    BoxLayout:
+        size_hint_y: None
+        height: 100
+        id: buttons
+    ScreenManager:
+        id: sm
+        transition: sm1.FadeTransition()
+
+
+<MButton>:
+    on_press: app.root.ids.sm.current = self.text
+    height: 80
+    size_hint_x: None
+    background_color: [0,0,0,0]
+
+    Image:
+        source: "./xamarintips.PNG"
+        center_x: self.parent.center_x
+        center_y: self.parent.center_y
+<Sc1>:
+    sd: sred_dol_value
+    se: sred_eur_value
+    pl: plata_value
+    ost: ostatak_value
+    tro: troskovi_value
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: sred_dol
+            text: 'Srednji kurs dolar'
+        Label:
+            id: sred_dol_value
+            text: ' '
+        Label:
+            id: sred_eur
+            text: 'Srednji kurs euro'
+        Label:
+            id: sred_eur_value
+            text: ' '
+        Label:
+            id: plata
+            text: 'Plata'
+        Label:
+            id: plata_value
+            text: ' '
+        Label:
+            id: troskovi
+            text: 'Troskovi'
+        Label:
+            id: troskovi_value
+            text: ' '
+        Label:
+            id: ostatak
+            text: 'Ostatak'
+        Label:
+            id: ostatak_value
+            text: ' '
+

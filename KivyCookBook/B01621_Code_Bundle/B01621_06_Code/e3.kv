@@ -1,0 +1,20 @@
+<CustomLayout>:
+	canvas.before:
+        Color:
+            rgba: 1, 1, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+<MyW>:
+    CustomLayout:
+        AsyncImage:
+            source: 'f1.png'
+            size_hint: 1, .5
+            pos_hint: {'center_x':.5, 'center_y': .5}
+    AsyncImage:
+        source: 'f0.png'
+    CustomLayout
+        AsyncImage:
+            source: 'f2.png'
+            size_hint: 1, .5
+            pos_hint: {'center_x':.5, 'center_y': .5}

@@ -1,0 +1,15 @@
+# File name: annotation.kv
+#:kivy 1.9.0
+
+<Subtitle@Label>:
+    halign: 'center'
+    font_size: '20px'
+    size: self.texture_size[0] + 20, self.texture_size[1] + 20
+    y: 50
+    bcolor: .1, .1, .1, 0
+    canvas.before:
+        Color:
+            rgba: self.bcolor
+        Rectangle:
+            pos: self.pos
+            size: self.size

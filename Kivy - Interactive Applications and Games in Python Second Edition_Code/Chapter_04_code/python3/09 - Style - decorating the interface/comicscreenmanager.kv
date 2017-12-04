@@ -1,0 +1,47 @@
+# File name: comicscreenmanager.kv
+#:kivy 1.9.0
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import comicscreenmanager comicscreenmanager
+
+<ComicScreenManager>:
+    transition: FadeTransition()
+    color_picker: _color_picker
+    ComicCreator:
+    Screen:
+        name: 'colorscreen'
+        MyColorPicker:
+            cols: 2
+            id: _color_picker
+            color: 0,.3,.6,1
+            Button:
+                text: "Red"
+                color: 1,0,0,1
+                on_press: self.parent.select_color((1,0,0,1))
+            Button:
+                text: "Green"
+                color: 0,1,0,1
+                on_press: self.parent.select_color((0,1,0,1))
+            Button:
+                text: "Blue"
+                color: 0,0,1,1
+                on_press: self.parent.select_color((0,0,1,1))
+            Button:
+                text: "Yellow"
+                color: 1,1,0,1
+                on_press: self.parent.select_color((1,1,0,1))
+            Button:
+                text: "Cyan"
+                color: 0,1,1,1
+                on_press: self.parent.select_color((0,1,1,1))
+            Button:
+                text: "Magenta"
+                color: 1,0,1,1
+                on_press: self.parent.select_color((1,0,1,1))
+            Button:
+                text: "White"
+                color: 1,1,1,1
+                on_press: self.parent.select_color((1,1,1,1))
+            Button:
+                text: "Black"
+                color: 0,0,0,1
+                on_press: self.parent.select_color((0,0,0,1))

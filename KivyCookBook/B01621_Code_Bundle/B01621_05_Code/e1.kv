@@ -1,0 +1,16 @@
+#: import sm1 kivy.uix.screenmanager
+
+<MyW>:
+	orientation: 'vertical'
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        id: buttons
+    ScreenManager:
+        id: sm
+        transition: sm1.WipeTransition()
+        Screen:
+            name: 'Hello3'
+<MButton>:
+    on_press: app.root.ids.sm.current = self.text
+    height: 60

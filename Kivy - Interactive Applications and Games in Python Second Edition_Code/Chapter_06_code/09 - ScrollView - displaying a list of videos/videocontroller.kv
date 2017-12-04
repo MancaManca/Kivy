@@ -1,0 +1,19 @@
+# File name: videocontroller.kv
+#:kivy 1.9.0
+
+<VideoController>:
+    video: _video
+    control_bar: _control_bar
+    play_pause: _control_bar.play_pause
+    control_bar_width: self.width
+    playing: _video.state == 'play'
+
+    Video:
+        id: _video
+        state: 'pause' if _control_bar.play_pause.state == 'normal' else 'play'
+
+    ControlBar:
+        id: _control_bar
+        width: root.control_bar_width
+        progress: _video.position / _video.duration
+

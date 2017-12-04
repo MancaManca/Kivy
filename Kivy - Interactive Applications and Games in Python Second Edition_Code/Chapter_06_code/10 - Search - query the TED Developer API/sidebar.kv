@@ -1,0 +1,24 @@
+# File name: sidebar.kv
+#:kivy 1.9.0
+
+<ListItem>:
+    size_hint: [1,None]
+    height: 70
+    group: 'listitem'
+    text_size: [self.width-20, None]
+
+
+<Sidebar@ScrollView>:
+    playlist: _playlist
+    size_hint: [None, None]
+    canvas.before:
+        Color:
+            rgba: 0,0,0,.9
+        Rectangle:
+            pos: 0,0,
+            size: self.width,self.height
+
+    GridLayout:
+        id: _playlist
+        size_hint_y: None
+        cols: 1

@@ -1,0 +1,35 @@
+
+#:kivy 1.9.0
+
+<RelativeLayout>:
+    size_hint: None, None
+    my_color: 0,0,0
+    canvas:
+        Color: 
+            rgb: self.my_color
+        Rectangle:
+            pos: 0,0
+            size: self.size
+
+<Relatives>:
+    a: _a
+    pos: 0,0
+    size: 150,75
+    my_color: 0,0,1
+    on_touch_down: self.test(*args)
+    RelativeLayout:
+        pos: 50,25
+        size: 100,50
+        my_color: 0,1,0
+        RelativeLayout:
+            pos: 50,25
+            size: 50,25
+            my_color: 1,0,0
+            Label:
+                id: _a
+                pos: 5,5
+                size_hint: None,None
+                size: 20,20
+                markup: True
+                size: 24,24
+                text: "[size=24][color=000000]a[/color][/size]"

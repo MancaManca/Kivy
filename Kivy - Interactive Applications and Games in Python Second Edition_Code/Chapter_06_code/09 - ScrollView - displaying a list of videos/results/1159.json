@@ -1,0 +1,338 @@
+{
+    "talk": {
+        "commented_count": 83,
+        "description": "Using simple, delightful illustrations, designer Stefan Sagmeister shares his latest thinking on happiness -- both the conscious and unconscious kind. His seven rules for life and design happiness can (with some customizations) apply to everyone seeking more joy.",
+        "emailed_count": 453,
+        "event": {
+            "id": 96,
+            "name": "TED@Cannes"
+        },
+        "id": 1159,
+        "image_16x9": false,
+        "images": [
+            {
+                "image": {
+                    "size": "113x85",
+                    "url": "http://images.ted.com/images/ted/3b216b8a8b244b18ac9b36084aa867935ad229fc_113x85.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "240x180",
+                    "url": "http://images.ted.com/images/ted/3b216b8a8b244b18ac9b36084aa867935ad229fc_240x180.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "615x461",
+                    "url": "http://images.ted.com/images/ted/3b216b8a8b244b18ac9b36084aa867935ad229fc_615x461.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "800x600",
+                    "url": "http://images.ted.com/images/ted/3b216b8a8b244b18ac9b36084aa867935ad229fc_800x600.jpg"
+                }
+            }
+        ],
+        "languages": {
+            "ar": {
+                "name": "Arabic"
+            },
+            "bg": {
+                "name": "Bulgarian"
+            },
+            "ca": {
+                "name": "Catalan"
+            },
+            "cs": {
+                "name": "Czech"
+            },
+            "da": {
+                "name": "Danish"
+            },
+            "de": {
+                "name": "German"
+            },
+            "el": {
+                "name": "Greek"
+            },
+            "en": {
+                "name": "English",
+                "native": true
+            },
+            "es": {
+                "name": "Spanish"
+            },
+            "et": {
+                "name": "Estonian"
+            },
+            "fa": {
+                "name": "Persian"
+            },
+            "fr": {
+                "name": "French"
+            },
+            "he": {
+                "name": "Hebrew"
+            },
+            "hr": {
+                "name": "Croatian"
+            },
+            "hu": {
+                "name": "Hungarian"
+            },
+            "hy": {
+                "name": "Armenian"
+            },
+            "id": {
+                "name": "Indonesian"
+            },
+            "it": {
+                "name": "Italian"
+            },
+            "ja": {
+                "name": "Japanese"
+            },
+            "ko": {
+                "name": "Korean"
+            },
+            "mk": {
+                "name": "Macedonian"
+            },
+            "ms": {
+                "name": "Malay"
+            },
+            "nl": {
+                "name": "Dutch"
+            },
+            "pl": {
+                "name": "Polish"
+            },
+            "pt": {
+                "name": "Portuguese"
+            },
+            "pt-br": {
+                "name": "Portuguese, Brazilian"
+            },
+            "ro": {
+                "name": "Romanian"
+            },
+            "ru": {
+                "name": "Russian"
+            },
+            "sk": {
+                "name": "Slovak"
+            },
+            "sq": {
+                "name": "Albanian"
+            },
+            "sr": {
+                "name": "Serbian"
+            },
+            "sv": {
+                "name": "Swedish"
+            },
+            "th": {
+                "name": "Thai"
+            },
+            "tr": {
+                "name": "Turkish"
+            },
+            "uk": {
+                "name": "Ukrainian"
+            },
+            "vi": {
+                "name": "Vietnamese"
+            },
+            "zh-cn": {
+                "name": "Chinese, Simplified"
+            },
+            "zh-tw": {
+                "name": "Chinese, Traditional"
+            }
+        },
+        "media": {
+            "internal": {
+                "180k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-180k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "320k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-320k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "450k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-450k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "600k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-600k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "64k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-64k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "950k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-950k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-480p.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high-en": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-480p-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-light": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-light.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-low-en": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S-low-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-regular": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2010S.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                }
+            }
+        },
+        "name": "Stefan Sagmeister: 7 rules for making more happiness",
+        "published_at": "2011-06-01 14:58:00",
+        "ratings": [
+            {
+                "rating": {
+                    "count": 269,
+                    "id": 10,
+                    "name": "Inspiring"
+                }
+            },
+            {
+                "rating": {
+                    "count": 132,
+                    "id": 1,
+                    "name": "Beautiful"
+                }
+            },
+            {
+                "rating": {
+                    "count": 314,
+                    "id": 25,
+                    "name": "OK"
+                }
+            },
+            {
+                "rating": {
+                    "count": 222,
+                    "id": 21,
+                    "name": "Unconvincing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 125,
+                    "id": 2,
+                    "name": "Confusing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 74,
+                    "id": 9,
+                    "name": "Ingenious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 91,
+                    "id": 8,
+                    "name": "Informative"
+                }
+            },
+            {
+                "rating": {
+                    "count": 86,
+                    "id": 22,
+                    "name": "Fascinating"
+                }
+            },
+            {
+                "rating": {
+                    "count": 41,
+                    "id": 24,
+                    "name": "Persuasive"
+                }
+            },
+            {
+                "rating": {
+                    "count": 118,
+                    "id": 7,
+                    "name": "Funny"
+                }
+            },
+            {
+                "rating": {
+                    "count": 77,
+                    "id": 11,
+                    "name": "Longwinded"
+                }
+            },
+            {
+                "rating": {
+                    "count": 32,
+                    "id": 26,
+                    "name": "Obnoxious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 19,
+                    "id": 3,
+                    "name": "Courageous"
+                }
+            },
+            {
+                "rating": {
+                    "count": 12,
+                    "id": 23,
+                    "name": "Jaw-dropping"
+                }
+            }
+        ],
+        "recorded_at": "2010-06-11 00:00:00",
+        "slug": "stefan_sagmeister_7_rules_for_making_more_happiness",
+        "speakers": [
+            {
+                "speaker": {
+                    "id": 53,
+                    "name": "Stefan Sagmeister"
+                }
+            }
+        ],
+        "tags": [
+            {
+                "tag": "arts"
+            },
+            {
+                "tag": "design"
+            },
+            {
+                "tag": "film"
+            },
+            {
+                "tag": "happiness"
+            },
+            {
+                "tag": "motivation"
+            }
+        ],
+        "themes": [
+            {
+                "theme": {
+                    "id": 16,
+                    "name": "Tales of Invention"
+                }
+            },
+            {
+                "theme": {
+                    "id": 33,
+                    "name": "What Makes Us Happy?"
+                }
+            }
+        ],
+        "updated_at": "2014-07-03 20:43:21",
+        "viewed_count": 1343756
+    }
+}

@@ -1,0 +1,332 @@
+{
+    "talk": {
+        "commented_count": 390,
+        "description": "Statistician Nic Marks asks why we measure a nation's success by its productivity -- instead of by the happiness and well-being of its people. He introduces the Happy Planet Index, which tracks national well-being against resource use (because a happy life doesn't have to cost the earth). Which countries rank highest in the HPI? You might be surprised.",
+        "emailed_count": 1400,
+        "event": {
+            "id": 39,
+            "name": "TEDGlobal 2010"
+        },
+        "id": 944,
+        "image_16x9": false,
+        "images": [
+            {
+                "image": {
+                    "size": "113x85",
+                    "url": "http://images.ted.com/images/ted/194325_113x85.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "240x180",
+                    "url": "http://images.ted.com/images/ted/194325_240x180.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "615x461",
+                    "url": "http://images.ted.com/images/ted/194325_615x461.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "800x600",
+                    "url": "http://images.ted.com/images/ted/194325_800x600.jpg"
+                }
+            }
+        ],
+        "languages": {
+            "ar": {
+                "name": "Arabic"
+            },
+            "bg": {
+                "name": "Bulgarian"
+            },
+            "ca": {
+                "name": "Catalan"
+            },
+            "cs": {
+                "name": "Czech"
+            },
+            "da": {
+                "name": "Danish"
+            },
+            "de": {
+                "name": "German"
+            },
+            "el": {
+                "name": "Greek"
+            },
+            "en": {
+                "name": "English",
+                "native": true
+            },
+            "es": {
+                "name": "Spanish"
+            },
+            "fa": {
+                "name": "Persian"
+            },
+            "fr": {
+                "name": "French"
+            },
+            "he": {
+                "name": "Hebrew"
+            },
+            "hr": {
+                "name": "Croatian"
+            },
+            "hu": {
+                "name": "Hungarian"
+            },
+            "hy": {
+                "name": "Armenian"
+            },
+            "id": {
+                "name": "Indonesian"
+            },
+            "it": {
+                "name": "Italian"
+            },
+            "ja": {
+                "name": "Japanese"
+            },
+            "ka": {
+                "name": "Georgian"
+            },
+            "ko": {
+                "name": "Korean"
+            },
+            "ms": {
+                "name": "Malay"
+            },
+            "nl": {
+                "name": "Dutch"
+            },
+            "pl": {
+                "name": "Polish"
+            },
+            "pt-br": {
+                "name": "Portuguese, Brazilian"
+            },
+            "ro": {
+                "name": "Romanian"
+            },
+            "ru": {
+                "name": "Russian"
+            },
+            "sk": {
+                "name": "Slovak"
+            },
+            "sq": {
+                "name": "Albanian"
+            },
+            "sr": {
+                "name": "Serbian"
+            },
+            "sv": {
+                "name": "Swedish"
+            },
+            "th": {
+                "name": "Thai"
+            },
+            "tr": {
+                "name": "Turkish"
+            },
+            "vi": {
+                "name": "Vietnamese"
+            },
+            "zh-cn": {
+                "name": "Chinese, Simplified"
+            },
+            "zh-tw": {
+                "name": "Chinese, Traditional"
+            }
+        },
+        "media": {
+            "internal": {
+                "180k": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-180k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "320k": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-320k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "450k": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-450k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "600k": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-600k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "64k": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-64k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "950k": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-950k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-480p.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high-en": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-480p-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-light": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-light.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-low-en": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G-low-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-regular": {
+                    "uri": "http://download.ted.com/talks/NicMarks_2010G.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                }
+            }
+        },
+        "name": "Nic Marks: The Happy Planet Index",
+        "published_at": "2010-08-30 01:00:00",
+        "ratings": [
+            {
+                "rating": {
+                    "count": 185,
+                    "id": 3,
+                    "name": "Courageous"
+                }
+            },
+            {
+                "rating": {
+                    "count": 283,
+                    "id": 22,
+                    "name": "Fascinating"
+                }
+            },
+            {
+                "rating": {
+                    "count": 220,
+                    "id": 1,
+                    "name": "Beautiful"
+                }
+            },
+            {
+                "rating": {
+                    "count": 554,
+                    "id": 24,
+                    "name": "Persuasive"
+                }
+            },
+            {
+                "rating": {
+                    "count": 1344,
+                    "id": 10,
+                    "name": "Inspiring"
+                }
+            },
+            {
+                "rating": {
+                    "count": 338,
+                    "id": 8,
+                    "name": "Informative"
+                }
+            },
+            {
+                "rating": {
+                    "count": 70,
+                    "id": 25,
+                    "name": "OK"
+                }
+            },
+            {
+                "rating": {
+                    "count": 71,
+                    "id": 23,
+                    "name": "Jaw-dropping"
+                }
+            },
+            {
+                "rating": {
+                    "count": 22,
+                    "id": 7,
+                    "name": "Funny"
+                }
+            },
+            {
+                "rating": {
+                    "count": 67,
+                    "id": 21,
+                    "name": "Unconvincing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 133,
+                    "id": 9,
+                    "name": "Ingenious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 24,
+                    "id": 26,
+                    "name": "Obnoxious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 22,
+                    "id": 11,
+                    "name": "Longwinded"
+                }
+            },
+            {
+                "rating": {
+                    "count": 11,
+                    "id": 2,
+                    "name": "Confusing"
+                }
+            }
+        ],
+        "recorded_at": "2010-07-16 00:00:00",
+        "slug": "nic_marks_the_happy_planet_index",
+        "speakers": [
+            {
+                "speaker": {
+                    "id": 737,
+                    "name": "Nic Marks"
+                }
+            }
+        ],
+        "tags": [
+            {
+                "tag": "TEDBooks"
+            },
+            {
+                "tag": "big problems"
+            },
+            {
+                "tag": "culture"
+            },
+            {
+                "tag": "data"
+            },
+            {
+                "tag": "economics"
+            },
+            {
+                "tag": "global issues"
+            },
+            {
+                "tag": "happiness"
+            },
+            {
+                "tag": "statistics"
+            }
+        ],
+        "themes": [
+            {
+                "theme": {
+                    "id": 33,
+                    "name": "What Makes Us Happy?"
+                }
+            }
+        ],
+        "updated_at": "2014-07-03 20:43:08",
+        "viewed_count": 1118712
+    }
+}

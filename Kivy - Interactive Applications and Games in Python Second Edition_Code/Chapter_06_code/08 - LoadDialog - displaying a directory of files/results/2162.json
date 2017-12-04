@@ -1,0 +1,283 @@
+{
+    "talk": {
+        "commented_count": 60,
+        "description": "Mapping apps help us find the fastest route to where we\u2019re going. But what if we\u2019d rather wander? Researcher Daniele Quercia demos \u201chappy maps\u201d that take into account not only the route you want to take, but how you want to feel along the way.",
+        "emailed_count": 0,
+        "event": {
+            "id": 348,
+            "name": "TED@BCG Berlin"
+        },
+        "id": 2162,
+        "image_16x9": "http://images.ted.com/images/ted/526bdf2a9e90114041ede34abfa9fec6992f1e77_2880x1620.jpg",
+        "images": [
+            {
+                "image": {
+                    "size": "113x85",
+                    "url": "http://images.ted.com/images/ted/c875f7ba92a4cbb2adca960785d978bd16ba5180_113x85.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "240x180",
+                    "url": "http://images.ted.com/images/ted/c875f7ba92a4cbb2adca960785d978bd16ba5180_240x180.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "615x461",
+                    "url": "http://images.ted.com/images/ted/c875f7ba92a4cbb2adca960785d978bd16ba5180_615x461.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "2400x1800",
+                    "url": "http://images.ted.com/images/ted/c875f7ba92a4cbb2adca960785d978bd16ba5180_2400x1800.jpg"
+                }
+            }
+        ],
+        "languages": {
+            "ca": {
+                "name": "Catalan"
+            },
+            "de": {
+                "name": "German"
+            },
+            "en": {
+                "name": "English",
+                "native": true
+            },
+            "es": {
+                "name": "Spanish"
+            },
+            "fa": {
+                "name": "Persian"
+            },
+            "fr": {
+                "name": "French"
+            },
+            "he": {
+                "name": "Hebrew"
+            },
+            "hr": {
+                "name": "Croatian"
+            },
+            "hu": {
+                "name": "Hungarian"
+            },
+            "it": {
+                "name": "Italian"
+            },
+            "ja": {
+                "name": "Japanese"
+            },
+            "my": {
+                "name": "Burmese"
+            },
+            "nl": {
+                "name": "Dutch"
+            },
+            "pt": {
+                "name": "Portuguese"
+            },
+            "pt-br": {
+                "name": "Portuguese, Brazilian"
+            },
+            "ro": {
+                "name": "Romanian"
+            },
+            "sr": {
+                "name": "Serbian"
+            },
+            "sv": {
+                "name": "Swedish"
+            },
+            "tr": {
+                "name": "Turkish"
+            },
+            "uk": {
+                "name": "Ukrainian"
+            },
+            "vi": {
+                "name": "Vietnamese"
+            },
+            "zh-cn": {
+                "name": "Chinese, Simplified"
+            },
+            "zh-tw": {
+                "name": "Chinese, Traditional"
+            }
+        },
+        "media": {
+            "internal": {
+                "180k": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-180k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "320k": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-320k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "450k": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-450k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "600k": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-600k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "64k": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-64k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "950k": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-950k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "audio-podcast": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S.mp3?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-480p.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high-en": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-480p-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-light": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-light.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-low-en": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S-low-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-regular": {
+                    "uri": "http://download.ted.com/talks/DanieleQuercia_2014S.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                }
+            }
+        },
+        "name": "Daniele Quercia: Happy maps",
+        "published_at": "2015-01-06 16:02:14",
+        "ratings": [
+            {
+                "rating": {
+                    "count": 341,
+                    "id": 1,
+                    "name": "Beautiful"
+                }
+            },
+            {
+                "rating": {
+                    "count": 219,
+                    "id": 9,
+                    "name": "Ingenious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 237,
+                    "id": 22,
+                    "name": "Fascinating"
+                }
+            },
+            {
+                "rating": {
+                    "count": 137,
+                    "id": 8,
+                    "name": "Informative"
+                }
+            },
+            {
+                "rating": {
+                    "count": 561,
+                    "id": 10,
+                    "name": "Inspiring"
+                }
+            },
+            {
+                "rating": {
+                    "count": 8,
+                    "id": 11,
+                    "name": "Longwinded"
+                }
+            },
+            {
+                "rating": {
+                    "count": 16,
+                    "id": 21,
+                    "name": "Unconvincing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 64,
+                    "id": 25,
+                    "name": "OK"
+                }
+            },
+            {
+                "rating": {
+                    "count": 119,
+                    "id": 24,
+                    "name": "Persuasive"
+                }
+            },
+            {
+                "rating": {
+                    "count": 17,
+                    "id": 3,
+                    "name": "Courageous"
+                }
+            },
+            {
+                "rating": {
+                    "count": 62,
+                    "id": 7,
+                    "name": "Funny"
+                }
+            },
+            {
+                "rating": {
+                    "count": 5,
+                    "id": 23,
+                    "name": "Jaw-dropping"
+                }
+            },
+            {
+                "rating": {
+                    "count": 2,
+                    "id": 2,
+                    "name": "Confusing"
+                }
+            }
+        ],
+        "recorded_at": "2014-11-10 00:00:00",
+        "slug": "daniele_quercia_happy_maps",
+        "speakers": [
+            {
+                "speaker": {
+                    "id": 2277,
+                    "name": "Daniele Quercia"
+                }
+            }
+        ],
+        "tags": [
+            {
+                "tag": "cities"
+            },
+            {
+                "tag": "design"
+            },
+            {
+                "tag": "happiness"
+            },
+            {
+                "tag": "map"
+            },
+            {
+                "tag": "technology"
+            }
+        ],
+        "themes": [
+            {
+                "theme": {
+                    "id": 25,
+                    "name": "Design That Matters"
+                }
+            }
+        ],
+        "updated_at": "2015-03-14 05:57:09",
+        "viewed_count": 1457946
+    }
+}

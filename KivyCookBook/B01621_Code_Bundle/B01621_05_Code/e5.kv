@@ -1,0 +1,14 @@
+<MyW>:
+	Button:
+        text: 'hello world'
+        size_hint: None, None
+        pos_hint: {'center_x': .5, 'center_y': .5}
+		canvas.before:
+			PushMatrix
+            Translate:
+            	xy: self.center_x, self.center_y
+            Rotate:
+            	angle: 45
+            	origin: self.center
+    	canvas.after:
+        	PopMatrix

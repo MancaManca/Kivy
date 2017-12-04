@@ -1,0 +1,317 @@
+{
+    "talk": {
+        "commented_count": 78,
+        "description": "Graphic designer Stefan Sagmeister takes the audience on a whimsical journey through moments of his life that made him happy -- and notes how many of these moments have to do with good design.",
+        "emailed_count": 858,
+        "event": {
+            "id": 5,
+            "name": "TED2004"
+        },
+        "id": 50,
+        "image_16x9": "http://images.ted.com/images/ted/357645ce1b44cbb0ff229b3a8a600bb49d984c94_1920x1080.jpg",
+        "images": [
+            {
+                "image": {
+                    "size": "113x85",
+                    "url": "http://images.ted.com/images/ted/f3257cb9323b0f9114e3a76ee65c052f2c76c18d_113x85.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "240x180",
+                    "url": "http://images.ted.com/images/ted/f3257cb9323b0f9114e3a76ee65c052f2c76c18d_240x180.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "615x461",
+                    "url": "http://images.ted.com/images/ted/f3257cb9323b0f9114e3a76ee65c052f2c76c18d_615x461.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "1600x1200",
+                    "url": "http://images.ted.com/images/ted/f3257cb9323b0f9114e3a76ee65c052f2c76c18d_1600x1200.jpg"
+                }
+            }
+        ],
+        "languages": {
+            "ar": {
+                "name": "Arabic"
+            },
+            "bg": {
+                "name": "Bulgarian"
+            },
+            "de": {
+                "name": "German"
+            },
+            "en": {
+                "name": "English",
+                "native": true
+            },
+            "es": {
+                "name": "Spanish"
+            },
+            "eu": {
+                "name": "Basque"
+            },
+            "fa": {
+                "name": "Persian"
+            },
+            "fr": {
+                "name": "French"
+            },
+            "he": {
+                "name": "Hebrew"
+            },
+            "hr": {
+                "name": "Croatian"
+            },
+            "it": {
+                "name": "Italian"
+            },
+            "ja": {
+                "name": "Japanese"
+            },
+            "ko": {
+                "name": "Korean"
+            },
+            "nl": {
+                "name": "Dutch"
+            },
+            "pl": {
+                "name": "Polish"
+            },
+            "pt-br": {
+                "name": "Portuguese, Brazilian"
+            },
+            "ro": {
+                "name": "Romanian"
+            },
+            "ru": {
+                "name": "Russian"
+            },
+            "sq": {
+                "name": "Albanian"
+            },
+            "sr": {
+                "name": "Serbian"
+            },
+            "uk": {
+                "name": "Ukrainian"
+            },
+            "vi": {
+                "name": "Vietnamese"
+            },
+            "zh-cn": {
+                "name": "Chinese, Simplified"
+            },
+            "zh-tw": {
+                "name": "Chinese, Traditional"
+            }
+        },
+        "media": {
+            "internal": {
+                "180k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-180k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "320k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-320k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "450k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-450k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "600k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-600k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "64k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-64k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "950k": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-950k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-480p.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high-en": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-480p-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-light": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-light.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-low-en": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004-low-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-regular": {
+                    "uri": "http://download.ted.com/talks/StefanSagmeister_2004.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                }
+            }
+        },
+        "name": "Stefan Sagmeister: Happiness by design",
+        "published_at": "2007-04-05 00:11:00",
+        "ratings": [
+            {
+                "rating": {
+                    "count": 21,
+                    "id": 2,
+                    "name": "Confusing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 433,
+                    "id": 7,
+                    "name": "Funny"
+                }
+            },
+            {
+                "rating": {
+                    "count": 140,
+                    "id": 9,
+                    "name": "Ingenious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 169,
+                    "id": 1,
+                    "name": "Beautiful"
+                }
+            },
+            {
+                "rating": {
+                    "count": 58,
+                    "id": 11,
+                    "name": "Longwinded"
+                }
+            },
+            {
+                "rating": {
+                    "count": 89,
+                    "id": 8,
+                    "name": "Informative"
+                }
+            },
+            {
+                "rating": {
+                    "count": 512,
+                    "id": 10,
+                    "name": "Inspiring"
+                }
+            },
+            {
+                "rating": {
+                    "count": 128,
+                    "id": 22,
+                    "name": "Fascinating"
+                }
+            },
+            {
+                "rating": {
+                    "count": 47,
+                    "id": 3,
+                    "name": "Courageous"
+                }
+            },
+            {
+                "rating": {
+                    "count": 62,
+                    "id": 21,
+                    "name": "Unconvincing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 110,
+                    "id": 25,
+                    "name": "OK"
+                }
+            },
+            {
+                "rating": {
+                    "count": 13,
+                    "id": 26,
+                    "name": "Obnoxious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 22,
+                    "id": 23,
+                    "name": "Jaw-dropping"
+                }
+            },
+            {
+                "rating": {
+                    "count": 29,
+                    "id": 24,
+                    "name": "Persuasive"
+                }
+            }
+        ],
+        "recorded_at": "2004-02-02 00:00:00",
+        "slug": "stefan_sagmeister_shares_happy_design",
+        "speakers": [
+            {
+                "speaker": {
+                    "id": 53,
+                    "name": "Stefan Sagmeister"
+                }
+            }
+        ],
+        "tags": [
+            {
+                "tag": "TED Conference"
+            },
+            {
+                "tag": "art"
+            },
+            {
+                "tag": "arts"
+            },
+            {
+                "tag": "design"
+            },
+            {
+                "tag": "happiness"
+            },
+            {
+                "tag": "typography"
+            }
+        ],
+        "themes": [
+            {
+                "theme": {
+                    "id": 1,
+                    "name": "The Creative Spark"
+                }
+            },
+            {
+                "theme": {
+                    "id": 17,
+                    "name": "Art Unusual"
+                }
+            },
+            {
+                "theme": {
+                    "id": 25,
+                    "name": "Design That Matters"
+                }
+            },
+            {
+                "theme": {
+                    "id": 28,
+                    "name": "Not Business as Usual"
+                }
+            },
+            {
+                "theme": {
+                    "id": 33,
+                    "name": "What Makes Us Happy?"
+                }
+            }
+        ],
+        "updated_at": "2014-12-09 00:21:50",
+        "viewed_count": 1438901
+    }
+}

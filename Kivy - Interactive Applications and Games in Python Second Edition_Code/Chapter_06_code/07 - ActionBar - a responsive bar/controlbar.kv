@@ -1,0 +1,30 @@
+# File name: controlbar.kv
+#:kivy 1.9.0
+
+<VideoPlayPause@ToggleButtonBehavior+Image>:
+    start: 'atlas://data/images/defaulttheme/media-playback-start'
+    pause: 'atlas://data/images/defaulttheme/media-playback-pause'
+    size_hint: [None, None]
+    width: 44
+    source: self.start if self.state == 'normal' else self.pause
+
+<ControlBar@GridLayout>:
+    rows: 1
+    size_hint: None, None
+    pos_hint: {'right': 1}
+    padding: [10,0,0,0]
+    play_pause: _play_pause
+    progress: 0
+
+    VideoSlider:
+        value: root.progress
+        max: 1
+
+    VideoPlayPause:
+        id: _play_pause
+
+    VideoStop:
+        size_hint: [None, None]
+        width: 44
+        source: 'atlas://data/images/defaulttheme/media-playback-stop'
+        on_press: self.stop(root.parent.video, _play_pause)

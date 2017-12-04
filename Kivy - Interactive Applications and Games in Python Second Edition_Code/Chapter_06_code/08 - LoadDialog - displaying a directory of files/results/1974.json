@@ -1,0 +1,287 @@
+{
+    "talk": {
+        "commented_count": 127,
+        "description": "The parenting section of the bookstore is overwhelming\u2014it's \"a giant, candy-colored monument to our collective panic,\" as writer Jennifer Senior puts it. Why is parenthood filled with so much anxiety? Because the goal of modern, middle-class parents\u2014to raise happy children\u2014is so elusive. In this honest talk, she offers some kinder and more achievable aims.",
+        "emailed_count": 0,
+        "event": {
+            "id": 256,
+            "name": "TED2014"
+        },
+        "id": 1974,
+        "image_16x9": false,
+        "images": [
+            {
+                "image": {
+                    "size": "113x85",
+                    "url": "http://images.ted.com/images/ted/98fd6cb5eb2d612414e1558c908df75843325395_113x85.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "240x180",
+                    "url": "http://images.ted.com/images/ted/98fd6cb5eb2d612414e1558c908df75843325395_240x180.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "615x461",
+                    "url": "http://images.ted.com/images/ted/98fd6cb5eb2d612414e1558c908df75843325395_615x461.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "1600x1200",
+                    "url": "http://images.ted.com/images/ted/98fd6cb5eb2d612414e1558c908df75843325395_1600x1200.jpg"
+                }
+            }
+        ],
+        "languages": {
+            "ar": {
+                "name": "Arabic"
+            },
+            "bg": {
+                "name": "Bulgarian"
+            },
+            "de": {
+                "name": "German"
+            },
+            "el": {
+                "name": "Greek"
+            },
+            "en": {
+                "name": "English",
+                "native": true
+            },
+            "es": {
+                "name": "Spanish"
+            },
+            "fr": {
+                "name": "French"
+            },
+            "he": {
+                "name": "Hebrew"
+            },
+            "hr": {
+                "name": "Croatian"
+            },
+            "hu": {
+                "name": "Hungarian"
+            },
+            "it": {
+                "name": "Italian"
+            },
+            "ja": {
+                "name": "Japanese"
+            },
+            "ko": {
+                "name": "Korean"
+            },
+            "pl": {
+                "name": "Polish"
+            },
+            "pt": {
+                "name": "Portuguese"
+            },
+            "pt-br": {
+                "name": "Portuguese, Brazilian"
+            },
+            "ro": {
+                "name": "Romanian"
+            },
+            "ru": {
+                "name": "Russian"
+            },
+            "sl": {
+                "name": "Slovenian"
+            },
+            "sq": {
+                "name": "Albanian"
+            },
+            "sr": {
+                "name": "Serbian"
+            },
+            "uk": {
+                "name": "Ukrainian"
+            },
+            "vi": {
+                "name": "Vietnamese"
+            },
+            "zh-cn": {
+                "name": "Chinese, Simplified"
+            },
+            "zh-tw": {
+                "name": "Chinese, Traditional"
+            }
+        },
+        "media": {
+            "internal": {
+                "180k": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-180k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "320k": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-320k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "450k": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-450k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "600k": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-600k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "64k": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-64k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "950k": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-950k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-480p.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high-en": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-480p-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-light": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-light.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-low-en": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014-low-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-regular": {
+                    "uri": "http://download.ted.com/talks/JenniferSenior_2014.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                }
+            }
+        },
+        "name": "Jennifer Senior: For parents, happiness is a very high bar",
+        "published_at": "2014-04-15 14:59:16",
+        "ratings": [
+            {
+                "rating": {
+                    "count": 108,
+                    "id": 11,
+                    "name": "Longwinded"
+                }
+            },
+            {
+                "rating": {
+                    "count": 83,
+                    "id": 21,
+                    "name": "Unconvincing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 45,
+                    "id": 26,
+                    "name": "Obnoxious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 461,
+                    "id": 10,
+                    "name": "Inspiring"
+                }
+            },
+            {
+                "rating": {
+                    "count": 151,
+                    "id": 22,
+                    "name": "Fascinating"
+                }
+            },
+            {
+                "rating": {
+                    "count": 141,
+                    "id": 3,
+                    "name": "Courageous"
+                }
+            },
+            {
+                "rating": {
+                    "count": 14,
+                    "id": 23,
+                    "name": "Jaw-dropping"
+                }
+            },
+            {
+                "rating": {
+                    "count": 159,
+                    "id": 1,
+                    "name": "Beautiful"
+                }
+            },
+            {
+                "rating": {
+                    "count": 215,
+                    "id": 24,
+                    "name": "Persuasive"
+                }
+            },
+            {
+                "rating": {
+                    "count": 45,
+                    "id": 9,
+                    "name": "Ingenious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 218,
+                    "id": 25,
+                    "name": "OK"
+                }
+            },
+            {
+                "rating": {
+                    "count": 237,
+                    "id": 8,
+                    "name": "Informative"
+                }
+            },
+            {
+                "rating": {
+                    "count": 82,
+                    "id": 7,
+                    "name": "Funny"
+                }
+            },
+            {
+                "rating": {
+                    "count": 21,
+                    "id": 2,
+                    "name": "Confusing"
+                }
+            }
+        ],
+        "recorded_at": "2014-03-21 00:00:00",
+        "slug": "jennifer_senior_for_parents_happiness_is_a_very_high_bar",
+        "speakers": [
+            {
+                "speaker": {
+                    "id": 1767,
+                    "name": "Jennifer Senior"
+                }
+            }
+        ],
+        "tags": [
+            {
+                "tag": "culture"
+            },
+            {
+                "tag": "family"
+            },
+            {
+                "tag": "parenting"
+            }
+        ],
+        "themes": [
+            {
+                "theme": {
+                    "id": 33,
+                    "name": "What Makes Us Happy?"
+                }
+            }
+        ],
+        "updated_at": "2015-02-08 02:00:19",
+        "viewed_count": 1307670
+    }
+}

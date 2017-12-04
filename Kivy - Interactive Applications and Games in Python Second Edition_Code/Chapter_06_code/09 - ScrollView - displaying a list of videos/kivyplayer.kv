@@ -1,0 +1,41 @@
+# File name: kivyplayer.kv
+#:kivy 1.9.0
+
+<KivyPlayer>:
+    list_button: _list_button
+    action_bar: _action_bar
+    video_controller: _video_controller
+    side_bar: _side_bar
+    playlist: _side_bar.playlist
+
+    VideoController:
+        id: _video_controller
+        control_bar_width: root.width - _side_bar.right
+        on_playing: root.hide_bars(*args)
+
+    ActionBar:
+        id: _action_bar
+        top: root.height
+        ActionView:
+            use_separator: True
+            ActionListButton:
+                id: _list_button
+                root: root
+                title: 'KPlayer'
+            ActionToggleButton:
+                text: 'Mute'
+                on_state: root.toggle_mute(*args)
+            ActionGroup:
+                text: 'More Options...'
+                ActionButton:
+                    text: 'Open List'
+                    on_release: root.show_load_list()
+                ActionTextInput:
+                    on_text_validate: root.search(self.text)
+
+    Sidebar:
+        id: _side_bar
+        width: min(_list_button.width,350)
+        height: root.height - _action_bar.height
+        top: root.height - _action_bar.height
+        x: 0 - self.width if _list_button.state == 'normal' else 0

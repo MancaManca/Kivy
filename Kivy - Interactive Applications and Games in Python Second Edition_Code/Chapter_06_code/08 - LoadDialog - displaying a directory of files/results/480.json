@@ -1,0 +1,317 @@
+{
+    "talk": {
+        "commented_count": 38,
+        "description": "In this talk from 2003, design critic Don Norman turns his incisive eye toward beauty, fun, pleasure and emotion, as he looks at design that makes people happy. He names the three emotional cues that a well-designed product must hit to succeed.",
+        "emailed_count": 584,
+        "event": {
+            "id": 6,
+            "name": "TED2003"
+        },
+        "id": 480,
+        "image_16x9": false,
+        "images": [
+            {
+                "image": {
+                    "size": "113x85",
+                    "url": "http://images.ted.com/images/ted/75971_113x85.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "240x180",
+                    "url": "http://images.ted.com/images/ted/75971_240x180.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "615x461",
+                    "url": "http://images.ted.com/images/ted/75971_615x461.jpg"
+                }
+            },
+            {
+                "image": {
+                    "size": "800x600",
+                    "url": "http://images.ted.com/images/ted/75971_800x600.jpg"
+                }
+            }
+        ],
+        "languages": {
+            "ar": {
+                "name": "Arabic"
+            },
+            "bg": {
+                "name": "Bulgarian"
+            },
+            "cs": {
+                "name": "Czech"
+            },
+            "de": {
+                "name": "German"
+            },
+            "el": {
+                "name": "Greek"
+            },
+            "en": {
+                "name": "English",
+                "native": true
+            },
+            "es": {
+                "name": "Spanish"
+            },
+            "fa": {
+                "name": "Persian"
+            },
+            "fr": {
+                "name": "French"
+            },
+            "he": {
+                "name": "Hebrew"
+            },
+            "hr": {
+                "name": "Croatian"
+            },
+            "hu": {
+                "name": "Hungarian"
+            },
+            "hy": {
+                "name": "Armenian"
+            },
+            "id": {
+                "name": "Indonesian"
+            },
+            "it": {
+                "name": "Italian"
+            },
+            "ja": {
+                "name": "Japanese"
+            },
+            "ko": {
+                "name": "Korean"
+            },
+            "nl": {
+                "name": "Dutch"
+            },
+            "pl": {
+                "name": "Polish"
+            },
+            "pt": {
+                "name": "Portuguese"
+            },
+            "pt-br": {
+                "name": "Portuguese, Brazilian"
+            },
+            "ro": {
+                "name": "Romanian"
+            },
+            "ru": {
+                "name": "Russian"
+            },
+            "sk": {
+                "name": "Slovak"
+            },
+            "th": {
+                "name": "Thai"
+            },
+            "tr": {
+                "name": "Turkish"
+            },
+            "uk": {
+                "name": "Ukrainian"
+            },
+            "vi": {
+                "name": "Vietnamese"
+            },
+            "zh-cn": {
+                "name": "Chinese, Simplified"
+            },
+            "zh-tw": {
+                "name": "Chinese, Traditional"
+            }
+        },
+        "media": {
+            "internal": {
+                "180k": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-180k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "320k": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-320k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "450k": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-450k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "600k": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-600k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "64k": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-64k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "950k": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-950k.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-480p.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-high-en": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-480p-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-light": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-light.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-low-en": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003-low-en.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                },
+                "podcast-regular": {
+                    "uri": "http://download.ted.com/talks/DonNorman_2003.mp4?apikey=79bcca13c0cc74523125332a1032ff104b62a163"
+                }
+            }
+        },
+        "name": "Don Norman: 3 ways good design makes you happy",
+        "published_at": "2009-03-09 08:21:00",
+        "ratings": [
+            {
+                "rating": {
+                    "count": 234,
+                    "id": 7,
+                    "name": "Funny"
+                }
+            },
+            {
+                "rating": {
+                    "count": 147,
+                    "id": 22,
+                    "name": "Fascinating"
+                }
+            },
+            {
+                "rating": {
+                    "count": 145,
+                    "id": 8,
+                    "name": "Informative"
+                }
+            },
+            {
+                "rating": {
+                    "count": 67,
+                    "id": 24,
+                    "name": "Persuasive"
+                }
+            },
+            {
+                "rating": {
+                    "count": 62,
+                    "id": 9,
+                    "name": "Ingenious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 218,
+                    "id": 10,
+                    "name": "Inspiring"
+                }
+            },
+            {
+                "rating": {
+                    "count": 116,
+                    "id": 1,
+                    "name": "Beautiful"
+                }
+            },
+            {
+                "rating": {
+                    "count": 60,
+                    "id": 25,
+                    "name": "OK"
+                }
+            },
+            {
+                "rating": {
+                    "count": 3,
+                    "id": 26,
+                    "name": "Obnoxious"
+                }
+            },
+            {
+                "rating": {
+                    "count": 19,
+                    "id": 23,
+                    "name": "Jaw-dropping"
+                }
+            },
+            {
+                "rating": {
+                    "count": 10,
+                    "id": 2,
+                    "name": "Confusing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 24,
+                    "id": 21,
+                    "name": "Unconvincing"
+                }
+            },
+            {
+                "rating": {
+                    "count": 12,
+                    "id": 11,
+                    "name": "Longwinded"
+                }
+            },
+            {
+                "rating": {
+                    "count": 9,
+                    "id": 3,
+                    "name": "Courageous"
+                }
+            }
+        ],
+        "recorded_at": "2003-02-02 00:00:00",
+        "slug": "don_norman_on_design_and_emotion",
+        "speakers": [
+            {
+                "speaker": {
+                    "id": 416,
+                    "name": "Don Norman"
+                }
+            }
+        ],
+        "tags": [
+            {
+                "tag": "TED Conference"
+            },
+            {
+                "tag": "creativity"
+            },
+            {
+                "tag": "design"
+            },
+            {
+                "tag": "happiness"
+            }
+        ],
+        "themes": [
+            {
+                "theme": {
+                    "id": 1,
+                    "name": "The Creative Spark"
+                }
+            },
+            {
+                "theme": {
+                    "id": 32,
+                    "name": "Unconventional Explanations"
+                }
+            },
+            {
+                "theme": {
+                    "id": 33,
+                    "name": "What Makes Us Happy?"
+                }
+            }
+        ],
+        "updated_at": "2014-07-03 20:42:47",
+        "viewed_count": 842607
+    }
+}
