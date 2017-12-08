@@ -9,66 +9,86 @@ MainScreen:
     pl: plata_value
     ost: ostatak_value
     tro: troskovi_value
-
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'paycheck_icon.png'
     BoxLayout:
         orientation: 'vertical'
         Label:
             id: sred_dol
-            text: 'Srednji kurs dolar'
+            bold: True
+            font_hinting: 'mono'
+            text: 'USD Avg Rate'
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: sred_dol_value
+            bold: True
+            font_hinting: 'mono'
             text: ' '
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: sred_eur
-            text: 'Srednji kurs euro'
+            bold: True
+            font_hinting: 'mono'
+            text: 'EUR Avg Rate'
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: sred_eur_value
+            bold: True
+            font_hinting: 'mono'
             text: ' '
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: plata
-            text: 'Plata'
+            bold: True
+            font_hinting: 'mono'
+            text: 'Neto Paycheck'
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: plata_value
+            bold: True
+            font_hinting: 'mono'
             text: ' '
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: troskovi
-            text: 'Troskovi'
+            bold: True
+            font_hinting: 'mono'
+            text: 'Expenses'
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: troskovi_value
+            bold: True
+            font_hinting: 'mono'
             text: ' '
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: ostatak
-            text: 'Ostatak'
+            bold: True
+            font_hinting: 'mono'
+            text: 'Clean Leftover'
             markup: True
-            outline_color: [1,1,1]
-
-            ellipsis_options: {'color':(1,0.5,0.5,1),'underline':True}
             size: self.texture_size
             padding_x: (root.width)/2
         Label:
             id: ostatak_value
+            bold: True
+            font_hinting: 'mono'
             text: ' '
             italic: True
             size: self.texture_size
         Button:
-            text: 'do magic'
-
+            text: 'GET'
             background_color: [1,2,2,1]
             on_press: root.search_location()
             size: self.texture_size

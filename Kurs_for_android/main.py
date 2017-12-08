@@ -1,5 +1,4 @@
 import kivy
-from kivy.core.window import Window
 from kivy.network.urlrequest import UrlRequest
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
@@ -18,10 +17,16 @@ class MainScreen(BoxLayout):
     # BEGIN SEARCHLOCATION
     def search_location(self):
         search_url = 'http://www.nbs.rs/kursnaListaModul/srednjiKurs.faces'
-        request = UrlRequest(search_url, self.populate) # <2>
-
+        # print search_url
+        self.request = UrlRequest(search_url, self.populate,on_error=self.on_error,on_failure=self.on_failure) # <2>
+    def on_error(self,request,*args):
+        print (args)
+        print ('on error {}'.format(request.result))
+    def on_failure(self,request,*args):
+        print (args)
+        print ('on failure {}'.format(request.result))
     def populate(self,request,*args):
-        print('entered populate')
+        # print'entered populate'
         anchorStart, anchorEnd = makeHTMLTags("td")
         htmlText = request.result
         anchor = anchorStart + SkipTo(anchorEnd).setResultsName("body") + anchorEnd
@@ -39,13 +44,13 @@ class MainScreen(BoxLayout):
                 deda = i + 2
         #############################################################
 
-        # print('{}'.format(l))
+        print('{}'.format(l))
         eur = l[baba]
         conv_eur = str(eur)
-        print('{}'.format(conv_eur))
+        print ('{}'.format(conv_eur))
         dol = l[deda]
         conv_dol = str(dol)
-        print('{}'.format(conv_dol))
+        print ('{}'.format(conv_dol))
 
         troskovi = {
             'porez': 22400,
@@ -68,6 +73,8 @@ class MainScreen(BoxLayout):
 
 
 class PaycheckApp(App):
+    def on_pause(self):
+        return True
     pass
 
 if __name__ == '__main__':
