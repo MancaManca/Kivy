@@ -1,0 +1,304 @@
+#:kivy 1.9.0
+
+<CustomPopup>:
+    size_hint: .5, .5
+    auto_dismiss: False
+    title: 'Hello world'
+    Button:
+        text: 'Click me to dismiss'
+        on_press: root.dismiss()
+
+
+#<Navbar>:
+#    orientation: 'horizontal'
+#    size_hint_y: .1
+#
+#    canvas.before:
+#        Color:
+#            rgba: 0, 1, 0, 1
+#        Rectangle:
+#            # self here refers to the widget i.e BoxLayout
+#            pos: self.pos
+#            size: self.size
+#    Label:
+#        size_hint_x: .1
+#        text: 'bla'
+#    Label:
+#        #size_hint_x: .1
+#        size_hint_min_x: 50
+#        size_hint_max_x: 90
+#        canvas.before:
+#            Rectangle:
+#                pos: self.pos
+#                size: self.size
+#                source: 'xamarintips.png'
+#    Button:
+#        size_hint_x: .2
+#        text: 'pop'
+#        on_release: app.show_popup()
+<MainView>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+                source: 'paycheck_icon.png'
+        BoxLayout:
+
+            orientation: 'horizontal'
+            size_hint_y: .1
+
+            canvas.before:
+                Color:
+                    rgba: 0, 1, 0, 1
+                Rectangle:
+                    # self here refers to the widget i.e BoxLayout
+                    pos: self.pos
+                    size: self.size
+            Label:
+                size_hint_x: .1
+                text: 'bla'
+            Label:
+                #size_hint_x: .1
+                size_hint_min_x: 50
+                size_hint_max_x: 90
+                canvas.before:
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                        source: 'xamarintips.png'
+            Button:
+                size_hint_x: .2
+                text: 'pop'
+                on_release: app.show_popup()
+        Carousel:
+            id: carousel
+
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 0, 1
+                Rectangle:
+                    # self here refers to the widget i.e BoxLayout
+                    pos: self.pos
+                    size: self.size
+            BoxLayout:
+                id: main
+                index: 1
+                orientation: 'vertical'
+                Label:
+                    id: avg_rate_dol
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: 'USD Avg Rate'
+                Label:
+                    id: avg_rate_dol_value
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: avg_rate_eur
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: 'EUR Avg Rate'
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: avg_rate_eur_value
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: paycheck
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: 'Neto Paycheck'
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: paycheck_value
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: expenses
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: 'Expenses'
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: expenses_value
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: clean_leftover
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: 'Clean Leftover'
+                    markup: True
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+                Label:
+                    id: clean_leftover_value
+                    bold: True
+                    color: 1,0,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    italic: True
+                    size: self.texture_size
+                Label:
+                    id: test
+                    color: 1,0,1,1
+                    text: ''
+                Button:
+                    text: 'GET'
+                    background_color: [1,2,2,1]
+                    on_press: root.search_location()
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+            BoxLayout:
+                id: second
+                orientation: 'vertical'
+                index: 2
+                width: root.width/2
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        id: info
+                        text: 'Edit Expenses'
+                    Label:
+                        id: f_expense
+                        bold: True
+                        font_hinting: 'mono'
+                        text: 'Enter expense name'
+#                    TextInput:
+#                        id: f_expense_input
+#                        multiline: False
+                    Label:
+                        id: f_expense
+                        bold: True
+                        font_hinting: 'mono'
+                        text: 'Enter expense value'
+#                    TextInput:
+#                        id: textinput1
+#                        multiline: False
+#                        text: ''
+#                        hint_text: 'bla'
+                    Button:
+                        text: 'clear'
+                        on_press: root.clear_all()
+                    Button:
+                        text: 'save'
+                        on_press:root.my_callback(f_expense_input.text,textinput1.text)
+                    Button:
+                        text: 'show'
+                        on_press: root.show_edits()
+                    BoxLayout:
+                        orientation: 'vertical'
+                        id: dic_values_wrap
+
+
+
+
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#
+#    BoxLayout:
+#        Label:
+#            id: sred_dol
+#            bold: True
+#            font_hinting: 'mono'
+#            text: 'USD Avg Rate'
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: sred_dol_value
+#            bold: True
+#            font_hinting: 'mono'
+#            text: ' '
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: sred_eur
+#            bold: True
+#            font_hinting: 'mono'
+#            text: 'EUR Avg Rate'
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: sred_eur_value
+#            bold: True
+#            font_hinting: 'mono'
+#            text: ' '
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: plata
+#            bold: True
+#            font_hinting: 'mono'
+#            text: 'Neto Paycheck'
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: plata_value
+#            bold: True
+#            font_hinting: 'mono'
+#            text: ' '
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: troskovi
+#            bold: True
+#            font_hinting: 'mono'
+#            text: 'Expenses'
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: troskovi_value
+#            bold: True
+#            font_hinting: 'mono'
+#            text: ' '
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: ostatak
+#            bold: True
+#            font_hinting: 'mono'
+#            text: 'Clean Leftover'
+#            markup: True
+#            size: self.texture_size
+#            padding_x: (root.width)/2
+#        Label:
+#            id: ostatak_value
+#            bold: True
+#            font_hinting: 'mono'
+#            text: ' '
+#            italic: True
+#            size: self.texture_size
+#        Button:
+#            text: 'GET'
+#            background_color: [1,2,2,1]
+#            on_press: root.search_location()
+#            size: self.texture_size
+#            padding_x: (root.width)/2
