@@ -24,24 +24,42 @@ MainView:
 
             orientation: 'vertical'
 
-            size_hint_y: .5
+            size_hint_y: .6
 
             Label:
-                text: 'Use default setup'
+                text: 'Add mode'
+                size_hint_y: .1
 
             CheckBox:
                 id: default_setup
-                on_active: root.print_l(self,self.active)
+                size_hint_y: .2
+                on_active: root.set_flag_edit(self,self.active)
 
             Label:
-                text: 'Edit setup'
+                text: 'Clean edit mode'
+                size_hint_y: .1
 
             CheckBox:
                 id: edit_setup
-                on_active: root.print_l(self,self.active)
+                size_hint_y: .2
+                on_active: root.set_flag_clean(self,self.active)
+            TextInput:
+                id: paycheck_amount_clean
+                size_hint_y: .2
+                opacity: 0
+
+                multiline: False
+                readonly: True
+#                height: 0
+            Button:
+                id: update_paycheck_amount
+                size_hint_y: .2
+                opacity: 0
+                text: 'Save amount'
+                on_press: root.set_paycheck_amount_clean(paycheck_amount_clean.text,edit_setup.active)
 
         Button:
-            size_hint_y: .1
+            size_hint_y: .2
             text: 'Close'
             on_press: root.dismiss()
 
@@ -233,7 +251,7 @@ MainView:
                 Button:
                     text: 'GET'
                     background_color: [1,2,2,1]
-                    on_press: root.send_request()
+                    on_press: root.populate()
                     size: self.texture_size
                     padding_x: (root.width)/2
 
