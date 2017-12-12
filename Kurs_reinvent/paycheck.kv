@@ -2,12 +2,13 @@
 MainView:
 <CustomPopup>:
     name: 'bo'
-    size_hint: .5, .5
+    size_hint: .8, .6
     auto_dismiss: False
     title: 'Settings'
-    mode: mode_state
+    mode_edit: checkbox_add_edit
+    mode_clean: checkbox_clean_add_edit
     BoxLayout:
-        id: bp
+        id: popup_box_content
         orientation: 'vertical'
 
         Label:
@@ -15,7 +16,6 @@ MainView:
             text: 'Edit mode set to'
 
         Label:
-
             size_hint_y: .1
             id: mode_state
             text: ''
@@ -23,26 +23,26 @@ MainView:
         BoxLayout:
 
             orientation: 'vertical'
-
             size_hint_y: .6
 
             Label:
-                text: 'Add mode'
+                text: 'Enable Add/Edit'
                 size_hint_y: .1
 
             CheckBox:
-                id: default_setup
+                id: checkbox_add_edit
                 size_hint_y: .2
                 on_active: root.set_flag_edit(self,self.active)
 
             Label:
-                text: 'Clean edit mode'
+                text: 'Clean Edit Setup'
                 size_hint_y: .1
 
             CheckBox:
-                id: edit_setup
+                id: checkbox_clean_add_edit
                 size_hint_y: .2
                 on_active: root.set_flag_clean(self,self.active)
+
             TextInput:
                 id: paycheck_amount_clean
                 size_hint_y: .2
@@ -51,30 +51,63 @@ MainView:
                 multiline: False
                 readonly: True
 #                height: 0
+
             Button:
                 id: update_paycheck_amount
                 size_hint_y: .2
                 opacity: 0
-                text: 'Save amount'
-                on_press: root.set_paycheck_amount_clean(paycheck_amount_clean.text,edit_setup.active)
+                text: 'Save Amount'
+                on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
 
         Button:
             size_hint_y: .2
             text: 'Close'
             on_press: root.dismiss()
 
-<MainView>:
-    mode_s: state_label
 
+<MainView>:
+    removal: init_s
+    orientation: 'vertical'
     BoxLayout:
         orientation: 'vertical'
+        id: init_s
+        size_hint_y: 1
+        spacing: 30
+        padding: ((self.width)/4,50)
+        Image:
+            source: 'paycheck_icon.png'
+        Label:
+            size_hint_max_y: ('50dp')
 
+            color: 1,1,1,1
+
+            font_hinting: 'mono'
+#            size_hint_x: .3
+            text: 'Enter Paycheck Amount'
+        TextInput:
+            id: init_s_input
+            size_hint_max_y: ('50dp')
+#            size_hint_x: .3
+            multiline: False
+            hint_text: 'Amount Value'
+        Button:
+            id: init_s_b
+            size_hint_max_y: ('50dp')
+#            size_hint_x: .3
+            text: 'Save'
+            on_press: root.remove(init_s_input.text)
+    BoxLayout:
+        orientation: 'vertical'
+        id: main_v
+        size_hint_y: None
+        height: 0
+        opacity: 0
         canvas.before:
             Rectangle:
                 pos: self.pos
                 size: self.size
 
-                source: 'br.png'
+                source: 'black.png'
 
         BoxLayout:
             orientation: 'horizontal'
@@ -82,28 +115,30 @@ MainView:
 
 #            canvas.before:
 #                Color:
-#                    rgba: .3, .1, 0, 1
+##                    rgba: 0.259, 0.259, 0.259, .9
+##                    rgba: .9, .8, .2, .9
+#                    rgba: 0 , 0 , 0, .1
 #                Rectangle:
 #                    # self here refers to the widget i.e BoxLayout
 #                    pos: self.pos
 #                    size: self.size
-            Label:
-                id: state_label
-                size_hint_x: .1
-                text: 'Paycheck'
+#            Label:
+#                id: state_label
+#                size_hint_x: .1
+#                text: 'Paycheck'
 
-            Label:
-                #size_hint_x: .1
-                size_hint_min_x: 50
-                size_hint_max_x: 90
-                canvas.before:
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-                        source: 'xamarintips.png'
+#            Label:
+#                #size_hint_x: .1
+#                size_hint_min_x: 50
+#                size_hint_max_x: 90
+#                canvas.before:
+#                    Rectangle:
+#                        pos: self.pos
+#                        size: self.size
+#                        source: 'xamarintips.png'
 
             Button:
-                size_hint_max_x: 50
+                size_hint_max_x: 90
 
                 on_release: app.show_popup()
                 background_color: [0,0,0,0]
@@ -111,7 +146,7 @@ MainView:
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                        source: 'paycheck_icon.png'
+                        source: 'cog.png'
 
         Carousel:
             id: carousel
@@ -135,17 +170,17 @@ MainView:
 #                        pos: self.pos
 #                        size: 400,400
 
-                Label:
-                    text: 'Progression: {}%'.format(int(pb.value))
-                    size_hint_y: None
-                    height: '48dp'
+#                Label:
+#                    text: 'Progression: {}%'.format(int(pb.value))
+#                    size_hint_y: None
+#                    height: '48dp'
 
-                ProgressBar:
-                    id: pb
-                    size_hint_x: .5
-                    size_hint_y: None
-                    height: '48dp'
-                    value: (app.time * 20) % 100
+#                ProgressBar:
+#                    id: pb
+#                    size_hint_x: .5
+#                    size_hint_y: None
+#                    height: '48dp'
+#                    value: (app.time * 20) % 100
 
                 Label:
                     id: avg_rate_dol
@@ -250,7 +285,7 @@ MainView:
 
                 Button:
                     text: 'GET'
-                    background_color: [1,2,2,1]
+                    background_color: 0.259, 0.259, 0.259,1
                     on_press: root.populate()
                     size: self.texture_size
                     padding_x: (root.width)/2
