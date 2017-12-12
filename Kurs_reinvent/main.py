@@ -40,7 +40,7 @@ class CustomPopup(Popup):
 			MainView.changed_values_dic = {}
 		else:
 			self.ids.paycheck_amount_clean.opacity = 0
-			self.ids.paycheck_amount_clean.readonly = True
+			# self.ids.paycheck_amount_clean.readonly = True
 			self.ids.update_paycheck_amount.opacity = 0
 			MainView.store['paycheck_amount'] = {'value': MainView.store['init_paycheck_amount']['value']}
 
@@ -61,6 +61,7 @@ class CustomPopup(Popup):
 		# else:
 		# 	MainView.changed_values_dic['paychechk_ammount']=None
 		# 	print(MainView.store['paycheck_amount'])
+
 
 class MainView(BoxLayout):
 
@@ -194,7 +195,16 @@ class MainView(BoxLayout):
 			except KeyError:
 				# print('No current entry for paycheck')
 				pass
-		exp_sum = sum(self.changed_values_dic.values())
+		if self.store.exists('hidden'):
+			default_setup_dic = {'porez': 22400,
+								'stan': float(stored_dol_rate) * 225,
+								'osiguranje': 3000,
+								'kuca': 20000,
+								'racuni': 10000,}
+			exp_sum = sum(default_setup_dic.values())
+		else:
+
+			exp_sum = sum(self.changed_values_dic.values())
 		# print(exp_sum)
 		pay_sum = float(float(stored_dol_rate) * paycheck_amount)
 		# print(pay_sum)
@@ -233,7 +243,12 @@ class MainView(BoxLayout):
 	# 		# self.changed_values_dic = default_setup_dic
 
 
-
+	def hidden_feature(self):
+		self.ids.hidden_b.opacity = 1
+		self.store['hidden'] = {'value':True}
+	# def on_touch_down(self,touch):
+	# 	if touch.is_triple_tap:
+	# 		self.hidden_feature()
 
 class PaycheckApp(App):
 	time = NumericProperty(0)
@@ -305,6 +320,8 @@ class PaycheckApp(App):
 		p.ids.paycheck_amount_clean.hint_text = str(MainView.store['paycheck_amount']['value'])
 		# print('Edit Checkbox status is {}'.format(p.mode_edit.active))
 		# print('Clean Checkbox status is {}'.format(p.mode_clean.active))
+		print(p.ids.paycheck_amount_clean.readonly)
+
 		p.open()
 	pass
 

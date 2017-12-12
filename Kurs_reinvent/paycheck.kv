@@ -7,6 +7,7 @@ MainView:
     title: 'Settings'
     mode_edit: checkbox_add_edit
     mode_clean: checkbox_clean_add_edit
+    on_open: popup_box_content.focus = True
     BoxLayout:
         id: popup_box_content
         orientation: 'vertical'
@@ -47,6 +48,7 @@ MainView:
                 id: paycheck_amount_clean
                 size_hint_y: .2
                 opacity: 0
+                focus: True
 
                 multiline: False
                 readonly: True
@@ -108,16 +110,17 @@ MainView:
                 size: self.size
 
                 source: 'black.png'
-
+       
         BoxLayout:
             orientation: 'horizontal'
+
             size_hint_y: .1
 
 #            canvas.before:
 #                Color:
 ##                    rgba: 0.259, 0.259, 0.259, .9
 ##                    rgba: .9, .8, .2, .9
-#                    rgba: 0 , 0 , 0, .1
+#                    rgba: 1 , 1 , 1, .6
 #                Rectangle:
 #                    # self here refers to the widget i.e BoxLayout
 #                    pos: self.pos
@@ -138,7 +141,7 @@ MainView:
 #                        source: 'xamarintips.png'
 
             Button:
-                size_hint_max_x: 90
+                size_hint_max_x: '70dp'
 
                 on_release: app.show_popup()
                 background_color: [0,0,0,0]
@@ -147,6 +150,18 @@ MainView:
                         pos: self.pos
                         size: self.size
                         source: 'cog.png'
+            Button:
+                id: hidden_b
+                size_hint_max_x: '70dp'
+                opacity: 0
+                text: ''
+                on_touch_down: if root.touch.is_triple_tap: self.hidden_feature()
+                canvas.before:
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                        source: '5.png'
+
 
         Carousel:
             id: carousel
