@@ -1,6 +1,7 @@
 from time import time
 from kivy.app import App
 import kivy
+from kivy.graphics.vertex_instructions import Rectangle
 from kivy.network.urlrequest import UrlRequest
 from kivy.properties import ObjectProperty, DictProperty, NumericProperty, Clock, BooleanProperty, ListProperty, \
 	partial, Logger
@@ -15,15 +16,30 @@ kivy.require('1.9.1')
 Logger.info('title: This is a info message.')
 Logger.debug('title: This is a debug message.')
 
+class StyleLabel(Label):
+	pass
+
 class HiddenButton(BoxLayout):
 	hid_flag_obj = ObjectProperty()
 	def __init__(self, **kwargs):
 		super(HiddenButton, self).__init__(**kwargs)
+
 		if MainView.store.exists('hidden'):
 			if MainView.store['hidden']['value']:
-				self.ids.hidden_b.opacity = 1
+				print('show exists')
+				Clock.schedule_once(partial(self.set_visible,'1'), 3)
 			else:
-				self.ids.hidden_b.opacity = 0
+				print('hide exists')
+
+				Clock.schedule_once(partial(self.set_visible,'0'), 3)
+		else:
+			Clock.schedule_once(partial(self.set_visible,'0'), 3)
+			print('hide no')
+
+	def set_visible(self,v,*args):
+		print('Opacity from set visible {}'.format(self.ids.hidden_b.opacity))
+		print(v)
+		self.ids.hidden_b.opacity = v
 	def on_touch_down(self, touch):
 
 		if touch.is_triple_tap:
@@ -34,9 +50,11 @@ class HiddenButton(BoxLayout):
 	def hidden_feature_enable(self,*args):
 		self.ids.hidden_b.opacity = 1
 		MainView.store['hidden'] = {'value':True}
+
 	def hidden_feature_disable(self,*args):
 		self.ids.hidden_b.opacity = 0
 		MainView.store['hidden'] = {'value':False}
+
 	pass
 
 class CustomPopup(Popup):
@@ -56,12 +74,13 @@ class CustomPopup(Popup):
 		MainView.store['flag_clean'] = {'value':value}
 		# print('clean flag val')
 		# print(value)
+		print(value)
 
 		if value:
 			self.ids.paycheck_amount_clean.opacity= .9
 			self.ids.paycheck_amount_clean.readonly = False
 			self.ids.update_paycheck_amount.opacity = .9
-			self.ids.paycheck_amount_clean.focus = True
+			# self.ids.paycheck_amount_clean.focus = True
 			MainView.changed_values_dic = {}
 		else:
 			self.ids.paycheck_amount_clean.opacity = 0
@@ -88,6 +107,11 @@ class CustomPopup(Popup):
 		# 	print(MainView.store['paycheck_amount'])
 
 
+	def on_open(self):
+		if MainView.store.exists('hidden'):
+			if MainView.store['hidden']['value']:
+				self.ids.paycheck_amount_clean.focus = 'True'
+
 class MainView(BoxLayout):
 
 # Storing current value for edit mode True Fals. Initialy populated by on start with False.
@@ -103,16 +127,19 @@ class MainView(BoxLayout):
 
 	def __init__(self, **kwargs):
 		super(MainView, self).__init__(**kwargs)
-		self.ids.nav.add_widget(HiddenButton())
+
+		hid_bu = HiddenButton()
 		if self.store.exists('init_paycheck_amount'):
-		# MainView.remove_widget(MainView.ids.init_s)
-		# 	print('uso')
 			self.remove_login()
+
+		self.ids.nav.add_widget(hid_bu)
 
 # Event dispatched  triggered on Save button clicked
 # First arg taken from Input Expanse Name , second arg taken from Input Expense Amount
 # Adding values to Main View dic object changed values
 # Clearing Input Expense Name and Input Expense Amaount text
+	def keyboard_shrink(self):
+		self.ids.im.size_hint_y = '.5'
 	def remove(self,init_am_v):
 		if len(init_am_v)>2:
 			self.remove_login()
@@ -128,7 +155,17 @@ class MainView(BoxLayout):
 			self.changed_values_dic[ex_n] = int(ex_v)
 			self.ids.test.text = str(ex_n)
 			self.ids.f_expense_input.text = ''
+			self.ids.f_expense_input.hint_text = 'Enter Expense Name'
 			self.ids.f_expense_v_input.text = ''
+			self.ids.f_expense_v_input.hint_text = 'Enter Expense Amount'
+			self.show_edits()
+		else:
+			print(len(ex_n))
+			print(len(ex_v))
+			self.ids.f_expense_input.text = ''
+			self.ids.f_expense_input.hint_text = 'Non valid'
+			self.ids.f_expense_v_input.text = ''
+			self.ids.f_expense_v_input.hint_text = 'Non valid'
 
 # Clear all labels from Widget displaying Expenses dict values added as Label widget
 	def clear_all(self):
@@ -139,9 +176,12 @@ class MainView(BoxLayout):
 	def show_edits(self):
 
 		self.clear_all()
+		# label = Label()
+
 
 		for i in self.changed_values_dic:
-			self.ids.dic_values_wrap.add_widget(Label(text='{} {}'.format(i, self.changed_values_dic[i]),color=(1,1,1,1)))
+			self.ids.dic_values_wrap.add_widget(StyleLabel(text='{} {}'.format(i, self.changed_values_dic[i]),color=(1,1,1,1)))
+
 
 # Get data from url, event triggered by on_click GET button
 
@@ -293,15 +333,12 @@ class PaycheckApp(App):
 		return True
 
 	def on_start(self):
-
+		mv = MainView()
 # Set initial value of FALSE to Main View store and Values for eur dol
 		if MainView.store.exists('init_paycheck_amount'):
 			# MainView.remove_widget(MainView.ids.init_s)
 			# print('uso')
-
 			MainView().ids.init_s.size_hint_y = 0
-		mv = MainView()
-
 
 		if not MainView.store.exists('flag_add_edit'):
 			MainView.store['flag_add_edit'] = {'value':False}
@@ -316,16 +353,10 @@ class PaycheckApp(App):
 		if not MainView.store.exists('paycheck_amount'):
 			MainView.store['paycheck_amount'] = {'value': 1350}
 
-			# mv.remove_widget(mv.ids.init_s)
-
-			# print(mv.ids)
-			# print(MainView().ids.init_s)
-			# print(MainView())
-			# MainView.remove_widget(MainView.removal)
 		if MainView.store.exists('hidden'):
-			print '1111'
+			print ('1111')
 		else:
-			print '0000'
+			print ('0000')
 			MainView.store['hidden']={'value':False}
 			
 		Clock.schedule_once(partial(mv.send_request,'self'), 1)

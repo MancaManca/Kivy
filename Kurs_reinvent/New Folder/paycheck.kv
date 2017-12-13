@@ -1,5 +1,14 @@
 #:kivy 1.9.0
 MainView:
+<StyleLabel>:
+    size_hint_max_y: '60dp'
+    canvas.before:
+        Color:
+            rgba: 0 , 0 , 0, .6
+        Rectangle:
+            source: 'lab.png'
+            pos: self.pos
+            size: self.size
 <HiddenButton>:
     id: hid_b_wrap
     hid_flag_obj: hidden_b
@@ -8,10 +17,12 @@ MainView:
     Button:
         id: hidden_b
 #        size_hint_max_x: '70dp'
+        opacity: 0
         background_color: [0,0,0,0]
         text: ''
     #                on_touch_down: if root.touch.is_triple_tap: self.hidden_feature()
         canvas.before:
+
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -23,7 +34,7 @@ MainView:
     title: 'Settings'
     mode_edit: checkbox_add_edit
     mode_clean: checkbox_clean_add_edit
-    on_open: paycheck_amount_clean.focus = True
+    on_dismiss: paycheck_amount_clean.focus = False
     BoxLayout:
         id: popup_box_content
         orientation: 'vertical'
@@ -64,8 +75,7 @@ MainView:
                 id: paycheck_amount_clean
                 size_hint_y: .2
                 opacity: 0
-                
-
+                input_filter: 'int'
                 multiline: False
                 readonly: False
 #                height: 0
@@ -92,11 +102,13 @@ MainView:
         size_hint_y: 1
         spacing: 30
         padding: ((self.width)/4,50)
+
         Image:
+            id: im
             source: 'paycheck_icon.png'
         Label:
             size_hint_max_y: ('50dp')
-
+            id: init_s_info_l
             color: 1,1,1,1
 
             font_hinting: 'mono'
@@ -105,15 +117,21 @@ MainView:
         TextInput:
             id: init_s_input
             size_hint_max_y: ('50dp')
+            input_filter: 'int'
 #            size_hint_x: .3
             multiline: False
             hint_text: 'Amount Value'
+            on_focus: root.keyboard_shrink()
+            on_cursor: root.keyboard_shrink()
+            on_touch_down: root.keyboard_shrink()
+
         Button:
             id: init_s_b
             size_hint_max_y: ('50dp')
 #            size_hint_x: .3
             text: 'Save'
             on_press: root.remove(init_s_input.text)
+
     BoxLayout:
         orientation: 'vertical'
         id: main_v
@@ -154,7 +172,7 @@ MainView:
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                        source: 'cog5.png'
+                        source: 'cog.png'
 
 
 
@@ -171,6 +189,7 @@ MainView:
             BoxLayout:
                 id: main
                 index: 1
+                padding: ((self.width)/3,1)
                 orientation: 'vertical'
 #                canvas.before:
 #                    Color:
@@ -198,13 +217,13 @@ MainView:
                     color: 1,1,1,1
                     font_hinting: 'mono'
                     text: 'USD Avg Rate'
-#                    canvas.before:
-#                        Color:
-#                            rgba: 1, 1, 1, 0
-#                        Rectangle:
-#                            # self here refers to the widget i.e BoxLayout
-#                            pos: self.pos
-#                            size: self.size
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: avg_rate_dol_value
@@ -213,7 +232,13 @@ MainView:
                     font_hinting: 'mono'
                     text: ' '
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: avg_rate_eur
@@ -222,7 +247,13 @@ MainView:
                     font_hinting: 'mono'
                     text: 'EUR Avg Rate'
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: avg_rate_eur_value
@@ -231,7 +262,13 @@ MainView:
                     font_hinting: 'mono'
                     text: ' '
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: paycheck
@@ -240,7 +277,13 @@ MainView:
                     font_hinting: 'mono'
                     text: 'Neto Paycheck'
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: paycheck_value
@@ -249,7 +292,13 @@ MainView:
                     font_hinting: 'mono'
                     text: ' '
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: expenses
@@ -258,7 +307,13 @@ MainView:
                     font_hinting: 'mono'
                     text: 'Expenses'
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: expenses_value
@@ -267,7 +322,13 @@ MainView:
                     font_hinting: 'mono'
                     text: ' '
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: clean_leftover
@@ -277,7 +338,13 @@ MainView:
                     text: 'Clean Leftover'
                     markup: True
                     size: self.texture_size
-                    padding_x: (root.width)/2
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: clean_leftover_value
@@ -286,7 +353,13 @@ MainView:
                     font_hinting: 'mono'
                     text: ' '
                     italic: True
-                    size: self.texture_size
+                    canvas.before:
+                        Color:
+                            rgba: 0 , 0 , 0, .6
+                        Rectangle:
+                            source: 'lab.png'
+                            pos: self.pos
+                            size: self.size
 
                 Label:
                     id: test
@@ -314,7 +387,7 @@ MainView:
 
                 BoxLayout:
                     orientation: 'vertical'
-
+                    padding: ((self.width)/9,0)
                     Label:
                         id: info
                         color: 1,1,1,1
@@ -323,17 +396,18 @@ MainView:
                         size_hint_y: .1
 
                     BoxLayout:
+                        id: expenses_edit_view
                         size_hint_y: .3
                         orientation: 'horizontal'
                         spacing: 30
-                        padding: (30,30)
+#                        padding: (30,30)
 
                         BoxLayout:
                             orientation: 'vertical'
 
                             Label:
                                 id: f_expense
-                                size_hint_max_y: '30dp'
+                                size_hint_max_y: '35dp'
                                 color: 1,1,1,1
                                 bold: True
                                 font_hinting: 'mono'
@@ -341,7 +415,7 @@ MainView:
 
                             TextInput:
                                 id: f_expense_input
-                                size_hint_max_y: '30dp'
+                                size_hint_max_y: '35dp'
                                 multiline: False
                                 hint_text: 'Name'
 
@@ -350,7 +424,7 @@ MainView:
 
                             Label:
                                 id: f_expense_v
-                                size_hint_max_y: '30dp'
+                                size_hint_max_y: '35dp'
                                 color: 1,1,1,1
                                 bold: True
                                 font_hinting: 'mono'
@@ -358,16 +432,18 @@ MainView:
 
                             TextInput:
                                 id: f_expense_v_input
-                                size_hint_max_y: '30dp'
+                                size_hint_max_y: '35dp'
                                 multiline: False
+                                input_filter: 'int'
                                 text: ''
                                 hint_text: 'Amount'
 
                     BoxLayout:
+                        id: expenses_button_control
                         orientation: 'horizontal'
                         size_hint_max_y: '30dp'
                         spacing: 30
-                        padding: ((self.width)/9,0)
+#                        padding: ((self.width)/9,0)
 #                        canvas.before:
 #                            Color:
 #                                rgba: 0, 1, 1, 1
@@ -401,11 +477,11 @@ MainView:
 
                     BoxLayout:
                         orientation: 'vertical'
-                        canvas.before:
-                            Color:
-                                rgba: 0, 1, 1, 0.1
-                            Rectangle:
-                                # self here refers to the widget i.e BoxLayout
-                                pos: self.pos
-                                size: self.size
+#                        canvas.before:
+#                            Color:
+#                                rgba: 0, 1, 1, 0.1
+#                            Rectangle:
+#                                # self here refers to the widget i.e BoxLayout
+#                                pos: self.pos
+#                                size: self.size
                         id: dic_values_wrap
