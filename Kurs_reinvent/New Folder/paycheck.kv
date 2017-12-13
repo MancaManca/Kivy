@@ -1,0 +1,411 @@
+#:kivy 1.9.0
+MainView:
+<HiddenButton>:
+    id: hid_b_wrap
+    hid_flag_obj: hidden_b
+    spacing: 2
+    padding: (root.width/6,1)
+    Button:
+        id: hidden_b
+#        size_hint_max_x: '70dp'
+        background_color: [0,0,0,0]
+        text: ''
+    #                on_touch_down: if root.touch.is_triple_tap: self.hidden_feature()
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: '5.png'
+<CustomPopup>:
+    name: 'bo'
+    size_hint: .8, .6
+    auto_dismiss: False
+    title: 'Settings'
+    mode_edit: checkbox_add_edit
+    mode_clean: checkbox_clean_add_edit
+    on_open: paycheck_amount_clean.focus = True
+    BoxLayout:
+        id: popup_box_content
+        orientation: 'vertical'
+
+        Label:
+            size_hint_y: .1
+            text: 'Edit mode set to'
+
+        Label:
+            size_hint_y: .1
+            id: mode_state
+            text: ''
+
+        BoxLayout:
+
+            orientation: 'vertical'
+            size_hint_y: .6
+
+            Label:
+                text: 'Enable Add/Edit'
+                size_hint_y: .1
+
+            CheckBox:
+                id: checkbox_add_edit
+                size_hint_y: .2
+                on_active: root.set_flag_edit(self,self.active)
+
+            Label:
+                text: 'Clean Edit Setup'
+                size_hint_y: .1
+
+            CheckBox:
+                id: checkbox_clean_add_edit
+                size_hint_y: .2
+                on_active: root.set_flag_clean(self,self.active)
+
+            TextInput:
+                id: paycheck_amount_clean
+                size_hint_y: .2
+                opacity: 0
+                
+
+                multiline: False
+                readonly: False
+#                height: 0
+
+            Button:
+                id: update_paycheck_amount
+                size_hint_y: .2
+                opacity: 0
+                text: 'Save Amount'
+                on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
+
+        Button:
+            size_hint_y: .2
+            text: 'Close'
+            on_press: root.dismiss()
+
+
+<MainView>:
+    removal: init_s
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'vertical'
+        id: init_s
+        size_hint_y: 1
+        spacing: 30
+        padding: ((self.width)/4,50)
+        Image:
+            source: 'paycheck_icon.png'
+        Label:
+            size_hint_max_y: ('50dp')
+
+            color: 1,1,1,1
+
+            font_hinting: 'mono'
+#            size_hint_x: .3
+            text: 'Enter Paycheck Amount'
+        TextInput:
+            id: init_s_input
+            size_hint_max_y: ('50dp')
+#            size_hint_x: .3
+            multiline: False
+            hint_text: 'Amount Value'
+        Button:
+            id: init_s_b
+            size_hint_max_y: ('50dp')
+#            size_hint_x: .3
+            text: 'Save'
+            on_press: root.remove(init_s_input.text)
+    BoxLayout:
+        orientation: 'vertical'
+        id: main_v
+        size_hint_y: None
+        height: 0
+        opacity: 0
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+                source: 'black.png'
+       
+        BoxLayout:
+            id: nav
+            orientation: 'horizontal'
+            size_hint_x: .6
+            spacing: 10
+            size_hint_y: .1
+
+#            canvas.before:
+#                Color:
+##                    rgba: 0.259, 0.259, 0.259, .9
+##                    rgba: .9, .8, .2, .9
+#                    rgba: 1 , 1 , 1, .6
+#                Rectangle:
+#                    # self here refers to the widget i.e BoxLayout
+#                    pos: self.pos
+#                    size: self.size
+
+            Button:
+#                size_hint_max_x: '70dp'
+
+                padding: (root.width/3,1)
+                on_release: app.show_popup()
+                background_color: [0,0,0,0]
+                canvas.before:
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                        source: 'cog5.png'
+
+
+
+        Carousel:
+            id: carousel
+#            canvas.before:
+#                Color:
+#                    rgba: .8, 1, 0, 1
+#                Rectangle:
+#                    # self here refers to the widget i.e BoxLayout
+#                    pos: self.pos
+#                    size: self.size
+
+            BoxLayout:
+                id: main
+                index: 1
+                orientation: 'vertical'
+#                canvas.before:
+#                    Color:
+#                        rgba: 1, 1, 1, 0.2
+#                    Rectangle:
+#                        # self here refers to the widget i.e BoxLayout
+#                        pos: self.pos
+#                        size: 400,400
+
+#                Label:
+#                    text: 'Progression: {}%'.format(int(pb.value))
+#                    size_hint_y: None
+#                    height: '48dp'
+
+#                ProgressBar:
+#                    id: pb
+#                    size_hint_x: .5
+#                    size_hint_y: None
+#                    height: '48dp'
+#                    value: (app.time * 20) % 100
+
+                Label:
+                    id: avg_rate_dol
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: 'USD Avg Rate'
+#                    canvas.before:
+#                        Color:
+#                            rgba: 1, 1, 1, 0
+#                        Rectangle:
+#                            # self here refers to the widget i.e BoxLayout
+#                            pos: self.pos
+#                            size: self.size
+
+                Label:
+                    id: avg_rate_dol_value
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: avg_rate_eur
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: 'EUR Avg Rate'
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: avg_rate_eur_value
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: paycheck
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: 'Neto Paycheck'
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: paycheck_value
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: expenses
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: 'Expenses'
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: expenses_value
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: clean_leftover
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: 'Clean Leftover'
+                    markup: True
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+                Label:
+                    id: clean_leftover_value
+                    bold: True
+                    color: 1,1,1,1
+                    font_hinting: 'mono'
+                    text: ' '
+                    italic: True
+                    size: self.texture_size
+
+                Label:
+                    id: test
+                    color: 1,1,1,1
+                    text: ''
+
+                Button:
+                    text: 'GET'
+                    background_color: 0.259, 0.259, 0.259,1
+                    on_press: root.populate()
+                    size: self.texture_size
+                    padding_x: (root.width)/2
+
+            BoxLayout:
+                id: second
+                orientation: 'vertical'
+                index: 2
+#                canvas.before:
+#                    Color:
+#                        rgba: 0, 1, 1, 1
+#                    Rectangle:
+#                        # self here refers to the widget i.e BoxLayout
+#                        pos: self.pos
+#                        size: self.size
+
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    Label:
+                        id: info
+                        color: 1,1,1,1
+                        text: 'Edit Expenses'
+                        size_hint_max_y: '30dp'
+                        size_hint_y: .1
+
+                    BoxLayout:
+                        size_hint_y: .3
+                        orientation: 'horizontal'
+                        spacing: 30
+                        padding: (30,30)
+
+                        BoxLayout:
+                            orientation: 'vertical'
+
+                            Label:
+                                id: f_expense
+                                size_hint_max_y: '30dp'
+                                color: 1,1,1,1
+                                bold: True
+                                font_hinting: 'mono'
+                                text: 'Enter expense name'
+
+                            TextInput:
+                                id: f_expense_input
+                                size_hint_max_y: '30dp'
+                                multiline: False
+                                hint_text: 'Name'
+
+                        BoxLayout:
+                            orientation: 'vertical'
+
+                            Label:
+                                id: f_expense_v
+                                size_hint_max_y: '30dp'
+                                color: 1,1,1,1
+                                bold: True
+                                font_hinting: 'mono'
+                                text: 'Enter expense value'
+
+                            TextInput:
+                                id: f_expense_v_input
+                                size_hint_max_y: '30dp'
+                                multiline: False
+                                text: ''
+                                hint_text: 'Amount'
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_max_y: '30dp'
+                        spacing: 30
+                        padding: ((self.width)/9,0)
+#                        canvas.before:
+#                            Color:
+#                                rgba: 0, 1, 1, 1
+#                            Rectangle:
+#                                # self here refers to the widget i.e BoxLayout
+#                                pos: self.pos
+#                                size: self.size
+
+                        Button:
+                            text: 'Clear'
+                            on_press: root.clear_all()
+
+#                            width: '100dp'
+
+                            size_hint_max_y: '30dp'
+
+
+                        Button:
+                            text: 'Save'
+                            on_press: root.save_entry(f_expense_input.text,f_expense_v_input.text)
+
+#                            width: '100dp'
+                            size_hint_max_y: '30dp'
+
+                        Button:
+                            text: 'Show'
+                            on_press: root.show_edits()
+
+#                            width: '100dp'
+                            size_hint_max_y: '30dp'
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        canvas.before:
+                            Color:
+                                rgba: 0, 1, 1, 0.1
+                            Rectangle:
+                                # self here refers to the widget i.e BoxLayout
+                                pos: self.pos
+                                size: self.size
+                        id: dic_values_wrap
