@@ -1,0 +1,62 @@
+#:kivy 1.0.4
+<ScrollView>:
+    id: scrollview
+    canvas:
+        Color:
+            rgb: 1, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MainViewControl>:
+    id: maincontrol
+    orientation: 'vertical'
+<CarouselView>:
+    id: carouselview
+    canvas:
+        Color:
+            rgb: 1, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+<ScrollV>:
+    id: scrollv
+    size_hint: (None,None)
+    size: (700,570)
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    do_scroll_x: False
+    canvas:
+        Color:
+            rgb: 1, 2, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+<Page>:
+    id: page
+    cols: 2
+    padding: 10
+    spacing: 10
+    size_hint: (None, None)
+    width: 700
+    height: 800
+    Button:
+        id: r
+        text: 'rrrrr'
+        on_press: root.re(self)
+    Button:
+        id: a
+        text: 'aaaaa'
+        on_press: root.set_ui(self)
+    Button:
+        id: r
+        text: 'rrrrr2'
+        on_press: root.re(self)
+    Button:
+        id: a
+        text: 'aaaaa2'
+        on_press: root.set_ui(self)
+<PageContent>
+    id: page_content
+    size_hint: (None, None)
+    width: 330
+    height: 170

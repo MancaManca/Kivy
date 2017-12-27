@@ -1,0 +1,392 @@
+from time import time
+from kivy.app import App
+import kivy
+from kivy.graphics.vertex_instructions import Rectangle
+from kivy.network.urlrequest import UrlRequest
+from kivy.properties import ObjectProperty, DictProperty, NumericProperty, Clock, BooleanProperty, ListProperty, \
+    partial, Logger
+from kivy.storage.jsonstore import JsonStore
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.popup import Popup
+from kivy.uix.progressbar import ProgressBar
+from pyparsing import makeHTMLTags, SkipTo
+
+kivy.require('1.9.1')
+
+
+class MainV(BoxLayout):
+    def __init__(self, **kwargs):
+        super(MainV, self).__init__(**kwargs)
+        self.add_widget(PostSplashLoading())
+    pass
+
+class PostSplashLoading(BoxLayout):
+    k = ObjectProperty(None)
+    def __init__(self, **kwargs):
+        super(PostSplashLoading, self).__init__(**kwargs)
+        # pb = ProgressBar(value=0,max=1000)
+
+        # self.event_trig = Clock.schedule_interval(partial(self.update, x ),1/ 15.)
+        # self.add_widget(pb)
+        # print(self.time)
+    def update(self,v):
+        if self.ids.pb.value == 100.0:
+            print('come to end')
+            return False
+        else:
+            self.ids.pb.value = self.ids.pb.value  + v
+            print(self.ids.pb.value)
+
+    def send_request(self, *args):
+
+        search_url = 'http://www.filmovizija.tv/'
+        # print search_url
+        self.request = UrlRequest(search_url,on_progress=self.on_progress,chunk_size=100)  # <2>
+    def on_progress(self,request, current_size, total_size, *args):
+
+        self.update(current_size/1000)
+
+        # print('Progress current size{} total size{} args{}'.format(*args))
+    pass
+
+class LoginV(BoxLayout):
+    pass
+
+
+
+# class StyleLabel(Label):
+#     pass
+#
+#
+# class HiddenButton(BoxLayout):
+#     hid_flag_obj = ObjectProperty()
+#
+#     def __init__(self, **kwargs):
+#         super(HiddenButton, self).__init__(**kwargs)
+#
+#         if MainView.store.exists('hidden'):
+#             if MainView.store['hidden']['value']:
+#                 print('show exists')
+#                 Clock.schedule_once(partial(self.set_visible, '1'), 3)
+#             else:
+#                 print('hide exists')
+#
+#                 Clock.schedule_once(partial(self.set_visible, '0'), 3)
+#         else:
+#             Clock.schedule_once(partial(self.set_visible, '0'), 3)
+#             print('hide no')
+#
+#     def set_visible(self, v, *args):
+#         print('Opacity from set visible {}'.format(self.ids.hidden_b.opacity))
+#         print(v)
+#         self.ids.hidden_b.opacity = v
+#
+#     def on_touch_down(self, touch):
+#
+#         if touch.is_triple_tap:
+#             self.hidden_feature_enable()
+#         if touch.is_double_tap:
+#             self.hidden_feature_disable()
+#
+#     def hidden_feature_enable(self, *args):
+#         self.ids.hidden_b.opacity = 1
+#         MainView.store['hidden'] = {'value': True}
+#
+#     def hidden_feature_disable(self, *args):
+#         self.ids.hidden_b.opacity = 0
+#         MainView.store['hidden'] = {'value': False}
+#
+#     pass
+#
+#
+# class CustomPopup(Popup):
+#     mode = ObjectProperty()
+#
+#     # Dispatch event on_active checkbox to Popup ModeState label & update store JSON value
+#     def set_flag_edit(self, instance, value):
+#
+#         # print(value)
+#         MainView.store['flag_add_edit'] = {'value': value}
+#
+#     # print(MainView.store.get('flag'))
+#
+#     pass
+#
+#     def set_flag_clean(self, instance, value):
+#         MainView.store['flag_clean'] = {'value': value}
+#         # print('clean flag val')
+#         # print(value)
+#         print(value)
+#
+#         if value:
+#             self.ids.paycheck_amount_clean.opacity = .9
+#             self.ids.paycheck_amount_clean.readonly = False
+#             self.ids.update_paycheck_amount.opacity = .9
+#             # self.ids.paycheck_amount_clean.focus = True
+#             MainView.changed_values_dic = {}
+#         else:
+#             self.ids.paycheck_amount_clean.opacity = 0
+#             # self.ids.paycheck_amount_clean.readonly = True
+#             self.ids.update_paycheck_amount.opacity = 0
+#             MainView.store['paycheck_amount'] = {'value': MainView.store['init_paycheck_amount']['value']}
+#
+#     def set_paycheck_amount_clean(self, pay_amount, state):
+#         if state:
+#             # print(pay_amount)
+#             if len(pay_amount) > 1:
+#                 MainView.store['paycheck_amount'] = {'value': int(pay_amount)}
+#                 self.ids.paycheck_amount_clean.text = ''
+#                 self.ids.paycheck_amount_clean.hint_text = ''
+#
+#             # print(state)
+#             # print(MainView.store['paycheck_amount'])
+#             else:
+#                 self.ids.paycheck_amount_clean.hint_text = 'invalid amount'
+#                 # else:
+#                 # 	MainView.changed_values_dic['paychechk_ammount']=None
+#                 # 	print(MainView.store['paycheck_amount'])
+#
+#     def on_open(self):
+#         if MainView.store.exists('hidden'):
+#             if MainView.store['hidden']['value']:
+#                 self.ids.paycheck_amount_clean.focus = 'True'
+#
+#
+# class MainView(BoxLayout):
+#     # Storing current value for edit mode True Fals. Initialy populated by on start with False.
+#     # Updated  with Custom Popup set_flag_edit event dispatch
+#     store = JsonStore('edit_mode.json')
+#     avg_rates_list = ListProperty()
+#     avg_rates_list_converted = ListProperty()
+#     removal = ObjectProperty()
+#
+#     # Disctionary used to calculate final values
+#     changed_values_dic = DictProperty(None)
+#
+#     def __init__(self, **kwargs):
+#         super(MainView, self).__init__(**kwargs)
+#
+#         hid_bu = HiddenButton()
+#         if self.store.exists('init_paycheck_amount'):
+#             self.remove_login()
+#
+#         self.ids.nav.add_widget(hid_bu)
+#
+#     # Event dispatched  triggered on Save button clicked
+#     # First arg taken from Input Expanse Name , second arg taken from Input Expense Amount
+#     # Adding values to Main View dic object changed values
+#     # Clearing Input Expense Name and Input Expense Amaount text
+#     def keyboard_shrink(self):
+#         self.ids.im.size_hint_y = '.5'
+#
+#     def remove(self, init_am_v):
+#         if len(init_am_v) > 2:
+#             self.remove_login()
+#             MainView.store['paycheck_amount'] = {'value': int(init_am_v)}
+#             MainView.store['init_paycheck_amount'] = {'value': int(init_am_v)}
+#         # print(self.children)
+#         else:
+#             self.ids.init_s_input.hint_text = 'Wrong Value!'
+#
+#     def save_entry(self, ex_n, ex_v):
+#
+#         if len(ex_n) & len(ex_v) > 0:
+#
+#             self.changed_values_dic[ex_n] = int(ex_v)
+#             self.ids.test.text = str(ex_n)
+#             self.ids.f_expense_input.text = ''
+#             self.ids.f_expense_input.hint_text = 'Enter Expense Name'
+#             self.ids.f_expense_v_input.text = ''
+#             self.ids.f_expense_v_input.hint_text = 'Enter Expense Amount'
+#             self.show_edits()
+#         else:
+#             print(len(ex_n))
+#             print(len(ex_v))
+#             self.ids.f_expense_input.text = ''
+#             self.ids.f_expense_input.hint_text = 'Non valid'
+#             self.ids.f_expense_v_input.text = ''
+#             self.ids.f_expense_v_input.hint_text = 'Non valid'
+#
+#             # Clear all labels from Widget displaying Expenses dict values added as Label widget
+#
+#     def clear_all(self):
+#
+#         self.ids.dic_values_wrap.clear_widgets()
+#
+#     # Add Main View dict changed_values_dic values as Labels
+#     def show_edits(self):
+#
+#         self.clear_all()
+#         # label = Label()
+#
+#         for i in self.changed_values_dic:
+#             self.ids.dic_values_wrap.add_widget(
+#                 StyleLabel(text='{} {}'.format(i, self.changed_values_dic[i]), color=(1, 1, 1, 1)))
+#
+#
+#             # Get data from url, event triggered by on_click GET button
+#
+#     def remove_login(self):
+#
+#         self.remove_widget(self.ids.init_s)
+#         self.ids.main_v.size_hint_y = 1
+#         self.ids.main_v.opacity = 1
+#
+#     def send_request(self, *args):
+#
+#         search_url = 'http://www.nbs.rs/kursnaListaModul/srednjiKurs.faces'
+#         # print search_url
+#         self.request = UrlRequest(search_url, self.get_avg_rates, on_error=self.on_error, on_failure=self.on_failure,
+#                                   on_progress=self.on_progress)  # <2>
+#
+#     def on_error(self, request, *args):
+#
+#         # print (args)
+#         # print ('on error {}'.format(request.result))
+#         return False
+#
+#     def on_failure(self, request, *args):
+#
+#         # print (args)
+#         # print ('on failure {}'.format(request.result))
+#         return False
+#
+#     def on_progress(request, current_size, total_size, *args):
+#
+#         return True
+#
+#     # print('Progress {} {}'.format(current_size,total_size))
+#
+#
+#     def get_avg_rates(self, request, *args):
+#         l = []
+#
+#         anchorStart, anchorEnd = makeHTMLTags("td")
+#         htmlText = request.result
+#         anchor = anchorStart + SkipTo(anchorEnd).setResultsName("body") + anchorEnd
+#
+#         for tokens, start, end in anchor.scanString(htmlText):
+#             l.append(tokens.body)
+#
+#         baba = None
+#         deda = None
+#
+#         for i, j in enumerate(l):
+#             if j == 'EUR':
+#                 baba = i + 2
+#             if j == 'USD':
+#                 deda = i + 2
+#         #############################################################
+#
+#         # print('{}'.format(l))
+#         eur = l[baba]
+#         conv_eur = str(eur)
+#         # self.avg_rates_list_converted.append(conv_eur)
+#
+#         # print ('{}'.format(conv_eur))
+#         dol = l[deda]
+#         conv_dol = str(dol)
+#         # self.avg_rates_list_converted.append(conv_dol)
+#
+#
+#         self.store['rates'] = {'eur': conv_eur, 'dol': conv_dol}
+#         self.populate()
+#
+#     # def populate(self,request,*args):
+#     #     print()
+#     def calculate(self, stored_eur_rate, stored_dol_rate, paycheck_amount=1350):
+#         # print(self.store.exists('paycheck_amount'))
+#         # for key in self.store:
+#         # print(self.store[key])
+#         # print(self.store.keys())
+#         if self.store.exists('paycheck_amount'):
+#             # 	print('entered if calculation')
+#             try:
+#                 paycheck_amount = int(self.store['paycheck_amount']['value'])
+#             except KeyError:
+#                 # print('No current entry for paycheck')
+#                 pass
+#         if self.store.exists('hidden') & self.store['hidden']['value']:
+#
+#             default_setup_dic = {'porez': 24364,
+#                                  'stan': float(stored_eur_rate) * 225,
+#                                  'osiguranje': 6000,
+#                                  'kuca': 20000,
+#                                  'racuni': 10000, }
+#             exp_sum = sum(default_setup_dic.values())
+#         else:
+#
+#             exp_sum = sum(self.changed_values_dic.values())
+#         # print(exp_sum)
+#         pay_sum = float(float(stored_dol_rate) * paycheck_amount)
+#         # print(pay_sum)
+#         left_sum = float(float(stored_dol_rate) * paycheck_amount) - float(exp_sum)
+#         # print(left_sum)
+#
+#
+#         self.ids.avg_rate_dol_value.text = str(stored_dol_rate)
+#         self.ids.avg_rate_eur_value.text = str(stored_eur_rate)
+#         self.ids.paycheck_value.text = str(pay_sum)
+#         self.ids.expenses_value.text = str(exp_sum)
+#         self.ids.clean_leftover_value.text = str(left_sum)
+#
+#     def populate(self):
+#         # print(self.store['rates'])
+#
+#
+#
+#         self.calculate(self.store['rates']['eur'], self.store['rates']['dol'])
+#
+#
+#         # def control_content(self):
+#         # 	a=True
+#         # 	b= True
+#         # 	default_setup_dic = {'porez': 22400,
+#         # 			'stan': float(self.store['rates']) * 225,
+#         # 			'osiguranje': 3000,
+#         # 			'kuca': 20000,
+#         # 			'racuni': 10000,}
+#         #
+#         # 	if a & b:
+#         # 		print('Should be edit clean mode')
+#         # 	if a == False & b:
+#         # 		print('Should be default with adding edit')
+#         # 		for key in default_setup_dic:
+#         # 			self.changed_values_dic[key] = default_setup_dic[key]
+#         # 		# self.changed_values_dic = default_setup_dic
+#
+#
+#
+#         # def on_touch_down(self,touch):
+#         # 	if touch.is_triple_tap:
+#         # 		self.hidden_feature()
+#
+
+class MediaCenterMobileClient(App):
+    time = NumericProperty(0)
+
+    def build(self):
+
+        # Clock.schedule_interval(self._update_clock, 1 / 60.)
+        root = BoxLayout(orientation='vertical')
+        root.add_widget(MainV())
+
+        return root
+
+    def on_pause(self):
+
+        return True
+
+    def on_start(self):
+        pv = PostSplashLoading()
+        pv.send_request()
+
+if __name__ == '__main__':
+    MediaCenterMobileClient().run()
+
+
+
+
+
+
