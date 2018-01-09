@@ -1,6 +1,10 @@
 from time import time
+
+from kivy.animation import Animation
 from kivy.app import App
 import kivy
+from kivy.cache import Cache
+from kivy.factory import Factory
 from kivy.graphics.vertex_instructions import Rectangle
 from kivy.network.urlrequest import UrlRequest
 from kivy.properties import ObjectProperty, DictProperty, NumericProperty, Clock, BooleanProperty, ListProperty, \
@@ -16,41 +20,200 @@ kivy.require('1.9.1')
 
 
 class MainV(BoxLayout):
+    screen_stack = ObjectProperty()
+    print('Main View INIT ??????????????????????????')
+
+    print(screen_stack.__class__)
+    print()
+    # screen_stack = {}
+    print(screen_stack.__class__)
+    print(str(screen_stack.__class__))
+
+    if str(screen_stack.__class__) == '<class \'kivy.properties.ObjectProperty\'>':
+        print('11')
+        screen_stack = {}
+    else:
+        print('22 {}'.format((screen_stack)))\
+
     def __init__(self, **kwargs):
         super(MainV, self).__init__(**kwargs)
-        self.add_widget(PostSplashLoading())
+
+        print(self.id)
+
+        self.add_widget(ViewControl())
+
+        self.width = 60
+
+
+    def add_to_screen_stack(self,screen_name):
+
+        print('sc stack dic obj {}'.format(MainV.screen_stack))
+
+        page = 'page_{}'.format(screen_name)
+
+        print(page)
+
+        diic = MainV.screen_stack
+
+        for e in diic:
+            print('111')
+
+        try:
+
+            if diic['current']:
+                print('updating {} to {}'.format(diic['current'], screen_name))
+                print(diic['current'])
+                diic['sc_stack']['p'] = diic['current']
+                diic['current'] = screen_name
+            else:
+                print('gggg')
+        except KeyError:
+
+            print('no current screen will populate')
+            diic['current'] = screen_name
+            diic['sc_stack'] = {}
+            pass
+
+        MainV.screen_stack = diic
+
+        print(len(MainV.screen_stack))
+        print(MainV.screen_stack)
+    pass
+
+
+
+class ViewControl(BoxLayout):
+
+    t = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        super(ViewControl, self).__init__(**kwargs)
+        print('View Control INIT  ??????????????????????????')
+
+        # MainV.add_to_screen_stack(self,self.__class__.__name__)
+        # self.clear_widgets()
+        if self.t == None:
+
+            self.add_widget(PostSplashLoading())
+        else:
+            print('it was now gone')
+    pass
+
+
+class Im(BoxLayout):
+    def __init__(self, **kwargs):
+
+
+
+        super(Im, self).__init__(**kwargs)
+        print('I am alive')
     pass
 
 class PostSplashLoading(BoxLayout):
+
     k = ObjectProperty(None)
+
     def __init__(self, **kwargs):
+
+        print('PresSPalsh INIT  ??????????????????????????')
+
         super(PostSplashLoading, self).__init__(**kwargs)
+
+        MainV.add_to_screen_stack(self, self)
+
+        print('this is id {}'.format(self.__class__.__name__))
+
+        ViewControl.t = 0
         # pb = ProgressBar(value=0,max=1000)
 
-        # self.event_trig = Clock.schedule_interval(partial(self.update, x ),1/ 15.)
-        # self.add_widget(pb)
-        # print(self.time)
-    def update(self,v):
-        if self.ids.pb.value == 100.0:
-            print('come to end')
-            return False
-        else:
-            self.ids.pb.value = self.ids.pb.value  + v
+        self.event_trig = Clock.schedule_interval(partial(self.update), 1/60)
+        self.event_trig()
+
+        Cache.register('mycache', limit=10, timeout=None)
+        self.key = 'objectid'
+        instance = self
+        Cache.append('mycache', self.key, instance)
+
+    def update(self,*args):
+
+        if self.ids.pb.value < 100:
+
+            self.ids.pb.value = self.ids.pb.value + 1
             print(self.ids.pb.value)
 
-    def send_request(self, *args):
+        else:
 
-        search_url = 'http://www.filmovizija.tv/'
-        # print search_url
-        self.request = UrlRequest(search_url,on_progress=self.on_progress,chunk_size=100)  # <2>
-    def on_progress(self,request, current_size, total_size, *args):
+            print('else')
 
-        self.update(current_size/1000)
+            Clock.unschedule(self.event_trig)
 
-        # print('Progress current size{} total size{} args{}'.format(*args))
-    pass
+            ViewControl.clear_widgets(self)
+
+            ViewControl.add_widget(self,LoginV())
+
+            # while self.ids.pb.value<100:
+            # Clock.schedule_once(partial(self.pb_up, 1))
+        # if self.ids.pb.value == 100.0:
+        #     print('come to end')
+        #     return False
+        # else:
+        #     self.event_trig
+
+    def pb_up(self,v,*args):
+
+        self.ids.pb.value = self.ids.pb.value + v
+        print(self.ids.pb.value)
+
 
 class LoginV(BoxLayout):
+
+    def __init__(self, **kwargs):
+        super(LoginV, self).__init__(**kwargs)
+
+        print('LoginV  INIT ??????????????????????????')
+
+        print('this is Page {}'.format(self.__class__.__name__))
+
+        MainV.add_to_screen_stack(self, self)
+
+        print(self)
+
+    def go_back(self,*args):
+        print('GO BACKKKK >>>>>>>')
+
+        ViewControl.clear_widgets(self)
+
+        # ViewControl().remove_widget(PostSplashLoading)
+        l = '{}()'.format(MainV.screen_stack['sc_stack']['p'])
+
+        print(MainV.screen_stack['sc_stack']['p'])
+
+        print(MainV.screen_stack['sc_stack']['p'].parent)
+        # print(Cache.print_usage())
+        # ViewControl.remove_widget(self, MainV.screen_stack['current'])
+        # ViewControl.remove_widget(self, MainV.screen_stack['sc_stack']['p'])
+        # print(ViewControl.children)
+        # print(MainV.screen_stack['sc_stack']['p'].parent)
+        # ViewControl.remove_widget(self, MainV.screen_stack['sc_stack']['p'])
+
+        # print(ViewControl().children)
+        # ViewControl().clear_widgets(self)
+        # MainV.screen_stack['sc_stack']['p'].unbind()
+        # ViewControl.clear_widgets(self)
+        # for i in ViewControl.children:
+        #     print('this is i {}'.format(i))
+        print("sgasgsadg")
+        # Clock.schedule_once(ViewControl.add_widget(self, Cache.get('mycache','objectid')),10)
+        # MainV.screen_stack['sc_stack']['p'].parent.remove_widget(MainV.screen_stack['sc_stack']['p'])
+        print(MainV.screen_stack['sc_stack']['p'].parent)
+        print(MainV.screen_stack['sc_stack']['p'])
+        # ViewControl.add_widget(self, MainV.screen_stack['sc_stack']['p'])
+        ll= Label(text='test')
+
+        # ViewControl.add_widget(self,PostSplashLoading())
+        # Clock.schedule_once(ViewControl.add_widget(self, ll), 3)
+        ViewControl.add_widget(self, Cache.get('mycache','objectid'))
+
     pass
 
 
@@ -379,8 +542,9 @@ class MediaCenterMobileClient(App):
         return True
 
     def on_start(self):
-        pv = PostSplashLoading()
-        pv.send_request()
+        print('s')
+        # pv = PostSplashLoading()
+        # pv.send_request()
 
 if __name__ == '__main__':
     MediaCenterMobileClient().run()

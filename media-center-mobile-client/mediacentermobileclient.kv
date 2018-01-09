@@ -1,9 +1,40 @@
+<ViewControl>:
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 1
+        Rectangle:
+            # self here refers to the widget i.e BoxLayout
+            pos: self.pos
+            size: self.size
 <PostSplashLoading>:
     k: pb
+    id: post_splash_w_id
+    orientation: 'vertical'
+    Image:
+        id: q
+        source: '5.png'
+    Label:
+        id:post_splash_lab
+        text: str(pb.value)
     ProgressBar:
         id: pb
-        size_hint_max_x: 400
+        size_hint_max_x: 50
         size_hint_y: None
+        color: 'red'
+        bar_color: 'red'
         height: '48dp'
         value: 0
         max: 100
+<LoginV>:
+    orientation: 'vertical'
+    id: login_screen
+    Label:
+        text: 'login'
+    Button:
+        text: 'bacl'
+        on_press: root.go_back(self)
+<Im>:
+    Image:
+        source: '1.png'
+    Label:
+        text: 'bsjhgbsagajds'
