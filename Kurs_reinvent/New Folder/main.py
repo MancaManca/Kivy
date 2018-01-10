@@ -1,9 +1,9 @@
 from time import time
-from kivy.app import App
+
 import kivy
-from kivy.graphics.vertex_instructions import Rectangle
+from kivy.app import App
 from kivy.network.urlrequest import UrlRequest
-from kivy.properties import ObjectProperty, DictProperty, NumericProperty, Clock, BooleanProperty, ListProperty, \
+from kivy.properties import ObjectProperty, NumericProperty, Clock, ListProperty, \
 	partial, Logger
 from kivy.storage.jsonstore import JsonStore
 from kivy.uix.boxlayout import BoxLayout
@@ -16,7 +16,14 @@ kivy.require('1.9.1')
 Logger.info('title: This is a info message.')
 Logger.debug('title: This is a debug message.')
 
-class StyleLabel(Label):
+class StyleLabel(BoxLayout):
+	def remove_single_show(self,te):
+		MainView().dic_store.delete(te)
+		self.clear_widgets()
+
+	pass
+
+class SettingsButton(BoxLayout):
 	pass
 
 class HiddenButton(BoxLayout):
@@ -26,20 +33,21 @@ class HiddenButton(BoxLayout):
 
 		if MainView.store.exists('hidden'):
 			if MainView.store['hidden']['value']:
-				print('show exists')
+				# print('show exists')
 				Clock.schedule_once(partial(self.set_visible,'1'), 3)
 			else:
-				print('hide exists')
+				# print('hide exists')
 
 				Clock.schedule_once(partial(self.set_visible,'0'), 3)
 		else:
 			Clock.schedule_once(partial(self.set_visible,'0'), 3)
-			print('hide no')
+			# print('hide no')
 
 	def set_visible(self,v,*args):
-		print('Opacity from set visible {}'.format(self.ids.hidden_b.opacity))
-		print(v)
+		# print('Opacity from set visible {}'.format(self.ids.hidden_b.opacity))
+		# print(v)
 		self.ids.hidden_b.opacity = v
+
 	def on_touch_down(self, touch):
 
 		if touch.is_triple_tap:
@@ -66,15 +74,12 @@ class CustomPopup(Popup):
 
 		# print(value)
 		MainView.store['flag_add_edit'] = {'value':value}
-		# print(MainView.store.get('flag'))
 
 	pass
 
 	def set_flag_clean(self,instance,value):
 		MainView.store['flag_clean'] = {'value':value}
-		# print('clean flag val')
 		# print(value)
-		print(value)
 
 		if value:
 			self.ids.paycheck_amount_clean.opacity= .9
@@ -88,28 +93,19 @@ class CustomPopup(Popup):
 			self.ids.update_paycheck_amount.opacity = 0
 			MainView.store['paycheck_amount'] = {'value': MainView.store['init_paycheck_amount']['value']}
 
-
-
 	def set_paycheck_amount_clean(self,pay_amount,state):
 		if state:
-			# print(pay_amount)
-			if len(pay_amount)>1:
+			if len(pay_amount) > 1:
 				MainView.store['paycheck_amount'] = {'value': int(pay_amount)}
 				self.ids.paycheck_amount_clean.text = ''
 				self.ids.paycheck_amount_clean.hint_text = ''
 
-				# print(state)
-				# print(MainView.store['paycheck_amount'])
 			else:
 				self.ids.paycheck_amount_clean.hint_text = 'invalid amount'
-		# else:
-		# 	MainView.changed_values_dic['paychechk_ammount']=None
-		# 	print(MainView.store['paycheck_amount'])
-
 
 	def on_open(self):
-		if MainView.store.exists('hidden'):
-			if MainView.store['hidden']['value']:
+		if MainView.store.exists('flag_clean'):
+			if MainView.store['flag_clean']['value']:
 				self.ids.paycheck_amount_clean.focus = 'True'
 
 class MainView(BoxLayout):
@@ -117,215 +113,277 @@ class MainView(BoxLayout):
 # Storing current value for edit mode True Fals. Initialy populated by on start with False.
 # Updated  with Custom Popup set_flag_edit event dispatch
 	store = JsonStore('edit_mode.json')
+	dic_store = JsonStore('expenses.json')
 	avg_rates_list = ListProperty()
 	avg_rates_list_converted = ListProperty()
 	removal = ObjectProperty()
+	temp_dic = {}
+	hidden_setup_dic = {}
+	if store.exists('rates'):
 
-# Disctionary used to calculate final values
-	changed_values_dic = DictProperty(None)
-
+		hidden_setup_dic = {'porez'     : 24364,
+				                    'stan'      : float(store['rates']['eur']) * 225,
+				                    'osiguranje': 6000,
+				                    'kuca'      : 20000,
+				                    'racuni'    : 10000, }
 
 	def __init__(self, **kwargs):
 		super(MainView, self).__init__(**kwargs)
 
 		hid_bu = HiddenButton()
+		sett_bu = SettingsButton()
 		if self.store.exists('init_paycheck_amount'):
 			self.remove_login()
 
 		self.ids.nav.add_widget(hid_bu)
+		self.ids.nav.add_widget(sett_bu)
 
-# Event dispatched  triggered on Save button clicked
-# First arg taken from Input Expanse Name , second arg taken from Input Expense Amount
-# Adding values to Main View dic object changed values
-# Clearing Input Expense Name and Input Expense Amaount text
+# Show
 	def keyboard_shrink(self):
 		self.ids.im.size_hint_y = '.5'
+
+# Remove Initial App screen by calling RemoveLogin() after setting init paycheck amount and storing in MainView Store Json Store
 	def remove(self,init_am_v):
-		if len(init_am_v)>2:
+		if len(init_am_v)>1:
 			self.remove_login()
 			MainView.store['paycheck_amount'] = {'value': int(init_am_v)}
 			MainView.store['init_paycheck_amount'] = {'value': int(init_am_v)}
 			# print(self.children)
 		else:
 			self.ids.init_s_input.hint_text='Wrong Value!'
-	def save_entry(self,ex_n,ex_v):
 
-		if len(ex_n) & len(ex_v) > 0:
-
-			self.changed_values_dic[ex_n] = int(ex_v)
-			self.ids.test.text = str(ex_n)
-			self.ids.f_expense_input.text = ''
-			self.ids.f_expense_input.hint_text = 'Enter Expense Name'
-			self.ids.f_expense_v_input.text = ''
-			self.ids.f_expense_v_input.hint_text = 'Enter Expense Amount'
-			self.show_edits()
-		else:
-			print(len(ex_n))
-			print(len(ex_v))
-			self.ids.f_expense_input.text = ''
-			self.ids.f_expense_input.hint_text = 'Non valid'
-			self.ids.f_expense_v_input.text = ''
-			self.ids.f_expense_v_input.hint_text = 'Non valid'
-
-# Clear all labels from Widget displaying Expenses dict values added as Label widget
-	def clear_all(self):
-
-		self.ids.dic_values_wrap.clear_widgets()
-
-# Add Main View dict changed_values_dic values as Labels
-	def show_edits(self):
-
-		self.clear_all()
-		# label = Label()
-
-
-		for i in self.changed_values_dic:
-			self.ids.dic_values_wrap.add_widget(StyleLabel(text='{} {}'.format(i, self.changed_values_dic[i]),color=(1,1,1,1)))
-
-
-# Get data from url, event triggered by on_click GET button
-
+# Methon for removing Init App screen Widget from Curent View
+# Updating Main View Widget to full size and opacity
 	def remove_login(self):
 
 		self.remove_widget(self.ids.init_s)
 		self.ids.main_v.size_hint_y = 1
 		self.ids.main_v.opacity = 1
 
-	def send_request(self,*args):
+	def set_currency_flag(self,va):
+		# print(va)
+		if va:
 
+			self.ids.f_expense_v_input.background_color = [.2, .8, .8, .8]
+			self.ids.f_expense_v_input.hint_text = 'EUR'
+			self.ids.f_expense_v_input.hint_text_color =  [1, 1, 1, 1]
+		else:
+
+			self.ids.f_expense_v_input.background_color = [1, 1, 1, 1]
+			self.ids.f_expense_v_input.hint_text_color = [0.5, 0.5, 0.5, 1.0]
+			self.ids.f_expense_v_input.hint_text = 'Amount'
+		MainView.store['currency_ex_v'] = {'value': va}
+
+# Event dispatched  triggered on Save button clicked
+# First arg taken from Input Expanse Name , second arg taken from Input Expense Amount
+# Adding values to Main View Expenses Json store EX_N as key and pair "value: EX_V"
+# Save action checks if Flag Add/Edit is True in order to proceed, if not warns user with input / label text change
+# Callback Show_Edits
+	def save_entry(self,ex_n,ex_v):
+		print(len(ex_n))
+		print(len(ex_v))
+
+		if self.store.exists('flag_add_edit'):
+
+			if self.store['flag_add_edit']['value']:
+
+				if len(ex_n) > 0:
+					if len(ex_v) > 0:
+
+						if self.store.exists('currency_ex_v'):
+
+							if self.store['currency_ex_v']['value']:
+								self.dic_store.put(ex_n, value=int(ex_v)*float(self.store['rates']['eur']))
+								# print('done with eur')
+							else:
+								self.dic_store.put(ex_n, value=int(ex_v))
+						self.ids.test.text = str(ex_n)
+						Clock.schedule_once(partial(self.update_exp_fields, 'Name','Amount'), 0.3)
+						self.show_edits()
+				else:
+					print(len(ex_n))
+					print(len(ex_v))
+					self.update_exp_fields('Non valid !', 'Non valid !')
+			else:
+				self.ids.info.text = 'Enable Expense Add / Edit'
+				self.ids.info.color = [.5,.5,.5,1]
+				self.update_exp_fields('Name', 'Amount')
+		else:
+			return FileExistsError
+
+# Updating expenses input field to be clear after successfull Save_Entry. Args predifined in Save_Entry call
+	def update_exp_fields(self,name,amount,*args):
+
+		self.ids.f_expense_input.text = ''
+		self.ids.f_expense_input.hint_text = name
+		self.ids.f_expense_v_input.text = ''
+		self.ids.f_expense_v_input.hint_text = amount
+		self.ids.currency_lab_hidden.opacity = 0
+		self.ids.eur_set_value.active = False
+		MainView.store['currency_ex_v'] = {'value': False}
+
+
+# Clear all labels from Widget displaying Expenses dict values added by Show_Edits as Label widget
+	def clear_all(self):
+		# hack: lis must be used because of Runtime Error in case of iterating over mutable dic values and removing them
+		lis = list(self.dic_store.keys())
+		self.ids.dic_values_wrap.clear_widgets()
+
+		for i in lis:
+			# print('deleting {}'.format(i))
+			self.dic_store.delete(i)
+		self.temp_dic = {}
+
+
+# Add iterated values from Dic Store Expenses Json Store to temp_dic
+# Adding labels Class StyleLabel by iterating through temp_dic
+# Clearing previously added Label widget by self
+# Settings label text and color
+
+	def show_edits(self,*args):
+		self.ids.dic_values_wrap.clear_widgets()
+		# print(self)
+		self.populate_temp_dic()
+		# print(self.temp_dic)
+		# print('>>>>>>>>>>>>>>>')
+		self.ids.dic_values_wrap.clear_widgets()
+		for key in self.temp_dic:
+			# print('{} {}'.format(key,self.temp_dic[key]))
+			k = StyleLabel()
+			self.ids.dic_values_wrap.add_widget(k)
+			k.ids.exp_show_single.text = '{} : {}'.format(key, self.temp_dic[key])
+			k.ids.rem_exp_show_single.text = '{}'.format(key)
+			# print('{} {}'.format(key, self.temp_dic[key]))
+			# print(k.ids.exp_show_single.text)
+
+# Get data from url, event triggered by on_click GET button
+
+	def send_request(self,*args):
+		# print('send request')
 		search_url = 'http://www.nbs.rs/kursnaListaModul/srednjiKurs.faces'
-		# print search_url
 		self.request = UrlRequest(search_url, self.get_avg_rates,on_error=self.on_error,on_failure=self.on_failure,on_progress=self.on_progress) # <2>
 
 	def on_error(self,request,*args):
-
-		# print (args)
 		# print ('on error {}'.format(request.result))
 		return False
 	def on_failure(self,request,*args):
-
-		# print (args)
 		# print ('on failure {}'.format(request.result))
 		return False
 	def on_progress(request,current_size,total_size,*args):
-
-		return True
 		# print('Progress {} {}'.format(current_size,total_size))
+		return True
 
-
+# Parse Send_Request request and append HTML tag line content to l list
+# Iterate over enumarated list grabing Eur Dol values and assigning to local variable for usage as index of list
+# Assigning eur and dol values by passing index from local var to list
+# Formating eur and dol values to string for label usage
+# Storing eur and dol values to MainView Store Json Store as par values
 	def get_avg_rates(self,request,*args):
 		l =[]
+		baba = None
+		deda = None
 
 		anchorStart, anchorEnd = makeHTMLTags("td")
 		htmlText = request.result
 		anchor = anchorStart + SkipTo(anchorEnd).setResultsName("body") + anchorEnd
-
 		for tokens, start, end in anchor.scanString(htmlText):
 			l.append(tokens.body)
-
-		baba = None
-		deda = None
 
 		for i, j in enumerate(l):
 			if j == 'EUR':
 				baba = i + 2
 			if j == 'USD':
 				deda = i + 2
-		#############################################################
 
-		# print('{}'.format(l))
 		eur = l[baba]
 		conv_eur = str(eur)
-		# self.avg_rates_list_converted.append(conv_eur)
-
-		# print ('{}'.format(conv_eur))
 		dol = l[deda]
 		conv_dol = str(dol)
-		# self.avg_rates_list_converted.append(conv_dol)
-
 
 		self.store['rates'] = {'eur': conv_eur, 'dol': conv_dol}
-		self.populate()
 
-	# def populate(self,request,*args):
-	#     print()
-	def calculate(self,stored_eur_rate,stored_dol_rate,paycheck_amount=1350):
-		# print(self.store.exists('paycheck_amount'))
-		# for key in self.store:
-			# print(self.store[key])
-			# print(self.store.keys())
+
+# Arg 1 needs to be EUR value , afterwards parsed from string to float
+# Arg 2 needs to be DOL value , afterwards parsed from string to float
+# Arg 3 needs to be Dictionary,
+# Default paycheck_amount set to 1350
+	def calculate(self, stored_eur_rate, stored_dol_rate, expense_in, paycheck_amount):
+
+
+
+
+		exp_sum = round(sum(expense_in.values()), 2)
+
+		# print(exp_sum)
+		pay_sum = round((float(stored_dol_rate) * paycheck_amount), 2)
+		# print(pay_sum)
+		left_sum = round((float(stored_dol_rate) * paycheck_amount) - float(exp_sum), 2)
+		# print(left_sum)
+		self.content_update(stored_dol_rate, stored_eur_rate, pay_sum, exp_sum, left_sum)
+
+	def content_update(self,st_dol_rate, st_eur_rate, p_sum, e_sum, l_sum):
+		self.ids.avg_rate_dol_value.text = str(st_dol_rate)
+		self.ids.avg_rate_eur_value.text = str(st_eur_rate)
+		self.ids.paycheck_value.text = str(p_sum)
+		self.ids.expenses_value.text = str(e_sum)
+		self.ids.clean_leftover_value.text = str(l_sum)
+
+	def control_content(self):
+		paycheck_amount=None
 		if self.store.exists('paycheck_amount'):
-		# 	print('entered if calculation')
+			# print('entered if calculation')
 			try:
 				paycheck_amount = int(self.store['paycheck_amount']['value'])
 			except KeyError:
 				# print('No current entry for paycheck')
 				pass
-		if self.store.exists('hidden') & self.store['hidden']['value']:
 
-			default_setup_dic = {'porez': 24364,
-								'stan': float(stored_eur_rate) * 225,
-								'osiguranje': 6000,
-								'kuca': 20000,
-								'racuni': 10000,}
-			exp_sum = sum(default_setup_dic.values())
-		else:
+			if self.store.exists('hidden') & self.store['hidden']['value']:
+				# print('set content for hidden')
+				self.populate_temp_dic()
+				if len(self.temp_dic.keys()) > 0:
+					for key in self.temp_dic:
+						self.hidden_setup_dic[key] = self.temp_dic[key]
+						# print('{} {}'.format(key, self.temp_dic[key]))
+				# print(self.hidden_setup_dic)
+				self.calculate(self.store['rates']['eur'], self.store['rates']['dol'], self.hidden_setup_dic, paycheck_amount)
+			else:
+				if self.store.exists('flag_clean') & self.store['flag_clean']['value']:
+					# print('2')
+					self.populate_temp_dic()
+					self.calculate(self.store['rates']['eur'], self.store['rates']['dol'], self.temp_dic, paycheck_amount)
 
-			exp_sum = sum(self.changed_values_dic.values())
-		# print(exp_sum)
-		pay_sum = float(float(stored_dol_rate) * paycheck_amount)
-		# print(pay_sum)
-		left_sum = float(float(stored_dol_rate) * paycheck_amount) - float(exp_sum)
-		# print(left_sum)
+				if self.store.exists('flag_clean') & self.store['flag_clean']['value'] is False:
+					# print('3')
+					self.calculate(self.store['rates']['eur'], self.store['rates']['dol'], {}, paycheck_amount)
 
+				if self.store.exists('flag_clean') & self.store['flag_add_edit']['value'] & self.store['flag_clean']['value'] is False:
+					# print('4')
+					self.populate_temp_dic()
+					self.calculate(self.store['rates']['eur'], self.store['rates']['dol'], self.temp_dic, paycheck_amount)
 
-		self.ids.avg_rate_dol_value.text = str(stored_dol_rate)
-		self.ids.avg_rate_eur_value.text = str(stored_eur_rate)
-		self.ids.paycheck_value.text = str(pay_sum)
-		self.ids.expenses_value.text = str(exp_sum)
-		self.ids.clean_leftover_value.text = str(left_sum)
-	def populate(self):
-		# print(self.store['rates'])
-
-
-
-		self.calculate(self.store['rates']['eur'],self.store['rates']['dol'])
-
-
-	# def control_content(self):
-	# 	a=True
-	# 	b= True
-	# 	default_setup_dic = {'porez': 22400,
-	# 			'stan': float(self.store['rates']) * 225,
-	# 			'osiguranje': 3000,
-	# 			'kuca': 20000,
-	# 			'racuni': 10000,}
-	#
-	# 	if a & b:
-	# 		print('Should be edit clean mode')
-	# 	if a == False & b:
-	# 		print('Should be default with adding edit')
-	# 		for key in default_setup_dic:
-	# 			self.changed_values_dic[key] = default_setup_dic[key]
-	# 		# self.changed_values_dic = default_setup_dic
-
-
-
-	# def on_touch_down(self,touch):
-	# 	if touch.is_triple_tap:
-	# 		self.hidden_feature()
+	def populate_temp_dic(self):
+		self.temp_dic = {}
+		for i in self.dic_store.keys():
+			# print(i)
+			self.temp_dic[i] = self.dic_store[i]['value']
 
 class PaycheckApp(App):
 	time = NumericProperty(0)
+	flags_dic = {
+		'flag_add_edit':False,
+		'flag_clean': False,
+		'paycheck_amount': 1350,
+		'hidden': False,
+		'expenses': {},
+		'rates': None
+	}
 
 	def build(self):
 
 		Clock.schedule_interval(self._update_clock, 1 / 60.)
 		root = BoxLayout(orientation='vertical')
 		root.add_widget(MainView())
-
-
-
 		return root
 
 	def on_pause(self):
@@ -336,34 +394,15 @@ class PaycheckApp(App):
 		mv = MainView()
 # Set initial value of FALSE to Main View store and Values for eur dol
 		if MainView.store.exists('init_paycheck_amount'):
-			# MainView.remove_widget(MainView.ids.init_s)
-			# print('uso')
 			MainView().ids.init_s.size_hint_y = 0
+		self.setup_flag(self.flags_dic)
+		Clock.schedule_once(partial(mv.send_request, 'self'), 1)
 
-		if not MainView.store.exists('flag_add_edit'):
-			MainView.store['flag_add_edit'] = {'value':False}
-		# else:
-			# print 'Flag Edit exists'
-
-		if not MainView.store.exists('flag_clean'):
-			MainView.store['flag_clean'] = {'value': False}
-		# else:
-			# print('Flag Clean exists')
-
-		if not MainView.store.exists('paycheck_amount'):
-			MainView.store['paycheck_amount'] = {'value': 1350}
-
-		if MainView.store.exists('hidden'):
-			print ('1111')
-		else:
-			print ('0000')
-			MainView.store['hidden']={'value':False}
-			
-		Clock.schedule_once(partial(mv.send_request,'self'), 1)
-
-		# print(MainView.store.get('flag'))
-		# print(MainView.store.get('rates'))
-	# MainView.store['paycheck_amount'] = {'paycheck': 1350}
+	def setup_flag(self,dic):
+		for i in dic:
+			if not MainView.store.exists(str(i)):
+				MainView.store[str(i)] = {'value':dic[i]}
+				# print('Setting up : {} {}'.format(i,dic[i]))
 
 	def _update_clock(self, dt):
 
@@ -373,18 +412,13 @@ class PaycheckApp(App):
 
 		p = CustomPopup()
 # Set initial Label value from store json. Updated Label on Popup open with latest value in store JSON
-		p.ids.mode_state.text = str(MainView.store.get('flag_add_edit')['value'])
-		# print(MainView.store.get('flag_add_edit'))
+# 		p.ids.mode_state.text = str(MainView.store.get('flag_add_edit')['value'])
 # Set Checkbox value on Popup open , value taken from store JSON
-		if MainView.store.get('flag_add_edit')['value']:
+		if MainView.store['flag_add_edit']['value']:
 			p.mode_edit.active = True
-		if MainView.store.get('flag_clean')['value']:
+		if MainView.store['flag_clean']['value']:
 			p.mode_clean.active = True
 		p.ids.paycheck_amount_clean.hint_text = str(MainView.store['paycheck_amount']['value'])
-		# print('Edit Checkbox status is {}'.format(p.mode_edit.active))
-		# print('Clean Checkbox status is {}'.format(p.mode_clean.active))
-		# print(p.ids.paycheck_amount_clean.readonly)
-
 		p.open()
 	pass
 
