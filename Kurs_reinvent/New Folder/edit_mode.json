@@ -1,1 +1,1 @@
-{"flag_add_edit": {"value": false}, "flag_clean": {"value": false}, "paycheck_amount": {"value": 1350}, "hidden": {"value": true}, "rates": {"eur": "119.5319", "dol": "101.6514"}}
+{"paycheck_amount": {"value": 1350}, "flag_clean": {"value": false}, "init_paycheck_amount": {"value": 1350}, "hidden": {"value": false}, "currency_ex_v": {"value": false}, "rates": {"dol": "99.0786", "eur": "118.5575"}, "expenses": {"value": {}}, "flag_add_edit": {"value": true}}

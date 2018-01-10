@@ -1,19 +1,73 @@
-#:kivy 1.9.0
+#:kivy 1.10.0
 MainView:
 <StyleLabel>:
+    orientation:'horizontal'
     size_hint_max_y: '60dp'
-    canvas.before:
-        Color:
-            rgba: 0 , 0 , 0, .6
-        Rectangle:
-            source: 'lab.png'
-            pos: self.pos
-            size: self.size
+    spacing: 15
+    padding: (5,5)
+    id: show_single_ob
+    BoxLayout:
+        size_hint_x: .8
+        canvas.before:
+            Color:
+                rgba: 0 , 0 , 0, .6
+            Rectangle:
+                source: 'lab.png'
+                pos: self.pos
+                size: self.size
+        Label:
+            id: exp_show_single
+            text: ''
+
+    BoxLayout:
+        padding: (15,5)
+        size_hint_x: .2
+        Button:
+
+    #        size_hint_y: .6
+    #        padding: (20,40)
+            id: rem_exp_show_single
+            background_color: [0,0,0,0]
+            text: ''
+            color: [0,0,0,0]
+            on_release: root.remove_single_show(self.text)
+            canvas.before:
+
+                Rectangle:
+                    pos: self.pos
+                    size: (exp_show_single.height-15,exp_show_single.height-15)
+                    source: 'x5.png'
+<Mo>:
+    id: mo
+    size_hint: None,None
+    size: (400,400)
+    Label:
+        text: 'modal'
+
+<SettingsButton>
+    id: sett_b_wrap
+    spacing: 10
+#    padding: (root.width/3,1)
+    padding: (5,5)
+
+    size_hint_x: .2
+    Button:
+        id: sett_b
+#        size_hint_max_x: '70dp'
+        background_color: [0,0,0,0]
+        text: ''
+        on_release: app.show_popup()
+        canvas.before:
+
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'cog5.png'
 <HiddenButton>:
     id: hid_b_wrap
     hid_flag_obj: hidden_b
     spacing: 2
-    padding: (root.width/6,1)
+    padding: (root.width/3,1)
     Button:
         id: hidden_b
 #        size_hint_max_x: '70dp'
@@ -32,69 +86,114 @@ MainView:
     size_hint: .8, .6
     auto_dismiss: False
     title: 'Settings'
+    font_name: 'DejaVuSans'
     mode_edit: checkbox_add_edit
     mode_clean: checkbox_clean_add_edit
     on_dismiss: paycheck_amount_clean.focus = False
     BoxLayout:
         id: popup_box_content
         orientation: 'vertical'
-
-        Label:
-            size_hint_y: .1
-            text: 'Edit mode set to'
-
-        Label:
-            size_hint_y: .1
-            id: mode_state
-            text: ''
+        size_hint_x: None
+        width: root.width/1.1
+        padding: (35,2)
 
         BoxLayout:
-
+            spacing:10
+            padding: (40,0)
             orientation: 'vertical'
-            size_hint_y: .6
+
 
             Label:
                 text: 'Enable Add/Edit'
+                font_name: 'DejaVuSans'
                 size_hint_y: .1
 
             CheckBox:
                 id: checkbox_add_edit
-                size_hint_y: .2
+                size_hint_y: .1
                 on_active: root.set_flag_edit(self,self.active)
 
             Label:
                 text: 'Clean Edit Setup'
+                font_name: 'DejaVuSans'
                 size_hint_y: .1
 
             CheckBox:
                 id: checkbox_clean_add_edit
-                size_hint_y: .2
+                size_hint_y: .1
                 on_active: root.set_flag_clean(self,self.active)
 
             TextInput:
                 id: paycheck_amount_clean
                 size_hint_y: .2
+                spacing: 10
                 opacity: 0
                 input_filter: 'int'
                 multiline: False
                 readonly: False
 #                height: 0
 
-            Button:
-                id: update_paycheck_amount
-                size_hint_y: .2
-                opacity: 0
-                text: 'Save Amount'
-                on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
+            BoxLayout:
+                padding: (70,0)
+                orientation: 'vertical'
+                size_hint_y: .4
+                Button:
+                    id: update_paycheck_amount
 
-        Button:
-            size_hint_y: .2
-            text: 'Close'
-            on_press: root.dismiss()
+    #                spacing: 10
+                    opacity: 0
+                    font_name: 'DejaVuSans'
+                    width: 80
+                    text: 'Save Amount'
+                    on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
+    #                background_color: [0,0,0,0]
+                    background_down: "./bp.png"
+                    background_normal: "./b.png"
+    #                canvas.before:
+    #
+    #                    Rectangle:
+    #                        pos: self.pos
+    #                        size: self.size
+    #                        source: 'b.png'
 
+                Button:
+
+                    font_name: 'DejaVuSans'
+
+    #                spacing: 10
+                    text: 'Close'
+                    on_press: root.dismiss()
+                    background_down: "./bp.png"
+                    background_normal: "./b.png"
+
+<ConB@Button>:
+    size_hint_y: None
+    size_hint_x: None
+    width: dp(55)
+    height: dp(30)
+    font_size: '20sp'
+    font_name: 'DejaVuSans'
+    background_down: "./bp.png"
+    background_normal: "./b.png"
+
+<MvrLabel@Label>:
+    font_name: 'DejaVuSans'
+    font_size: '10sp'
+    bold: True
+    color: 1,1,1,1
+    font_hinting: 'mono'
+    size: self.texture_size
+    canvas.before:
+        Color:
+            rgba: 0 , 0 , 0, .6
+        Rectangle:
+            source: 'lab.png'
+            pos: self.pos
+            size: self.size
 
 <MainView>:
     removal: init_s
+
     orientation: 'vertical'
     BoxLayout:
         orientation: 'vertical'
@@ -103,17 +202,19 @@ MainView:
         spacing: 30
         padding: ((self.width)/4,50)
 
-        Image:
-            id: im
-            source: 'paycheck_icon.png'
         Label:
             size_hint_max_y: ('50dp')
             id: init_s_info_l
             color: 1,1,1,1
 
             font_hinting: 'mono'
+#            font_name: 'RobotoMono-Regular'
+            font_name: 'DejaVuSans'
+            bold: True
 #            size_hint_x: .3
             text: 'Enter Paycheck Amount'
+
+
         TextInput:
             id: init_s_input
             size_hint_max_y: ('50dp')
@@ -131,6 +232,11 @@ MainView:
 #            size_hint_x: .3
             text: 'Save'
             on_press: root.remove(init_s_input.text)
+            background_down: "./bp.png"
+            background_normal: "./b.png"
+        Image:
+            id: im
+            source: 'paycheck_icon.png'
 
     BoxLayout:
         orientation: 'vertical'
@@ -144,234 +250,107 @@ MainView:
                 size: self.size
 
                 source: 'black.png'
-       
+
         BoxLayout:
             id: nav
             orientation: 'horizontal'
-            size_hint_x: .6
             spacing: 10
             size_hint_y: .1
 
-#            canvas.before:
-#                Color:
-##                    rgba: 0.259, 0.259, 0.259, .9
-##                    rgba: .9, .8, .2, .9
-#                    rgba: 1 , 1 , 1, .6
-#                Rectangle:
-#                    # self here refers to the widget i.e BoxLayout
-#                    pos: self.pos
-#                    size: self.size
-
-            Button:
-#                size_hint_max_x: '70dp'
-
-                padding: (root.width/3,1)
-                on_release: app.show_popup()
-                background_color: [0,0,0,0]
-                canvas.before:
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-                        source: 'cog.png'
-
-
-
         Carousel:
             id: carousel
-#            canvas.before:
-#                Color:
-#                    rgba: .8, 1, 0, 1
-#                Rectangle:
-#                    # self here refers to the widget i.e BoxLayout
-#                    pos: self.pos
-#                    size: self.size
 
             BoxLayout:
                 id: main
                 index: 1
-                padding: ((self.width)/3,1)
+                padding: ((self.width)/6,1)
                 orientation: 'vertical'
-#                canvas.before:
-#                    Color:
-#                        rgba: 1, 1, 1, 0.2
-#                    Rectangle:
-#                        # self here refers to the widget i.e BoxLayout
-#                        pos: self.pos
-#                        size: 400,400
 
-#                Label:
-#                    text: 'Progression: {}%'.format(int(pb.value))
-#                    size_hint_y: None
-#                    height: '48dp'
-
-#                ProgressBar:
-#                    id: pb
-#                    size_hint_x: .5
-#                    size_hint_y: None
-#                    height: '48dp'
-#                    value: (app.time * 20) % 100
-
-                Label:
+                MvrLabel:
                     id: avg_rate_dol
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
+
                     text: 'USD Avg Rate'
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+
+                MvrLabel:
                     id: avg_rate_dol_value
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
-                    text: ' '
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+                    text: ' '
+
+
+                MvrLabel:
                     id: avg_rate_eur
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
+
                     text: 'EUR Avg Rate'
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+
+                MvrLabel:
                     id: avg_rate_eur_value
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
-                    text: ' '
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+                    text: ' '
+
+
+                MvrLabel:
                     id: paycheck
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
+
                     text: 'Neto Paycheck'
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+
+                MvrLabel:
                     id: paycheck_value
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
-                    text: ' '
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+                    text: ' '
+
+
+                MvrLabel:
                     id: expenses
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
+
                     text: 'Expenses'
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+
+                MvrLabel:
                     id: expenses_value
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
-                    text: ' '
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+                    text: ' '
+
+
+                MvrLabel:
                     id: clean_leftover
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
+
                     text: 'Clean Leftover'
-                    markup: True
-                    size: self.texture_size
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+
+                MvrLabel:
                     id: clean_leftover_value
-                    bold: True
-                    color: 1,1,1,1
-                    font_hinting: 'mono'
-                    text: ' '
-                    italic: True
-                    canvas.before:
-                        Color:
-                            rgba: 0 , 0 , 0, .6
-                        Rectangle:
-                            source: 'lab.png'
-                            pos: self.pos
-                            size: self.size
 
-                Label:
+                    text: ' '
+
+
+                MvrLabel:
                     id: test
                     color: 1,1,1,1
                     text: ''
 
-                Button:
-                    text: 'GET'
-                    background_color: 0.259, 0.259, 0.259,1
-                    on_press: root.populate()
-                    size: self.texture_size
-                    padding_x: (root.width)/2
+                BoxLayout:
+#                    width: main.width/2
+                    orientation: 'vertical'
+#                    size_hint_x: .4
+                    padding:  [190, 0, 190, 0]
+
+
+#                    padding: (self.width/2,0)
+                    Button:
+                        pos: self.parent.pos
+                        font_name: 'DejaVuSans'
+                        text: 'GET'
+                        spacing: 10
+
+    #                    background_color: 0.259, 0.259, 0.259,1
+                        on_press: root.control_content()
+#                        size: self.texture_size
+#                        width: 250
+                        background_down: "./bp.png"
+                        background_normal: "./b.png"
 
             BoxLayout:
                 id: second
@@ -387,63 +366,94 @@ MainView:
 
                 BoxLayout:
                     orientation: 'vertical'
-                    padding: ((self.width)/9,0)
-                    Label:
-                        id: info
-                        color: 1,1,1,1
-                        text: 'Edit Expenses'
-                        size_hint_max_y: '30dp'
+                    padding: ((self.width)/9,1)
+                    BoxLayout:
+                        orientation: 'horizontal'
                         size_hint_y: .1
+                        Label:
+                            id: info
+                            color: 1,1,1,1
+                            text: 'Edit Expenses'
+                            font_name: 'DejaVuSans'
+                            size_hint_max_y: '30dp'
+
+                        ConB:
+                            id: show_hint
+
+                            on_press: root.show_tip()
+
+
 
                     BoxLayout:
                         id: expenses_edit_view
-                        size_hint_y: .3
-                        orientation: 'horizontal'
-                        spacing: 30
-#                        padding: (30,30)
+                        size_hint_y: .2
+                        orientation: 'vertical'
+                        spacing: 10
 
                         BoxLayout:
                             orientation: 'vertical'
+                            size_hint_y: .5
 
                             Label:
                                 id: f_expense
-                                size_hint_max_y: '35dp'
                                 color: 1,1,1,1
                                 bold: True
                                 font_hinting: 'mono'
+                                font_name: 'DejaVuSans'
                                 text: 'Enter expense name'
 
                             TextInput:
                                 id: f_expense_input
-                                size_hint_max_y: '35dp'
                                 multiline: False
+                                font_name: 'DejaVuSans'
                                 hint_text: 'Name'
+
 
                         BoxLayout:
                             orientation: 'vertical'
+                            size_hint_y: .5
 
                             Label:
                                 id: f_expense_v
-                                size_hint_max_y: '35dp'
                                 color: 1,1,1,1
                                 bold: True
                                 font_hinting: 'mono'
+                                font_name: 'DejaVuSans'
                                 text: 'Enter expense value'
 
-                            TextInput:
-                                id: f_expense_v_input
-                                size_hint_max_y: '35dp'
-                                multiline: False
-                                input_filter: 'int'
-                                text: ''
-                                hint_text: 'Amount'
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                spacing: 30
+                                TextInput:
+                                    id: f_expense_v_input
+                                    size_hint_x: .7
+                                    multiline: False
+                                    input_filter: 'int'
+                                    font_name: 'DejaVuSans'
+                                    hint_text: 'Amount'
+
+                                Label:
+                                    id: currency_lab_hidden
+                                    text: 'EUR'
+                                    font_name: 'DejaVuSans'
+                                    size_hint_x: .1
+                                    opacity:1
+
+                                CheckBox:
+                                    id: eur_set_value
+                                    size_hint_x: .1
+                                    on_active: root.set_currency_flag(self.active)
+
+
+
 
                     BoxLayout:
                         id: expenses_button_control
                         orientation: 'horizontal'
-                        size_hint_max_y: '30dp'
-                        spacing: 30
-#                        padding: ((self.width)/9,0)
+#                        size_hint_max_y: '80dp'
+                        size_hint_y: .1
+                        spacing: 25
+                        padding: (0,10)
 #                        canvas.before:
 #                            Color:
 #                                rgba: 0, 1, 1, 1
@@ -452,31 +462,31 @@ MainView:
 #                                pos: self.pos
 #                                size: self.size
 
-                        Button:
-                            text: 'Clear'
+                        ConB:
+
                             on_press: root.clear_all()
-
+#                            background_color: [0,0,0,0]
 #                            width: '100dp'
+                            text: 'Clear'
 
-                            size_hint_max_y: '30dp'
 
 
-                        Button:
+
+                        ConB:
                             text: 'Save'
                             on_press: root.save_entry(f_expense_input.text,f_expense_v_input.text)
-
+#                            background_color: [0,0,0,0]
 #                            width: '100dp'
-                            size_hint_max_y: '30dp'
 
-                        Button:
+
+                        ConB:
                             text: 'Show'
                             on_press: root.show_edits()
 
-#                            width: '100dp'
-                            size_hint_max_y: '30dp'
 
                     BoxLayout:
                         orientation: 'vertical'
+                        size_hint_y: .6
 #                        canvas.before:
 #                            Color:
 #                                rgba: 0, 1, 1, 0.1
