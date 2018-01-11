@@ -1,11 +1,42 @@
 #:kivy 1.10.0
+#:import OpacityScrollEffect kivy.effects.opacityscroll.OpacityScrollEffect
 MainView:
+<ScrollContainer>:
+    size_hint: None,None
+    size: (600,250)
+    pos_hint:{'center_x': 0.5, 'center_y': 0.5}
+    do_scroll_x: False
+#    effect_cls: 'OpacityScrollEffect'
+
+
+<ScrollGrid>:
+    id: sg
+    cols: 1
+    size_hint: None,None
+
+    height: 450
+
+    row_default_height: dp(50)
+#    canvas.before:
+#        Color:
+#            rgba: .8, 1, 1, 1
+#        Rectangle:
+#            # self here refers to the widget i.e BoxLayout
+#            pos: self.pos
+#            size: self.size
 <StyleLabel>:
     orientation:'horizontal'
-    size_hint_max_y: '60dp'
-    spacing: 15
-    padding: (5,5)
+    size_hint_max_y: dp(50)
+#    spacing: 15
+#    padding: (5,5)
     id: show_single_ob
+#    canvas.before:
+#        Color:
+#            rgba: 0, 1, 1, 1
+#        Rectangle:
+#            # self here refers to the widget i.e BoxLayout
+#            pos: self.pos
+#            size: self.size
     BoxLayout:
         size_hint_x: .8
         canvas.before:
@@ -20,8 +51,8 @@ MainView:
             text: ''
 
     BoxLayout:
-        padding: (15,5)
-        size_hint_x: .2
+#        padding: (15,5)
+        size_hint_x: .1
         Button:
 
     #        size_hint_y: .6
@@ -29,7 +60,8 @@ MainView:
             id: rem_exp_show_single
             background_color: [0,0,0,0]
             text: ''
-            color: [0,0,0,0]
+            font_size: 0
+            color: 0,0,0,0
             on_release: root.remove_single_show(self.text)
             canvas.before:
 
@@ -53,7 +85,7 @@ MainView:
     size_hint_x: .2
     Button:
         id: sett_b
-#        size_hint_max_x: '70dp'
+        size_hint_max_x: dp(60)
         background_color: [0,0,0,0]
         text: ''
         on_release: app.show_popup()
@@ -63,31 +95,20 @@ MainView:
                 pos: self.pos
                 size: self.size
                 source: 'cog5.png'
-<HiddenButton>:
-    id: hid_b_wrap
-    hid_flag_obj: hidden_b
-    spacing: 2
-    padding: (root.width/3,1)
-    Button:
-        id: hidden_b
-#        size_hint_max_x: '70dp'
-        opacity: 0
-        background_color: [0,0,0,0]
-        text: ''
-    #                on_touch_down: if root.touch.is_triple_tap: self.hidden_feature()
-        canvas.before:
 
-            Rectangle:
-                pos: self.pos
-                size: self.size
-                source: '5.png'
+<CurrencySetterLabel@Label>:
+    color: 1,1,1,1
+<CurrencySetterCheck@CheckBox>:
+    group: 'pick_box_group'
+    color: 1,1,1,1
+
 <CustomPopup>:
     name: 'bo'
     size_hint: .8, .6
     auto_dismiss: False
     title: 'Settings'
     font_name: 'DejaVuSans'
-    mode_edit: checkbox_add_edit
+
     mode_clean: checkbox_clean_add_edit
     on_dismiss: paycheck_amount_clean.focus = False
     BoxLayout:
@@ -102,17 +123,6 @@ MainView:
             padding: (40,0)
             orientation: 'vertical'
 
-
-            Label:
-                text: 'Enable Add/Edit'
-                font_name: 'DejaVuSans'
-                size_hint_y: .1
-
-            CheckBox:
-                id: checkbox_add_edit
-                size_hint_y: .1
-                on_active: root.set_flag_edit(self,self.active)
-
             Label:
                 text: 'Clean Edit Setup'
                 font_name: 'DejaVuSans'
@@ -121,50 +131,86 @@ MainView:
             CheckBox:
                 id: checkbox_clean_add_edit
                 size_hint_y: .1
+                color: 1,1,1,1
                 on_active: root.set_flag_clean(self,self.active)
 
-            TextInput:
-                id: paycheck_amount_clean
-                size_hint_y: .2
-                spacing: 10
-                opacity: 0
-                input_filter: 'int'
-                multiline: False
-                readonly: False
-#                height: 0
-
             BoxLayout:
-                padding: (70,0)
                 orientation: 'vertical'
-                size_hint_y: .4
-                Button:
-                    id: update_paycheck_amount
+                id: settings_content_wrap
+                size_hint_y: .6
+                BoxLayout:
+                    id: settings_currency_pick
+                    size_hint_y: .3
 
-    #                spacing: 10
-                    opacity: 0
-                    font_name: 'DejaVuSans'
-                    width: 80
-                    text: 'Save Amount'
-                    on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
-    #                background_color: [0,0,0,0]
-                    background_down: "./bp.png"
-                    background_normal: "./b.png"
-    #                canvas.before:
-    #
-    #                    Rectangle:
-    #                        pos: self.pos
-    #                        size: self.size
-    #                        source: 'b.png'
+                    BoxLayout:
+                        id: settings_rsd_box
+                        orientation:'vertical'
+                        CurrencySetterLabel:
+                            id: settings_rsd_lab
+                            text: "Rsd"
+                        CurrencySetterCheck:
+                            id: settings_rsd_pick
+                            active: True
 
-                Button:
+                    BoxLayout:
+                        id: settings_dol_box
+                        orientation:'vertical'
+                        CurrencySetterLabel:
+                            id: settings_dol_lab
+                            text: "Dol"
+                        CurrencySetterCheck:
+                            id: settings_dol_pick
 
-                    font_name: 'DejaVuSans'
+                    BoxLayout:
+                        id: settings_eur_box
+                        orientation:'vertical'
+                        CurrencySetterLabel:
+                            id: settings_eur_lab
+                            text: "Eur"
+                        CurrencySetterCheck:
+                            id: settings_eur_pick
 
-    #                spacing: 10
-                    text: 'Close'
-                    on_press: root.dismiss()
-                    background_down: "./bp.png"
-                    background_normal: "./b.png"
+
+                TextInput:
+                    id: paycheck_amount_clean
+                    size_hint_y: .4
+                    spacing: 10
+                    input_filter: 'int'
+                    multiline: False
+                    readonly: False
+    #                height: 0
+
+                BoxLayout:
+                    padding: (70,0)
+                    orientation: 'vertical'
+                    size_hint_y: .3
+                    Button:
+                        id: update_paycheck_amount
+
+        #                spacing: 10
+                        font_name: 'DejaVuSans'
+                        width: 80
+                        text: 'Save Amount'
+                        on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
+        #                background_color: [0,0,0,0]
+                        background_down: "./bp.png"
+                        background_normal: "./b.png"
+        #                canvas.before:
+        #
+        #                    Rectangle:
+        #                        pos: self.pos
+        #                        size: self.size
+        #                        source: 'b.png'
+
+            Button:
+                size_hint_y: .2
+                font_name: 'DejaVuSans'
+
+                #                spacing: 10
+                text: 'Close'
+                on_press: root.dismiss()
+                background_down: "./bp.png"
+                background_normal: "./b.png"
 
 <ConB@Button>:
     size_hint_y: None
@@ -193,6 +239,19 @@ MainView:
 
 <MainView>:
     removal: init_s
+    average_rate_dolar_label: avg_rate_dol
+    average_rate_dolar_value_label: avg_rate_dol_value
+    average_rate_euro_label: avg_rate_eur
+    average_rate_euro_value_label: avg_rate_eur_value
+    paycheck_label: paycheck
+    paycheck_value_label: paycheck_value
+    expenses_label: expenses
+    expense_value_label: expenses_value
+    clean_leftover_label: clean_leftover
+    clean_leftover_value_label: clean_leftover_value
+
+
+
 
     orientation: 'vertical'
     BoxLayout:
@@ -213,6 +272,36 @@ MainView:
             bold: True
 #            size_hint_x: .3
             text: 'Enter Paycheck Amount'
+
+        BoxLayout:
+            id: init_s_currency_pick
+
+            BoxLayout:
+                id: rsd_box
+                orientation:'vertical'
+                CurrencySetterLabel:
+                    id: rsd_lab
+                    text: "Rsd"
+                CurrencySetterCheck:
+                    id: rsd_pick
+                    active: True
+            BoxLayout:
+                id: dol_box
+                orientation:'vertical'
+                CurrencySetterLabel:
+                    id: dol_lab
+                    text: "Dol"
+                CurrencySetterCheck:
+                    id: dol_pick
+
+            BoxLayout:
+                id: eur_box
+                orientation:'vertical'
+                CurrencySetterLabel:
+                    id: eur_lab
+                    text: "Eur"
+                CurrencySetterCheck:
+                    id: eur_pick
 
 
         TextInput:
@@ -367,9 +456,11 @@ MainView:
                 BoxLayout:
                     orientation: 'vertical'
                     padding: ((self.width)/9,1)
+
                     BoxLayout:
                         orientation: 'horizontal'
                         size_hint_y: .1
+
                         Label:
                             id: info
                             color: 1,1,1,1
@@ -379,10 +470,43 @@ MainView:
 
                         ConB:
                             id: show_hint
-
                             on_press: root.show_tip()
 
+                    BoxLayout:
+                        id: expenses_currency_pick
+                        size_hint_y: .1
 
+                        BoxLayout:
+                            id: expenses_rsd_box
+                            orientation:'vertical'
+
+                            CurrencySetterLabel:
+                                id: expenses_rsd_lab
+                                text: "Rsd"
+
+                            CurrencySetterCheck:
+                                id: expenses_rsd_pick
+                                active: True
+
+                        BoxLayout:
+                            id: expenses_dol_box
+                            orientation:'vertical'
+
+                            CurrencySetterLabel:
+                                id: expenses_dol_lab
+                                text: "Dol"
+
+                            CurrencySetterCheck:
+                                id: expenses_dol_pick
+
+                        BoxLayout:
+                            id: expenses_eur_box
+                            orientation:'vertical'
+                            CurrencySetterLabel:
+                                id: expenses_eur_lab
+                                text: "Eur"
+                            CurrencySetterCheck:
+                                id: expenses_eur_pick
 
                     BoxLayout:
                         id: expenses_edit_view
@@ -408,7 +532,6 @@ MainView:
                                 font_name: 'DejaVuSans'
                                 hint_text: 'Name'
 
-
                         BoxLayout:
                             orientation: 'vertical'
                             size_hint_y: .5
@@ -424,6 +547,7 @@ MainView:
                             BoxLayout:
                                 orientation: 'horizontal'
                                 spacing: 30
+
                                 TextInput:
                                     id: f_expense_v_input
                                     size_hint_x: .7
@@ -431,6 +555,7 @@ MainView:
                                     input_filter: 'int'
                                     font_name: 'DejaVuSans'
                                     hint_text: 'Amount'
+                                    background_normal: 'lab.png'
 
                                 Label:
                                     id: currency_lab_hidden
@@ -444,13 +569,9 @@ MainView:
                                     size_hint_x: .1
                                     on_active: root.set_currency_flag(self.active)
 
-
-
-
                     BoxLayout:
                         id: expenses_button_control
                         orientation: 'horizontal'
-#                        size_hint_max_y: '80dp'
                         size_hint_y: .1
                         spacing: 25
                         padding: (0,10)
@@ -461,32 +582,22 @@ MainView:
 #                                # self here refers to the widget i.e BoxLayout
 #                                pos: self.pos
 #                                size: self.size
-
                         ConB:
 
                             on_press: root.clear_all()
-#                            background_color: [0,0,0,0]
-#                            width: '100dp'
                             text: 'Clear'
-
-
-
 
                         ConB:
                             text: 'Save'
                             on_press: root.save_entry(f_expense_input.text,f_expense_v_input.text)
-#                            background_color: [0,0,0,0]
-#                            width: '100dp'
-
 
                         ConB:
                             text: 'Show'
                             on_press: root.show_edits()
 
-
                     BoxLayout:
                         orientation: 'vertical'
-                        size_hint_y: .6
+                        size_hint_y: .4
 #                        canvas.before:
 #                            Color:
 #                                rgba: 0, 1, 1, 0.1
