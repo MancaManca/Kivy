@@ -216,7 +216,7 @@ MainView:
     #                height: 0
 
                 BoxLayout:
-                    padding: (278,0)
+                    padding: (280,0)
                     orientation: 'vertical'
                     size_hint_y: .3
                     Button:
@@ -239,7 +239,7 @@ MainView:
         #                        source: 'b.png'
             BoxLayout:
                 size_hint_y: .2
-                padding: (302,0)
+                padding: (299,0)
                 Button:
 
                     font_name: 'DejaVuSans'
@@ -303,6 +303,12 @@ MainView:
         size_hint_y: 1
         spacing: dp(20)
         padding: ((self.width)/4,50)
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+                source: 'black.png'
 
         Label:
 
@@ -312,7 +318,7 @@ MainView:
             font_hinting: 'mono'
 #            font_name: 'RobotoMono-Regular'
             font_name: 'DejaVuSans'
-            font_size: '22sp'
+            font_size: '20sp'
             bold: True
 #            size_hint_x: .3
             text: 'Enter Paycheck Amount'
@@ -358,9 +364,10 @@ MainView:
             color: 1, 1, 1, 1
             hint_text: 'Amount Value'
             hint_text_color: 1,1,1,1
-            padding: (170,30)
+            padding: (170,50)
             background_normal: 'tiad.png'
             background_active: 'tia.png'
+            foreground_color: 1,1,1,1
             on_focus: root.keyboard_shrink()
             on_cursor: root.keyboard_shrink()
             on_touch_down: root.keyboard_shrink()
@@ -368,7 +375,7 @@ MainView:
         ConB:
             id: init_s_b
             size_hint_y: .1
-            padding: (root.width/4,0)
+            padding: (root.width/3.5,0)
 #            size_hint_x: .3
             text: 'Save'
             on_press: root.remove(init_s_input.text)
@@ -586,7 +593,7 @@ MainView:
                                 hint_text: 'Name'
                                 hint_text_color: 1,1,1,1
                                 color: 1, 1, 1, 1
-                                padding: (200,40)
+                                padding: (200,44)
                                 background_normal: 'tiad.png'
                                 background_active: 'tia.png'
 
@@ -602,7 +609,7 @@ MainView:
                                 hint_text: 'Amount'
                                 hint_text_color: 1,1,1,1
                                 color: 1, 1, 1, 1
-                                padding: (200,40)
+                                padding: (200,44)
                                 background_normal: 'tiad.png'
                                 background_active: 'tia.png'
 
