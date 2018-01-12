@@ -66,9 +66,9 @@ class ScrollGrid(GridLayout):
         if is_expenses_dict_empty > 0:
             for i in MainView.dic_store.keys():
                 # print('scroll grid for main view loop {}'.format(i))
-                scroll_grid_dic[i] = MainView.dic_store[i]['value']
+                scroll_grid_dic[i] = '{} {}'.format(MainView.dic_store[i]['value'], MainView.dic_store[i]['currency'])
         else:
-            scroll_grid_dic={}
+            scroll_grid_dic = {}
         # self.clear_widgets()
 
         # MainView().populate_temp_dic()
@@ -110,7 +110,9 @@ class SettingsButton(BoxLayout):
 class CustomPopup(Popup):
 
     mode = ObjectProperty()
-
+    settings_currency_check_rsd = ObjectProperty()
+    settings_currency_check_dol = ObjectProperty()
+    settings_currency_check_eur = ObjectProperty()
 # Dispatch event on_active checkbox to Popup ModeState label & update store JSON value
     def flag_clean_content_visible(self):
 
@@ -139,13 +141,25 @@ class CustomPopup(Popup):
 
             MainView.store['paycheck_amount'] = {'value': MainView.store['init_paycheck_amount']['value']}
 
+    def settings_store(self,value,store_key):
+
+        MainView.store['paycheck_amount'] = {'value': float(value)}
+        MainView.store['init_paycheck_amount'] = {'value': float(value)}
+        MainView.store['paycheck_amount_currency'] = {'value': store_key}
+        self.ids.paycheck_amount_clean.text = ''
+        self.ids.paycheck_amount_clean.hint_text = '{} {}'.format(value,store_key)
     def set_paycheck_amount_clean(self,pay_amount,state):
 
         if state:
             if len(pay_amount) > 1:
-                MainView.store['paycheck_amount'] = {'value': int(pay_amount)}
-                self.ids.paycheck_amount_clean.text = ''
-                self.ids.paycheck_amount_clean.hint_text = ''
+                if self.settings_currency_check_rsd.active:
+                    self.settings_store(pay_amount,'RSD')
+
+                elif self.settings_currency_check_dol.active:
+                    self.settings_store(pay_amount, 'USD')
+
+                else:
+                    self.settings_store(pay_amount, 'EUR')
 
             else:
                 self.ids.paycheck_amount_clean.hint_text = 'invalid amount'
@@ -173,6 +187,9 @@ class MainView(BoxLayout):
     avg_rates_list_converted = ListProperty()
     removal = ObjectProperty()
     temp_dic = {}
+    expense_currency_check_rsd = ObjectProperty()
+    expense_currency_check_dol = ObjectProperty()
+    expense_currency_check_eur = ObjectProperty()
     average_rate_dolar_label = ObjectProperty()
     average_rate_dolar_value_label = ObjectProperty()
     average_rate_euro_label = ObjectProperty()
@@ -265,23 +282,28 @@ class MainView(BoxLayout):
 # Adding values to Main View Expenses Json store EX_N as key and pair "value: EX_V"
 # Save action checks if Flag Add/Edit is True in order to proceed, if not warns user with input / label text change
 # Callback Show_Edits
+    def store_expense_with_currency(self,ex_name,ex_value,ex_currency):
+
+        self.dic_store.put(ex_name, value=int(ex_value), currency=ex_currency)
     def save_entry(self,ex_n,ex_v):
         # print(len(ex_n))
         # print(len(ex_v))
         # print(len(ex_n)>0)
         # print(len(ex_v)>0)
 
-
         if (len(ex_n) > 0) and (len(ex_v) > 0):
             # print('first if')
-            if self.store.exists('currency_ex_v'):
-                # print('second if')
+            if self.expense_currency_check_rsd.active:
+                self.store_expense_with_currency(ex_n,ex_v,'RSD')
+                print('saving expense rsd {} {} '.format(ex_n,ex_v))
 
-                self.dic_store.put(ex_n, value=int(ex_v)*float(self.store['rates']['eur']))
-                    # print('done with eur')
+            elif self.expense_currency_check_dol.active:
+                self.store_expense_with_currency(ex_n, ex_v, 'USD')
+                print('saving expense dol {} {} '.format(ex_n, ex_v))
             else:
-                # print('else if')
-                self.dic_store.put(ex_n, value=int(ex_v))
+                self.store_expense_with_currency(ex_n, ex_v, 'EUR')
+                print('saving expense eur {} {} '.format(ex_n, ex_v))
+
             self.ids.test.text = str(ex_n)
             Clock.schedule_once(partial(self.update_exp_fields, 'Name','Amount'), 0.3)
             self.show_edits()
@@ -398,9 +420,9 @@ class MainView(BoxLayout):
         exp_sum = round(sum(expense_in.values()), 2)
 
         # print('exp {}'.format(exp_sum))
-        if self.store['paycheck_amount_currency']['value'] == 'Rsd':
+        if self.store['paycheck_amount_currency']['value'] == 'RSD':
             pay_sum = round(paycheck_amount, 2)
-        elif self.store['paycheck_amount_currency']['value'] == 'Dol':
+        elif self.store['paycheck_amount_currency']['value'] == 'USD':
             pay_sum = round((float(stored_dol_rate) * paycheck_amount), 2)
         else:
             pay_sum = round((float(stored_eur_rate) * paycheck_amount), 2)
@@ -438,7 +460,14 @@ class MainView(BoxLayout):
         self.temp_dic = {}
         for i in self.dic_store.keys():
             # print(i)
-            self.temp_dic[i] = self.dic_store[i]['value']
+            if self.dic_store[i]['currency'] == 'RSD':
+
+                self.temp_dic[i] = self.dic_store[i]['value']
+            elif self.dic_store[i]['currency'] == 'USD':
+
+                self.temp_dic[i] = (float(self.dic_store[i]['value']))*(float(self.store['rates']['dol']))
+            else:
+                self.temp_dic[i] = (float(self.dic_store[i]['value'])) * (float(self.store['rates']['eur']))
 
     def show_tip(self):
         Mo().open(self)

@@ -88,7 +88,7 @@ MainView:
         Label:
             font_name: 'DejaVuSans'
             font_size: '15sp'
-            text: 'Expense amount \ncan be entered \nin  RSD, USD, EMU \nmonatery value.'
+            text: 'Expense amount \ncan be entered \nin  RSD, USD, EUR \nmonatery value.'
 
 <SettingsButton>
     id: sett_b_wrap
@@ -117,6 +117,16 @@ MainView:
 <CurrencySetterCheck@CheckBox>:
     group: 'pick_box_group'
     color: 1,1,1,1
+    allow_no_selection: False
+
+<CurrencySetterCheckSettings@CheckBox>:
+    group: 'pick_box_group_settings'
+    color: 1,1,1,1
+    allow_no_selection: False
+<CurrencySetterCheckInit@CheckBox>:
+    group: 'pick_box_group_init'
+    color: 1,1,1,1
+    allow_no_selection: False
 
 <CustomPopup>:
     name: 'bo'
@@ -125,7 +135,9 @@ MainView:
     title: 'Settings'
     font_name: 'DejaVuSans'
     font_size: '16sp'
-
+    settings_currency_check_rsd: settings_rsd_pick
+    settings_currency_check_dol: settings_dol_pick
+    settings_currency_check_eur: settings_eur_pick
     mode_clean: checkbox_clean_add_edit
     on_dismiss: paycheck_amount_clean.focus = False
     BoxLayout:
@@ -167,8 +179,8 @@ MainView:
                         orientation:'vertical'
                         CurrencySetterLabel:
                             id: settings_rsd_lab
-                            text: "Rsd"
-                        CurrencySetterCheck:
+                            text: "RSD"
+                        CurrencySetterCheckSettings:
                             id: settings_rsd_pick
                             active: True
 
@@ -177,8 +189,8 @@ MainView:
                         orientation:'vertical'
                         CurrencySetterLabel:
                             id: settings_dol_lab
-                            text: "Dol"
-                        CurrencySetterCheck:
+                            text: "USD"
+                        CurrencySetterCheckSettings:
                             id: settings_dol_pick
 
                     BoxLayout:
@@ -186,8 +198,8 @@ MainView:
                         orientation:'vertical'
                         CurrencySetterLabel:
                             id: settings_eur_lab
-                            text: "Eur"
-                        CurrencySetterCheck:
+                            text: "EUR"
+                        CurrencySetterCheckSettings:
                             id: settings_eur_pick
 
 
@@ -215,7 +227,7 @@ MainView:
                         size_hint_x: None
                         width: dp(80)
                         text: 'Save'
-                        on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
+                        on_press: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
         #                background_color: [0,0,0,0]
                         background_down: "./bp.png"
                         background_normal: "./b.png"
@@ -275,7 +287,12 @@ MainView:
     expense_value_label: expenses_value
     clean_leftover_label: clean_leftover
     clean_leftover_value_label: clean_leftover_value
-
+    expense_currency_check_rsd: expenses_rsd_pick
+    expense_currency_check_dol: expenses_dol_pick
+    expense_currency_check_eur: expenses_eur_pick
+#    expense_currency_label_rsd: expenses_rsd_lab
+#    expense_currency_label_dol: expenses_dol_lab
+#    expense_currency_label_eur: expenses_eur_lab
 
 
 
@@ -309,8 +326,8 @@ MainView:
                 orientation:'vertical'
                 CurrencySetterLabel:
                     id: rsd_lab
-                    text: "Rsd"
-                CurrencySetterCheck:
+                    text: "RSD"
+                CurrencySetterCheckInit:
                     id: rsd_pick
                     active: True
             BoxLayout:
@@ -318,8 +335,8 @@ MainView:
                 orientation:'vertical'
                 CurrencySetterLabel:
                     id: dol_lab
-                    text: "Dol"
-                CurrencySetterCheck:
+                    text: "USD"
+                CurrencySetterCheckInit:
                     id: dol_pick
 
             BoxLayout:
@@ -327,8 +344,8 @@ MainView:
                 orientation:'vertical'
                 CurrencySetterLabel:
                     id: eur_lab
-                    text: "Eur"
-                CurrencySetterCheck:
+                    text: "EUR"
+                CurrencySetterCheckInit:
                     id: eur_pick
 
 
@@ -526,7 +543,7 @@ MainView:
 
                             CurrencySetterLabel:
                                 id: expenses_rsd_lab
-                                text: "Rsd"
+                                text: "RSD"
 
                             CurrencySetterCheck:
                                 id: expenses_rsd_pick
@@ -538,7 +555,7 @@ MainView:
 
                             CurrencySetterLabel:
                                 id: expenses_dol_lab
-                                text: "Dol"
+                                text: "USD"
 
                             CurrencySetterCheck:
                                 id: expenses_dol_pick
@@ -548,7 +565,7 @@ MainView:
                             orientation:'vertical'
                             CurrencySetterLabel:
                                 id: expenses_eur_lab
-                                text: "Eur"
+                                text: "EUR"
                             CurrencySetterCheck:
                                 id: expenses_eur_pick
 
