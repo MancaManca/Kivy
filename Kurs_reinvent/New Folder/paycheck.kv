@@ -1,9 +1,11 @@
-#:kivy 1.10.0
+#:kivy 1.9.1
 #:import OpacityScrollEffect kivy.effects.opacityscroll.OpacityScrollEffect
 MainView:
 <ScrollContainer>:
     size_hint: None,None
-    size: (600,250)
+    padding: (25,25)
+    height: dp(250)
+    width: dp(300)
     pos_hint:{'center_x': 0.5, 'center_y': 0.5}
     do_scroll_x: False
 #    effect_cls: 'OpacityScrollEffect'
@@ -14,9 +16,9 @@ MainView:
     cols: 1
     size_hint: None,None
 
-    height: 450
+    height: dp(1000)
 
-    row_default_height: dp(50)
+    row_default_height: dp(40)
 #    canvas.before:
 #        Color:
 #            rgba: .8, 1, 1, 1
@@ -26,7 +28,7 @@ MainView:
 #            size: self.size
 <StyleLabel>:
     orientation:'horizontal'
-    size_hint_max_y: dp(50)
+    size_hint_max_y: dp(40)
 #    spacing: 15
 #    padding: (5,5)
     id: show_single_ob
@@ -72,9 +74,21 @@ MainView:
 <Mo>:
     id: mo
     size_hint: None,None
-    size: (400,400)
-    Label:
-        text: 'modal'
+    height: dp(300)
+    width: dp(260)
+    opacity: .9
+    background: 'di.png'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: (50,60)
+        Label:
+            font_name: 'DejaVuSans'
+            font_size: '15sp'
+            text: 'For editing Paycheck \namount  go to settings \nand enable editing.'
+        Label:
+            font_name: 'DejaVuSans'
+            font_size: '15sp'
+            text: 'Expense amount \ncan be entered \nin  RSD, USD, EMU \nmonatery value.'
 
 <SettingsButton>
     id: sett_b_wrap
@@ -98,6 +112,8 @@ MainView:
 
 <CurrencySetterLabel@Label>:
     color: 1,1,1,1
+    font_name: 'DejaVuSans'
+    font_size: '18sp'
 <CurrencySetterCheck@CheckBox>:
     group: 'pick_box_group'
     color: 1,1,1,1
@@ -108,6 +124,7 @@ MainView:
     auto_dismiss: False
     title: 'Settings'
     font_name: 'DejaVuSans'
+    font_size: '16sp'
 
     mode_clean: checkbox_clean_add_edit
     on_dismiss: paycheck_amount_clean.focus = False
@@ -119,14 +136,15 @@ MainView:
         padding: (35,2)
 
         BoxLayout:
-            spacing:10
+            spacing: 10
             padding: (40,0)
             orientation: 'vertical'
 
             Label:
-                text: 'Clean Edit Setup'
+                text: 'Edit Paycheck Amount'
                 font_name: 'DejaVuSans'
                 size_hint_y: .1
+                font_size: '16sp'
 
             CheckBox:
                 id: checkbox_clean_add_edit
@@ -137,7 +155,9 @@ MainView:
             BoxLayout:
                 orientation: 'vertical'
                 id: settings_content_wrap
+                opacity:0
                 size_hint_y: .6
+                spacing: dp(10)
                 BoxLayout:
                     id: settings_currency_pick
                     size_hint_y: .3
@@ -173,15 +193,18 @@ MainView:
 
                 TextInput:
                     id: paycheck_amount_clean
-                    size_hint_y: .4
+                    size_hint_y: .2
                     spacing: 10
                     input_filter: 'int'
                     multiline: False
                     readonly: False
+                    padding: (130,40)
+                    background_normal: 'tiad.png'
+                    background_active: 'tia.png'
     #                height: 0
 
                 BoxLayout:
-                    padding: (70,0)
+                    padding: (278,0)
                     orientation: 'vertical'
                     size_hint_y: .3
                     Button:
@@ -189,8 +212,9 @@ MainView:
 
         #                spacing: 10
                         font_name: 'DejaVuSans'
-                        width: 80
-                        text: 'Save Amount'
+                        size_hint_x: None
+                        width: dp(80)
+                        text: 'Save'
                         on_press: if checkbox_clean_add_edit.active: root.set_paycheck_amount_clean(paycheck_amount_clean.text,checkbox_clean_add_edit.active)
         #                background_color: [0,0,0,0]
                         background_down: "./bp.png"
@@ -201,30 +225,32 @@ MainView:
         #                        pos: self.pos
         #                        size: self.size
         #                        source: 'b.png'
-
-            Button:
+            BoxLayout:
                 size_hint_y: .2
-                font_name: 'DejaVuSans'
+                padding: (302,0)
+                Button:
 
-                #                spacing: 10
-                text: 'Close'
-                on_press: root.dismiss()
-                background_down: "./bp.png"
-                background_normal: "./b.png"
+                    font_name: 'DejaVuSans'
+                    text: 'Close'
+                    on_press: root.dismiss()
+                    size_hint_x: None
+                    width: dp(80)
+                    background_down: "./bp.png"
+                    background_normal: "./b.png"
 
 <ConB@Button>:
     size_hint_y: None
     size_hint_x: None
-    width: dp(55)
-    height: dp(30)
-    font_size: '20sp'
+    width: dp(95)
+    height: dp(45)
+    font_size: '17sp'
     font_name: 'DejaVuSans'
     background_down: "./bp.png"
     background_normal: "./b.png"
 
 <MvrLabel@Label>:
     font_name: 'DejaVuSans'
-    font_size: '10sp'
+    font_size: '13sp'
     bold: True
     color: 1,1,1,1
     font_hinting: 'mono'
@@ -258,23 +284,25 @@ MainView:
         orientation: 'vertical'
         id: init_s
         size_hint_y: 1
-        spacing: 30
+        spacing: dp(20)
         padding: ((self.width)/4,50)
 
         Label:
-            size_hint_max_y: ('50dp')
+
             id: init_s_info_l
             color: 1,1,1,1
-
+            size_hint_y: .1
             font_hinting: 'mono'
 #            font_name: 'RobotoMono-Regular'
             font_name: 'DejaVuSans'
+            font_size: '22sp'
             bold: True
 #            size_hint_x: .3
             text: 'Enter Paycheck Amount'
 
         BoxLayout:
             id: init_s_currency_pick
+            size_hint_y: .2
 
             BoxLayout:
                 id: rsd_box
@@ -306,25 +334,31 @@ MainView:
 
         TextInput:
             id: init_s_input
-            size_hint_max_y: ('50dp')
+            size_hint_y: .1
             input_filter: 'int'
 #            size_hint_x: .3
             multiline: False
+            color: 1, 1, 1, 1
             hint_text: 'Amount Value'
+            hint_text_color: 1,1,1,1
+            padding: (170,30)
+            background_normal: 'tiad.png'
+            background_active: 'tia.png'
             on_focus: root.keyboard_shrink()
             on_cursor: root.keyboard_shrink()
             on_touch_down: root.keyboard_shrink()
 
-        Button:
+        ConB:
             id: init_s_b
-            size_hint_max_y: ('50dp')
+            size_hint_y: .1
+            padding: (root.width/4,0)
 #            size_hint_x: .3
             text: 'Save'
             on_press: root.remove(init_s_input.text)
-            background_down: "./bp.png"
-            background_normal: "./b.png"
+
         Image:
             id: im
+            size_hint_y: .5
             source: 'paycheck_icon.png'
 
     BoxLayout:
@@ -352,7 +386,7 @@ MainView:
             BoxLayout:
                 id: main
                 index: 1
-                padding: ((self.width)/6,1)
+                padding: ((self.width)/6,10)
                 orientation: 'vertical'
 
                 MvrLabel:
@@ -424,14 +458,14 @@ MainView:
 #                    width: main.width/2
                     orientation: 'vertical'
 #                    size_hint_x: .4
-                    padding:  [190, 0, 190, 0]
+                    padding:  [230, 0, 230, 0]
 
 
 #                    padding: (self.width/2,0)
                     Button:
                         pos: self.parent.pos
                         font_name: 'DejaVuSans'
-                        text: 'GET'
+                        text: 'Check'
                         spacing: 10
 
     #                    background_color: 0.259, 0.259, 0.259,1
@@ -455,7 +489,8 @@ MainView:
 
                 BoxLayout:
                     orientation: 'vertical'
-                    padding: ((self.width)/9,1)
+                    padding: ((self.width)/9,10)
+                    spacing: dp(15)
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -464,13 +499,22 @@ MainView:
                         Label:
                             id: info
                             color: 1,1,1,1
-                            text: 'Edit Expenses'
+                            text: 'Add Expenses'
                             font_name: 'DejaVuSans'
-                            size_hint_max_y: '30dp'
+                            size_hint_x: .9
+                            padding: (7,0)
+                            size_hint_max_y: dp(30)
 
-                        ConB:
+                        Button:
+
                             id: show_hint
+                            size_hint_y: None
+                            size_hint_x: None
+                            height: dp(50)
+                            width: dp(50)
                             on_press: root.show_tip()
+                            background_down: "./tooltip_d.png"
+                            background_normal: "./tooltip.png"
 
                     BoxLayout:
                         id: expenses_currency_pick
@@ -512,69 +556,46 @@ MainView:
                         id: expenses_edit_view
                         size_hint_y: .2
                         orientation: 'vertical'
-                        spacing: 10
+                        spacing: dp(12)
 
                         BoxLayout:
                             orientation: 'vertical'
                             size_hint_y: .5
-
-                            Label:
-                                id: f_expense
-                                color: 1,1,1,1
-                                bold: True
-                                font_hinting: 'mono'
-                                font_name: 'DejaVuSans'
-                                text: 'Enter expense name'
 
                             TextInput:
                                 id: f_expense_input
                                 multiline: False
                                 font_name: 'DejaVuSans'
                                 hint_text: 'Name'
+                                hint_text_color: 1,1,1,1
+                                color: 1, 1, 1, 1
+                                padding: (200,40)
+                                background_normal: 'tiad.png'
+                                background_active: 'tia.png'
 
                         BoxLayout:
                             orientation: 'vertical'
                             size_hint_y: .5
 
-                            Label:
-                                id: f_expense_v
-                                color: 1,1,1,1
-                                bold: True
-                                font_hinting: 'mono'
+                            TextInput:
+                                id: f_expense_v_input
+                                multiline: False
+                                input_filter: 'int'
                                 font_name: 'DejaVuSans'
-                                text: 'Enter expense value'
+                                hint_text: 'Amount'
+                                hint_text_color: 1,1,1,1
+                                color: 1, 1, 1, 1
+                                padding: (200,40)
+                                background_normal: 'tiad.png'
+                                background_active: 'tia.png'
 
-                            BoxLayout:
-                                orientation: 'horizontal'
-                                spacing: 30
 
-                                TextInput:
-                                    id: f_expense_v_input
-                                    size_hint_x: .7
-                                    multiline: False
-                                    input_filter: 'int'
-                                    font_name: 'DejaVuSans'
-                                    hint_text: 'Amount'
-                                    background_normal: 'lab.png'
-
-                                Label:
-                                    id: currency_lab_hidden
-                                    text: 'EUR'
-                                    font_name: 'DejaVuSans'
-                                    size_hint_x: .1
-                                    opacity:1
-
-                                CheckBox:
-                                    id: eur_set_value
-                                    size_hint_x: .1
-                                    on_active: root.set_currency_flag(self.active)
 
                     BoxLayout:
                         id: expenses_button_control
                         orientation: 'horizontal'
                         size_hint_y: .1
-                        spacing: 25
-                        padding: (0,10)
+
 #                        canvas.before:
 #                            Color:
 #                                rgba: 0, 1, 1, 1
@@ -597,7 +618,8 @@ MainView:
 
                     BoxLayout:
                         orientation: 'vertical'
-                        size_hint_y: .4
+                        size_hint_y: .5
+                        padding: (dp(5),dp(5))
 #                        canvas.before:
 #                            Color:
 #                                rgba: 0, 1, 1, 0.1

@@ -43,36 +43,47 @@ Logger.debug('title: This is a debug message.')
 class ScrollContainer(ScrollView):
     def __init__(self, **kwargs):
         super(ScrollContainer, self).__init__(**kwargs)
-        print('joko')
-        print(MainView.ids)
-        print('called scroll view instance')
-        print(self.pos_hint)
-        print('scroll view  {}'.format(self.height))
-        print('scroll view  {}'.format(self.size))
-        print(MainView.temp_dic)
+        # print('joko')
+        # print(MainView.ids)
+        # print('called scroll view instance')
+        # print(self.pos_hint)
+        # print('scroll view  {}'.format(self.height))
+        # print('scroll view  {}'.format(self.size))
+        # print(MainView.temp_dic)
         sc = ScrollGrid()
-        sc.width = self.width-1
+        sc.width = self.width-25
         self.add_widget(sc)
 
 class ScrollGrid(GridLayout):
+
     def __init__(self, **kwargs):
         super(ScrollGrid, self).__init__(**kwargs)
-
-        self.bind(minimum_height=self.setter('height'))
-
         self.clear_widgets()
+        self.bind(minimum_height=self.setter('height'))
+        scroll_grid_dic = {}
+        is_expenses_dict_empty = len(MainView.dic_store.keys())
+        # print('gey keys {}'.format(len(MainView.dic_store.keys())))
+        if is_expenses_dict_empty > 0:
+            for i in MainView.dic_store.keys():
+                # print('scroll grid for main view loop {}'.format(i))
+                scroll_grid_dic[i] = MainView.dic_store[i]['value']
+        else:
+            scroll_grid_dic={}
+        # self.clear_widgets()
 
-        MainView.populate_temp_dic(MainView)
-
+        # MainView().populate_temp_dic()
+        # print('scroll grid for loop {}'.format(scroll_grid_dic))
         ooo = 0
+        # print('init scroll grid')
+        # print(MainView().temp_dic)
 
-        for key in MainView.temp_dic:
+        for key in scroll_grid_dic:
             ooo +=1
-            print(ooo)
-            print('{} {}'.format(key, MainView.temp_dic[key]))
+            # print('coutner'.format(ooo))
+            # print('{} {}'.format(key, scroll_grid_dic[key]))
             k = StyleLabel()
             self.add_widget(k)
-            k.ids.exp_show_single.text = '{} : {}'.format(key, MainView.temp_dic[key])
+            k.ids.exp_show_single.text = '{} : {}'.format(key, scroll_grid_dic[key])
             k.ids.rem_exp_show_single.text = '{}'.format(key)
             # print('{} {}'.format(key, self.temp_dic[key]))
             # print(k.ids.exp_show_single.text)
@@ -117,7 +128,7 @@ class CustomPopup(Popup):
     def set_flag_clean(self,instance,value):
 
         MainView.store['flag_clean'] = {'value': value}
-        print(value)
+        # print(value)
 
         if value:
             self.flag_clean_content_visible()
@@ -199,23 +210,23 @@ class MainView(BoxLayout):
         if len(init_am_v) > 1:
 
             if self.ids.rsd_pick.active:
-                print('set rsd')
+                # print('set rsd')
 
-                print(init_am_v)
+                # print(init_am_v)
 
                 self.initial_s_store(init_am_v,self.ids.rsd_lab.text)
 
             elif self.ids.dol_pick.active:
-                print('set dol')
+                # print('set dol')
 
-                print(init_am_v)
+                # print(init_am_v)
 
                 self.initial_s_store(init_am_v, self.ids.dol_lab.text)
 
             else:
-                print('set eur')
+                # print('set eur')
 
-                print(init_am_v)
+                # print(init_am_v)
 
                 self.initial_s_store(init_am_v, self.ids.eur_lab.text)
 
@@ -223,9 +234,9 @@ class MainView(BoxLayout):
             # print(self.children)
         else:
             self.ids.init_s_input.hint_text = 'Wrong Value!'
-            print(self.ids.rsd_pick.active)
-            print(self.ids.eur_pick.active)
-            print(self.ids.dol_pick.active)
+            # print(self.ids.rsd_pick.active)
+            # print(self.ids.eur_pick.active)
+            # print(self.ids.dol_pick.active)
 
 # Methon for removing Init App screen Widget from Curent View
 # Updating Main View Widget to full size and opacity
@@ -236,7 +247,7 @@ class MainView(BoxLayout):
         self.ids.main_v.opacity = 1
 
     def set_currency_flag(self,va):
-        print(va)
+        # print(va)
         if va:
 
             self.ids.f_expense_v_input.background_color = [.2, .8, .8, .8]
@@ -255,29 +266,29 @@ class MainView(BoxLayout):
 # Save action checks if Flag Add/Edit is True in order to proceed, if not warns user with input / label text change
 # Callback Show_Edits
     def save_entry(self,ex_n,ex_v):
-        print(len(ex_n))
-        print(len(ex_v))
-        print(len(ex_n)>0)
-        print(len(ex_v)>0)
+        # print(len(ex_n))
+        # print(len(ex_v))
+        # print(len(ex_n)>0)
+        # print(len(ex_v)>0)
 
 
         if (len(ex_n) > 0) and (len(ex_v) > 0):
-            print('first if')
+            # print('first if')
             if self.store.exists('currency_ex_v'):
-                print('second if')
+                # print('second if')
 
                 self.dic_store.put(ex_n, value=int(ex_v)*float(self.store['rates']['eur']))
                     # print('done with eur')
             else:
-                print('else if')
+                # print('else if')
                 self.dic_store.put(ex_n, value=int(ex_v))
             self.ids.test.text = str(ex_n)
             Clock.schedule_once(partial(self.update_exp_fields, 'Name','Amount'), 0.3)
             self.show_edits()
         else:
-            print('fail')
-            print(len(ex_n))
-            print(len(ex_v))
+            # print('fail')
+            # print(len(ex_n))
+            # print(len(ex_v))
             self.update_exp_fields('Non valid !', 'Non valid !')
 
 
@@ -290,9 +301,6 @@ class MainView(BoxLayout):
         self.ids.f_expense_v_input.text = ''
         self.ids.f_expense_v_input.hint_text = amount
         # self.ids.currency_lab_hidden.opacity = 0
-        self.ids.eur_set_value.active = False
-        MainView.store['currency_ex_v'] = {'value': False}
-
 
 # Clear all labels from Widget displaying Expenses dict values added by Show_Edits as Label widget
     def clear_all(self):
@@ -314,13 +322,17 @@ class MainView(BoxLayout):
     def show_edits(self,*args):
         self.ids.dic_values_wrap.clear_widgets()
         # print(self)
-        self.populate_temp_dic()
+        # self.populate_temp_dic()
         # print(self.temp_dic)
         # print('>>>>>>>>>>>>>>>')
         # self.ids.dic_values_wrap.clear_widgets()
-        self.ids.dic_values_wrap.add_widget(ScrollContainer())
-        for key in self.temp_dic:
-            print('{} {}'.format(key, self.temp_dic[key]))
+
+        # for key in self.temp_dic:
+        #     print('this is from main {} {}'.format(key, self.temp_dic[key]))
+        # print('crazy {}'.format(MainView.temp_dic))
+        scroll_cont = ScrollContainer()
+
+        self.ids.dic_values_wrap.add_widget(scroll_cont)
         # for key in self.temp_dic:
         #     # print('{} {}'.format(key,self.temp_dic[key]))
         #     k = StyleLabel()
@@ -385,7 +397,7 @@ class MainView(BoxLayout):
 
         exp_sum = round(sum(expense_in.values()), 2)
 
-        print('exp {}'.format(exp_sum))
+        # print('exp {}'.format(exp_sum))
         if self.store['paycheck_amount_currency']['value'] == 'Rsd':
             pay_sum = round(paycheck_amount, 2)
         elif self.store['paycheck_amount_currency']['value'] == 'Dol':
@@ -393,9 +405,9 @@ class MainView(BoxLayout):
         else:
             pay_sum = round((float(stored_eur_rate) * paycheck_amount), 2)
 
-        print(pay_sum)
+        # print(pay_sum)
         left_sum = round(pay_sum - float(exp_sum), 2)
-        print(left_sum)
+        # print(left_sum)
         self.content_update(stored_dol_rate, stored_eur_rate, pay_sum, exp_sum, left_sum)
 
     def content_update(self,st_dol_rate, st_eur_rate, p_sum, e_sum, l_sum):
@@ -410,11 +422,11 @@ class MainView(BoxLayout):
     def control_content(self):
         paycheck_amount = None
         if self.store.exists('paycheck_amount'):
-            print('entered if calculation')
+            # print('entered if calculation')
             try:
                 paycheck_amount = self.store['paycheck_amount']['value']
             except KeyError:
-                print('No current entry for paycheck')
+                # print('No current entry for paycheck')
                 pass
 
             self.populate_temp_dic()
@@ -425,7 +437,7 @@ class MainView(BoxLayout):
     def populate_temp_dic(self):
         self.temp_dic = {}
         for i in self.dic_store.keys():
-            print(i)
+            # print(i)
             self.temp_dic[i] = self.dic_store[i]['value']
 
     def show_tip(self):
@@ -463,13 +475,13 @@ class PaycheckApp(App):
         for i in dic:
             if not MainView.store.exists(str(i)):
                 MainView.store[str(i)] = {'value':dic[i]}
-                print('Setting up : {} {}'.format(i,dic[i]))
+                # print('Setting up : {} {}'.format(i,dic[i]))
 
     def show_popup(self):
 
         p = CustomPopup()
 # Set initial Label value from store json. Updated Label on Popup open with latest value in store JSON
-# 		p.ids.mode_state.text = str(MainView.store.get('flag_add_edit')['value'])
+#       p.ids.mode_state.text = str(MainView.store.get('flag_add_edit')['value'])
 # Set Checkbox value on Popup open , value taken from store JSON
 
         if MainView.store['flag_clean']['value']:
@@ -481,9 +493,3 @@ class PaycheckApp(App):
 if __name__ == '__main__':
 
     PaycheckApp().run()
-
-
-
-
-
-
