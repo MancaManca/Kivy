@@ -10,7 +10,7 @@ from kivy.properties import ObjectProperty, NumericProperty, Clock, ListProperty
 from kivy.storage.jsonstore import JsonStore
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.image import AsyncImage
+from kivy.uix.image import AsyncImage, Image
 from kivy.uix.label import Label
 from kivy.uix.modalview import ModalView
 from kivy.uix.popup import Popup
@@ -75,10 +75,13 @@ class Mo(ModalView):
         Logger.info('Mo: children {}'.format(self.gif_wrap.children))
 
         if len(self.gif_wrap.children) < 1:
-            xxx = Cache.get('movid', 'vid')
-            xxx.state = 'play'
-            xxx.volume = 0
+            # xxx = Cache.get('movid', 'vid')
+            # xxx.state = 'play'
+            # xxx.volume = 0
             # xxx.anim_delay = 0
+            xxx = AsyncImage(source='fi.zip')
+            xxx.anim_delay = .9
+            xxx.allow_stretch = True
             self.gif_wrap.add_widget(xxx)
 
     def re(self):
@@ -216,7 +219,8 @@ class CustomPopup(Popup):
                     Logger.info('CustomPopup: set paycheck to {} eur '.format(pay_amount))
 
             else:
-                self.ids.paycheck_amount_clean.hint_text = 'invalid amount'
+                self.ids.paycheck_amount_clean.hint_text = 'Non Valid!'
+                self.ids.paycheck_amount_clean.hint_text_color = kivy.utils.get_color_from_hex('#FF0000')
                 Logger.info('CustomPopup: amount not valid {} '.format(len(pay_amount)))
 
     def on_open(self):
@@ -394,7 +398,8 @@ class MainView(BoxLayout):
             self.remove_login()
             # print(self.children)
         else:
-            self.ids.init_s_input.hint_text = 'Wrong Value!'
+            self.ids.init_s_input.hint_text = 'Non Valid!'
+            self.ids.init_s_input.hint_text_color = kivy.utils.get_color_from_hex('#FF0000')
             # print(self.ids.rsd_pick.active)
             # print(self.ids.eur_pick.active)
             # print(self.ids.dol_pick.active)
@@ -451,21 +456,25 @@ class MainView(BoxLayout):
                 self.store_expense_with_currency(ex_n, ex_v, 'EUR')
                 # print('saving expense eur {} {} '.format(ex_n, ex_v))
 
-            Clock.schedule_once(partial(self.update_exp_fields, 'Name', 'Amount'), 0.3)
+            Clock.schedule_once(partial(self.update_exp_fields, 'Name', 'Amount',kivy.utils.get_color_from_hex('#FFFFFF')), 0.3)
             self.show_edits()
         else:
             # print('fail')
             # print(len(ex_n))
             # print(len(ex_v))
-            self.update_exp_fields('Non valid !', 'Non valid !')
+            self.update_exp_fields('Non Valid !', 'Non Valid !', kivy.utils.get_color_from_hex('#FF0000'))
 
     # Updating expenses input field to be clear after successfull Save_Entry. Args predifined in Save_Entry call
-    def update_exp_fields(self, name, amount, *args):
+    def update_exp_fields(self, name, amount, icolo, *args):
 
         self.ids.f_expense_input.text = ''
         self.ids.f_expense_input.hint_text = name
+        self.ids.f_expense_input.hint_text_color = icolo
         self.ids.f_expense_v_input.text = ''
         self.ids.f_expense_v_input.hint_text = amount
+        self.ids.f_expense_v_input.hint_text_color = icolo
+
+
         # self.ids.currency_lab_hidden.opacity = 0
 
     # Clear all labels from Widget displaying Expenses dict values added by Show_Edits as Label widget
@@ -642,10 +651,10 @@ class PaycheckApp(App):
         #             MainView().ids.init_s.size_hint_y = 0
         self.setup_flag(self.flags_dic)
         Clock.schedule_once(partial(mv.send_request, 'self'), 1)
-        Cache.register('movid')
-        key = 'vid'
-        instance = Video(source='/ani.mp4')
-        Cache.append('movid', key, instance)
+        # Cache.register('movid')
+        # key = 'vid'
+        # instance = AsyncImage(source='/ggg.zip')
+        # Cache.append('movid', key, instance)
 
     def setup_flag(self, dic):
         for i in dic:
@@ -673,4 +682,3 @@ class PaycheckApp(App):
 
 if __name__ == '__main__':
     PaycheckApp().run()
-

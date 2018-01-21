@@ -1,1 +1,1 @@
-{"flag_clean": {"value": false}, "init_paycheck_amount": {"value": 555.0}, "paycheck_amount_currency": {"value": "RSD"}, "rates": {"dol": "98.6081", "eur": "118.7636"}, "paycheck_amount": {"value": 555.0}}
+{"paycheck_amount": {"value": 54333.0}, "rates": {"eur": "118.4991", "dol": "96.6078"}, "flag_clean": {"value": true}, "init_paycheck_amount": {"value": 54333.0}, "paycheck_amount_currency": {"value": "RSD"}}

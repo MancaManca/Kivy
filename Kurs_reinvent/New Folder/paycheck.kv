@@ -159,6 +159,7 @@ MainView:
                     CustomTextInput:
                         id: paycheck_amount_clean
                         input_filter: 'int'
+                        hint_text_color: 1,1,1,1
 
                 FloatLayout:
                     size_hint_y: .3
@@ -267,6 +268,7 @@ MainView:
                 id: init_s_input
                 input_filter: 'int'
                 hint_text: 'Amount'
+                hint_text_color: 1,1,1,0.4
                 on_focus: root.keyboard_shrink()
                 on_cursor: root.keyboard_shrink()
                 on_touch_down: root.keyboard_shrink()
@@ -571,7 +573,11 @@ MainView:
                 background_normal: "./tooltip.png"
                 on_press: root.open_modal(self.text)
     BoxLayout:
-        size_hint_x: .8
+        size_hint_x: .1
+        CheckBox:
+            id: payed
+    BoxLayout:
+        size_hint_x: .7
         canvas.before:
             Color:
                 rgba: 0 , 0 , 0, .6
@@ -662,4 +668,3 @@ MainView:
                 pos: self.pos
                 size: self.size
                 source: 'cog5.png'
-
